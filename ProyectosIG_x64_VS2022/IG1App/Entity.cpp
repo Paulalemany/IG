@@ -41,3 +41,21 @@ RegularPolygon::RegularPolygon(GLuint num, GLdouble r)
 {
 	mMesh = Mesh::generateRegularPolygon(num, r);
 }
+
+RegularPolygon::~RegularPolygon()
+{
+	delete mMesh;
+	mMesh = nullptr;
+}
+
+void RegularPolygon::render(glm::dmat4 const& modelViewMat) const
+{
+
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		upload(aMat);
+		glLineWidth(2);
+		mMesh->render();
+		glLineWidth(1);
+	}
+}

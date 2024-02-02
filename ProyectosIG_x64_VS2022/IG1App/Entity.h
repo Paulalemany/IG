@@ -40,7 +40,10 @@ public:
 
 class RegularPolygon : public Abs_Entity 
 {
+public: 
 	explicit RegularPolygon(GLuint num, GLdouble r);
+	~RegularPolygon();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
 #endif //_H_Entities_H_

@@ -44,13 +44,20 @@ Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
 	
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_LINE_LOOP;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
-	mesh->vVertices.reserve(num);				//Reserva espacio para el número de vértices
+	mesh->mNumVertices = num;
+	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
-	mesh->vVertices.emplace_back(r * cos(alpha), r * sin(alpha), 0.0);	//Se supone que pone el primer vértice
+	//mesh->vVertices.emplace_back(r * cos(alpha), r * sin(alpha), 0.0);	//Se supone que pone el primer vértice
+	GLdouble x, y;
 
-	for (int i = 1; i < num; i++) {
-		mesh->vVertices.emplace_back(r * cos(alpha += angle), r * sin(alpha += angle), 0.0); //Se supone que pone el resto de vértices
+	for (int i = 0; i < num; i++) {
+		//x = r * cos(alpha += angle);
+		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i)) , r * sin(radians((360.0 / num) * i)), 0.0); //Se supone que pone el resto de vértices
 	}
+
+	
+
+
 
 	return mesh;
 }

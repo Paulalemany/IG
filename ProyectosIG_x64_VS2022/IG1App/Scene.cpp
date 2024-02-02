@@ -16,6 +16,7 @@ Scene::init()
 
 	// Graphics objects (entities) of the scene
 	gObjects.push_back(new EjesRGB(400.0));
+	gObjects.push_back(new RegularPolygon(12.0, 100.0));
 }
 void
 Scene::free()
