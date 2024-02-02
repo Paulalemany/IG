@@ -36,6 +36,25 @@ Mesh::render() const
 	}
 }
 
+Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
+{
+	//Angulos
+	double alpha = radians(90.0);
+	const GLuint angle = 360 / num;
+	
+	Mesh* mesh = new Mesh();					//Creamos una nueva malla
+	mesh->mPrimitive = GL_LINE_LOOP;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
+	mesh->vVertices.reserve(num);				//Reserva espacio para el número de vértices
+
+	mesh->vVertices.emplace_back(r * cos(alpha), r * sin(alpha), 0.0);	//Se supone que pone el primer vértice
+
+	for (int i = 1; i < num; i++) {
+		mesh->vVertices.emplace_back(r * cos(alpha += angle), r * sin(alpha += angle), 0.0); //Se supone que pone el resto de vértices
+	}
+
+	return mesh;
+}
+
 Mesh*
 Mesh::createRGBAxes(GLdouble l)
 {

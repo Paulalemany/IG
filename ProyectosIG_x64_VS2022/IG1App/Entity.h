@@ -38,4 +38,9 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
+class RegularPolygon : public Abs_Entity 
+{
+	explicit RegularPolygon(GLuint num, GLdouble r);
+};
+
 #endif //_H_Entities_H_
