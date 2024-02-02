@@ -59,7 +59,7 @@ IG1App::iniWinOpenGL()
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
-	glutInitWindowSize(mWinW, mWinH); // window size
+	glutInitWindowSize(mWinW, mWinH);		// window size
 	glutInitWindowPosition (2800, 140);		//Cambia la posición en la que aparece la pantalla
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE |
@@ -67,7 +67,7 @@ IG1App::iniWinOpenGL()
 	                                                    // buffer and stencil buffer
 
 	mWinId = glutCreateWindow(
-	  "IG1App"); // with its associated OpenGL context, return window's identifier
+	  "Paula"); // with its associated OpenGL context, return window's identifier
 
 	// Callback registration
 	glutReshapeFunc(s_resize);
