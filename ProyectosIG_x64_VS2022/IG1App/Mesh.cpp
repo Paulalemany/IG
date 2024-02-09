@@ -43,7 +43,6 @@ Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
 	mesh->mNumVertices = num;
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
-	GLdouble x, y;
 
 	for (int i = 0; i < num; i++) {
 		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i)) , r * sin(radians((360.0 / num) * i)), 0.0); //Se supone que pone el resto de vértices
@@ -56,7 +55,7 @@ Mesh* Mesh::generateRGBTriangle(GLdouble r)
 {
 	
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
-	glPolygonMode(GL_FRONT, GL_FILL);			//Primitiva para colorear
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);			//Primitiva para colorear
 	mesh->mNumVertices = 3.0;
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);
