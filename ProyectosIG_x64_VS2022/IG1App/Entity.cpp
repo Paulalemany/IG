@@ -72,13 +72,22 @@ RGBTriangle::RGBTriangle(GLdouble r)
 	: Abs_Entity()
 {
 	//Creamos un triángulo
-	mMesh = Mesh::generateRegularPolygon(3.0, r);
+	mMesh = Mesh::generateRGBTriangle(r);
 }
 
 RGBTriangle::~RGBTriangle()
 {
+	delete mMesh;
+	mMesh = nullptr;
 }
 
 void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 {
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		upload(aMat);
+		glLineWidth(2);
+		mMesh->render();
+		glLineWidth(1);
+	}
 }

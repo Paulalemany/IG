@@ -37,27 +37,39 @@ Mesh::render() const
 }
 
 Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
-{
-	//Angulos
-	double alpha = radians(90.0);
-	const GLuint angle = 360 / num;
-	
+{	
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_LINE_LOOP;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
 	mesh->mNumVertices = num;
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
-	//mesh->vVertices.emplace_back(r * cos(alpha), r * sin(alpha), 0.0);	//Se supone que pone el primer vértice
 	GLdouble x, y;
 
 	for (int i = 0; i < num; i++) {
-		//x = r * cos(alpha += angle);
 		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i)) , r * sin(radians((360.0 / num) * i)), 0.0); //Se supone que pone el resto de vértices
 	}
 
+	return mesh;
+}
+
+Mesh* Mesh::generateRGBTriangle(GLdouble r)
+{
 	
+	Mesh* mesh = new Mesh();					//Creamos una nueva malla
+	glPolygonMode(GL_FRONT, GL_FILL);			//Primitiva para colorear
+	mesh->mNumVertices = 3.0;
+	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
+	mesh->vColors.reserve(mesh->mNumVertices);
 
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+		mesh->vVertices.emplace_back(r * cos(radians((360.0 / mesh->mNumVertices) * i)), r * sin(radians((360.0 / mesh->mNumVertices) * i)), 0.0); //Se supone que pone el resto de vértices
+	}
 
+	//Cambiar color de los vértices
+	
+	mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);	
+	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
 	return mesh;
 }

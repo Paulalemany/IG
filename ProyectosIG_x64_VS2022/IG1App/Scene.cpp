@@ -17,8 +17,10 @@ Scene::init()
 	// Graphics objects (entities) of the scene
 	gObjects.push_back(new EjesRGB(400.0));
 	
-	gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0)); //Triángulo
-	gObjects.push_back(new RegularPolygon(glm::dvec4(1,0,1,1), 100.0, 100.0));//Círculo
+	//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0)); //Triángulo
+	//gObjects.push_back(new RegularPolygon(glm::dvec4(1,0,1,1), 100.0, 100.0));//Círculo
+
+	gObjects.push_back(new RGBTriangle(100.0));								  //Triángulo RGB
 }
 void
 Scene::free()
