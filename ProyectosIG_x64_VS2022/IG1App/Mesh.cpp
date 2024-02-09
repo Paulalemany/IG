@@ -45,7 +45,7 @@ Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
 
 
 	for (int i = 0; i < num; i++) {
-		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i)) , r * sin(radians((360.0 / num) * i)), 0.0); //Se supone que pone el resto de vértices
+		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i + 90.0)) , r * sin(radians((360.0 / num) * i + 90)), 0.0); //Se supone que pone el resto de vértices
 	}
 
 	return mesh;
@@ -54,14 +54,14 @@ Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
 Mesh* Mesh::generateRGBTriangle(GLdouble r)
 {
 	
-	Mesh* mesh = new Mesh();					//Creamos una nueva malla
+	Mesh* mesh = new Mesh();							//Creamos una nueva malla
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);			//Primitiva para colorear
 	mesh->mNumVertices = 3.0;
-	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
+	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);
 
 	for (int i = 0; i < mesh->mNumVertices; i++) {
-		mesh->vVertices.emplace_back(r * cos(radians((360.0 / mesh->mNumVertices) * i)), r * sin(radians((360.0 / mesh->mNumVertices) * i)), 0.0); //Se supone que pone el resto de vértices
+		mesh->vVertices.emplace_back(r * cos(radians((360.0 / mesh->mNumVertices) * i + 90.0)), r * sin(radians((360.0 / mesh->mNumVertices) * i + 90.0)), 0.0); //Se supone que pone el resto de vértices
 	}
 
 	//Cambiar color de los vértices

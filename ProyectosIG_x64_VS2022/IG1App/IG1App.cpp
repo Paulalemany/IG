@@ -60,7 +60,7 @@ IG1App::iniWinOpenGL()
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 
 	glutInitWindowSize(mWinW, mWinH);		// window size
-	glutInitWindowPosition (2800, 140);		//Cambia la posición en la que aparece la pantalla
+	glutInitWindowPosition (140, 140);		//Cambia la posición en la que aparece la pantalla
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE |
 	                    GLUT_DEPTH /*| GLUT_STENCIL*/); // RGBA colors, double buffer, depth
