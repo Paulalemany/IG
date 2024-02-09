@@ -10,7 +10,8 @@ class Abs_Entity // abstract class
 {
 public:
 	Abs_Entity()
-	  : mModelMat(1.0){}; // 4x4 identity matrix
+	  : mModelMat(1.0), mColor(1) {}; // 4x4 identity matrix
+
 	virtual ~Abs_Entity() = default;
 
 	Abs_Entity(const Abs_Entity& e) = delete;            // no copy constructor
@@ -22,10 +23,14 @@ public:
 	glm::dmat4 const& modelMat() const { return mModelMat; };
 	void setModelMat(glm::dmat4 const& aMat) { mModelMat = aMat; };
 
+	//Color
+	glm::dvec4 const& color() const { return mColor; };
+	void setColor(glm::dvec4 const& aColor) { mColor = aColor; };
+
 protected:
 	Mesh* mMesh = nullptr; // the mesh
 	glm::dmat4 mModelMat;  // modeling matrix
-	glm::dvec4 mColor;		//
+	glm::dvec4 mColor;	   // color de la entidad
 
 	// transfers modelViewMat to the GPU
 	virtual void upload(glm::dmat4 const& mModelViewMat) const;
@@ -42,8 +47,14 @@ public:
 class RegularPolygon : public Abs_Entity 
 {
 public: 
-	explicit RegularPolygon(GLuint num, GLdouble r);
+	explicit RegularPolygon(glm::dvec4 mColor, GLuint num, GLdouble r);
 	~RegularPolygon();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
+class RGBTriangle : public Abs_Entity {
+	explicit RGBTriangle(GLdouble r);
+	~RGBTriangle();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
