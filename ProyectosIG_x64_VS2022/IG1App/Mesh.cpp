@@ -123,31 +123,32 @@ Mesh* Mesh::generateRGBRectangle(GLdouble w, GLdouble h)
 Mesh* Mesh::generateCube(GLdouble l)
 {
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT, GL_LINE);
+	glPolygonMode(GL_BACK, GL_POINT);
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
-	mesh->mNumVertices = 12;							
+	mesh->mNumVertices = 14;							
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 
 	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
 
 	GLdouble a = l / 2;
 
-	mesh->vVertices.emplace_back(-a, a, a); //v1
-	mesh->vVertices.emplace_back(a, -a, a); //v2
-	mesh->vVertices.emplace_back(-a, -a, a); //v3
-	mesh->vVertices.emplace_back(-a, -a, -a); //v4
-	mesh->vVertices.emplace_back(-a, a, -a); //v5
+	mesh->vVertices.emplace_back(-a, -a, -a); //v0
+	mesh->vVertices.emplace_back(a, -a, -a); //v1
+	mesh->vVertices.emplace_back(-a, -a, a); //v2
+	mesh->vVertices.emplace_back(a, -a, a); //v3
+	mesh->vVertices.emplace_back(a, a, a); //v4
+	mesh->vVertices.push_back(mesh->vVertices[1]); //v5 = v1
 	mesh->vVertices.emplace_back(a, a, -a); //v6
-	mesh->vVertices.emplace_back(-a, a, a); //v7 = v1
-	mesh->vVertices.emplace_back(a, a, a); //v8
-	mesh->vVertices.emplace_back(a, -a, a); //v9 = v2
-	mesh->vVertices.emplace_back(a, -a, -a); //v10
-	mesh->vVertices.emplace_back(-a, -a, -a); //v11 = v4
-	mesh->vVertices.emplace_back(a, a, -a); //v12 = v6
-		
+	mesh->vVertices.push_back(mesh->vVertices[0]); //v7 = v0
+	mesh->vVertices.emplace_back(-a, a, -a); //v8
+	mesh->vVertices.push_back(mesh->vVertices[2]); //v9 = v2
+	mesh->vVertices.emplace_back(-a, a, a); //v10
+	mesh->vVertices.push_back(mesh->vVertices[4]); //v11 = v4
+	mesh->vVertices.push_back(mesh->vVertices[8]); //v12 = v8
+	mesh->vVertices.push_back(mesh->vVertices[6]); //v13 = v6
 	
-
 	return mesh;
 }
 
