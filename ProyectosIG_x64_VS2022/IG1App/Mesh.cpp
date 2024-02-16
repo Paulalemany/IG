@@ -55,7 +55,8 @@ Mesh* Mesh::generateRGBTriangle(GLdouble r)
 {
 	
 	Mesh* mesh = new Mesh();							//Creamos una nueva malla
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);			//Primitiva para colorear
+	glPolygonMode(GL_FRONT, GL_FILL);					//Primitiva para colorear
+	glPolygonMode(GL_BACK, GL_POINT);
 	mesh->mNumVertices = 3.0;
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);
