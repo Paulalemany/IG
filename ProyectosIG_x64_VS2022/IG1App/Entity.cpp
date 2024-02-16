@@ -140,3 +140,26 @@ void RGBRectangle::render(glm::dmat4 const& modelViewMat) const
 		glLineWidth(1);
 	}
 }
+
+RegularCube::RegularCube(GLdouble lenght)
+{
+	//Creamos un cubo
+	mMesh = Mesh::generateCube(lenght);
+}
+
+RegularCube::~RegularCube()
+{
+	delete mMesh;
+	mMesh = nullptr;
+}
+
+void RegularCube::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		upload(aMat);
+		glLineWidth(2);
+		mMesh->render();
+		glLineWidth(1);
+	}
+}

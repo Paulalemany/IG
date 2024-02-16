@@ -23,7 +23,9 @@ Scene::init()
 	//gObjects.push_back(new RGBTriangle(100.0));								  //Triángulo RGB
 
 	//gObjects.push_back(new RegularRectangle(200.0, 100.0));						//Rectángulo Línea
-	gObjects.push_back(new RGBRectangle(200.0, 100.0));
+	//gObjects.push_back(new RGBRectangle(200.0, 100.0));							//Rectángulo RGB
+
+	gObjects.push_back(new RegularCube(200.0));
 }
 void
 Scene::free()
