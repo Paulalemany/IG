@@ -56,7 +56,9 @@ Mesh* Mesh::generateRGBTriangle(GLdouble r)
 	Mesh* mesh = new Mesh();							//Creamos una nueva malla
 	glPolygonMode(GL_FRONT, GL_FILL);					//Primitiva para colorear
 	//glPolygonMode(GL_BACK, GL_LINE);					//Dibuja las lineas detras
-	glPolygonMode(GL_BACK, GL_POINT);					//Dibuja los puntos detras
+	//glPolygonMode(GL_BACK, GL_POINT);					//Dibuja los puntos detras
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Dibuja los puntos detras
+
 	mesh->mNumVertices = 3.0;
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);
@@ -83,11 +85,18 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 
 	mesh->mNumVertices = 4.0;							// v0, v1, v2, v3
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
+	mesh->vColors.reserve(mesh->mNumVertices);			//reserva para el color
 
 	mesh->vVertices.emplace_back(-w/2,h/2,0);
 	mesh->vVertices.emplace_back(w/2, h / 2,0);
 	mesh->vVertices.emplace_back(-w/2, -h / 2,0);
 	mesh->vVertices.emplace_back(w/2, - h / 2, 0);
+
+	//Color
+	mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
+	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
 	return mesh;
 }

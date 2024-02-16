@@ -18,15 +18,15 @@ Scene::init()
 	gObjects.push_back(new EjesRGB(400.0));
 	
 	//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0)); //Triángulo
-	//gObjects.push_back(new RegularPolygon(glm::dvec4(1,0,1,1), 100.0, 100.0));//Círculo
+	gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));//Círculo
 
-	//gObjects.push_back(new RGBTriangle(100.0));								  //Triángulo RGB
+	gObjects.push_back(new RGBTriangle(30.0));								//Triángulo RGB
 
-	//gObjects.push_back(new RegularRectangle(200.0, 100.0));						//Rectángulo Línea
-	//gObjects.push_back(new RGBRectangle(200.0, 100.0));							//Rectángulo RGB
+	gObjects.push_back(new RegularRectangle(400.0, 200.0));					//Rectángulo Línea
+	//gObjects.push_back(new RGBRectangle(200.0, 100.0));					//Rectángulo RGB
 
-	//gObjects.push_back(new RegularCube(200.0));									//Cubo
-	gObjects.push_back(new RGBCube(200.0));
+	//gObjects.push_back(new RegularCube(200.0));							//Cubo
+	//gObjects.push_back(new RGBCube(200.0));								//Cubo RGB
 }
 void
 Scene::free()
@@ -59,4 +59,8 @@ Scene::render(Camera const& cam) const
 	for (Abs_Entity* el : gObjects) {
 		el->render(cam.viewMat());
 	}
+}
+
+void Scene::setScene(int mId)
+{
 }

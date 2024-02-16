@@ -86,7 +86,7 @@ void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 		upload(aMat);
-		glLineWidth(2);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
 		mMesh->render();
 		glLineWidth(1);
 	}
@@ -111,9 +111,8 @@ void RegularRectangle::render(glm::dmat4 const& modelViewMat) const
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 		upload(aMat);
-		glLineWidth(2);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);					//Primitiva para colorear
 		mMesh->render();
-		glLineWidth(1);
 	}
 }
 
