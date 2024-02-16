@@ -56,6 +56,7 @@ protected:
 	Camera* mCamera = nullptr;
 	// Graphics objects of the scene
 	Scene* mScene = nullptr;
+	Scene* scene[2];
 
 	bool mStop = false; // main event processing loop
 	int mWinId = 0;     // window's identifier

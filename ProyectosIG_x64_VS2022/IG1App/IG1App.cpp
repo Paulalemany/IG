@@ -41,6 +41,7 @@ IG1App::init()
 	  new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 	mCamera = new Camera(mViewPort);
 	mScene = new Scene;
+	
 
 	mCamera->set2D();
 	mScene->init();
