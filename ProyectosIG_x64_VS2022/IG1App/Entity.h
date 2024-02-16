@@ -59,4 +59,11 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
+class RegularRectangle : public Abs_Entity {
+public:
+	explicit RegularRectangle(GLdouble w, GLdouble h);
+	~RegularRectangle();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+};
+
 #endif //_H_Entities_H_
