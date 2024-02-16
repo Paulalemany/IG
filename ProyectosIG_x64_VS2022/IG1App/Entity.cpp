@@ -142,6 +142,7 @@ void RGBRectangle::render(glm::dmat4 const& modelViewMat) const
 }
 
 RegularCube::RegularCube(GLdouble lenght)
+	: Abs_Entity()
 {
 	//Creamos un cubo
 	mMesh = Mesh::generateCube(lenght);
@@ -154,6 +155,30 @@ RegularCube::~RegularCube()
 }
 
 void RegularCube::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		upload(aMat);
+		glLineWidth(2);
+		mMesh->render();
+		glLineWidth(1);
+	}
+}
+
+RGBCube::RGBCube(GLdouble l)
+	: Abs_Entity()
+{
+	//Creamos un cubo
+	mMesh = Mesh::generateRGBCubeTriangles(l);
+}
+
+RGBCube::~RGBCube()
+{
+	delete mMesh;
+	mMesh = nullptr;
+}
+
+void RGBCube::render(glm::dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
 		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
