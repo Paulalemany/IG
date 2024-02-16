@@ -116,3 +116,27 @@ void RegularRectangle::render(glm::dmat4 const& modelViewMat) const
 		glLineWidth(1);
 	}
 }
+
+RGBRectangle::RGBRectangle(GLdouble w, GLdouble h)
+	: Abs_Entity()
+{
+	//Creamos un rectángulo
+	mMesh = Mesh::generateRGBRectangle(w, h);
+}
+
+RGBRectangle::~RGBRectangle()
+{
+	delete mMesh;
+	mMesh = nullptr;
+}
+
+void RGBRectangle::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		upload(aMat);
+		glLineWidth(2);
+		mMesh->render();
+		glLineWidth(1);
+	}
+}
