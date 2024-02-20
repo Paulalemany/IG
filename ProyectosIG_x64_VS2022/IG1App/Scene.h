@@ -26,6 +26,8 @@ public:
 
 	void render(Camera const& cam) const;
 
+	void update();
+
 	void addObject(Abs_Entity* e);
 
 protected:

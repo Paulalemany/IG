@@ -168,6 +168,9 @@ IG1App::key(unsigned char key, int x, int y)
 		case '1' :
 			setScene(1);
 			break;
+		case 'u' :
+			scenes[scene_index]->update();
+			break;
 		default:
 			need_redisplay = false;
 			break;

@@ -3,6 +3,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <iostream>
+
 using namespace glm;
 
 //Abs_Entity
@@ -39,6 +41,11 @@ EjesRGB::render(dmat4 const& modelViewMat) const
 	}
 }
 
+void EjesRGB::update()
+{
+	std::cout << "EjesRGB update" << std::endl;
+}
+
 //RegularPolygon
 RegularPolygon::RegularPolygon(glm::dvec4 color, GLuint num, GLdouble r)
 	: Abs_Entity()
@@ -67,6 +74,11 @@ void RegularPolygon::render(glm::dmat4 const& modelViewMat) const
 	}
 }
 
+void RegularPolygon::update()
+{
+	std::cout << "RegularPolygon update" << std::endl;
+}
+
 //RGBTriangle
 RGBTriangle::RGBTriangle(GLdouble r)
 	: Abs_Entity()
@@ -90,6 +102,11 @@ void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 		mMesh->render();
 		glLineWidth(1);
 	}
+}
+
+void RGBTriangle::update()
+{
+	std::cout << "RGBTriangle update" << std::endl;
 }
 
 RegularRectangle::RegularRectangle(GLdouble w, GLdouble h)
@@ -116,6 +133,11 @@ void RegularRectangle::render(glm::dmat4 const& modelViewMat) const
 	}
 }
 
+void RegularRectangle::update()
+{
+	std::cout << "RegularRectangle update" << std::endl;
+}
+
 RGBRectangle::RGBRectangle(GLdouble w, GLdouble h)
 	: Abs_Entity()
 {
@@ -138,6 +160,11 @@ void RGBRectangle::render(glm::dmat4 const& modelViewMat) const
 		mMesh->render();
 		glLineWidth(1);
 	}
+}
+
+void RGBRectangle::update()
+{
+	std::cout << "RGBRectangle update" << std::endl;
 }
 
 RegularCube::RegularCube(GLdouble lenght)
@@ -164,6 +191,11 @@ void RegularCube::render(glm::dmat4 const& modelViewMat) const
 	}
 }
 
+void RegularCube::update()
+{
+	std::cout << "RegularCube update" << std::endl;
+}
+
 RGBCube::RGBCube(GLdouble l)
 	: Abs_Entity()
 {
@@ -185,4 +217,9 @@ void RGBCube::render(glm::dmat4 const& modelViewMat) const
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		mMesh->render();
 	}
+}
+
+void RGBCube::update()
+{
+	std::cout << "RGBCube update" << std::endl;
 }

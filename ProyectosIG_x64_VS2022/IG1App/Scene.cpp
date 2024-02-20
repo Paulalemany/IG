@@ -50,6 +50,12 @@ Scene::render(Camera const& cam) const
 	}
 }
 
+void Scene::update()
+{
+	//Hace el update de cada objeto en la escena
+	for (auto i : gObjects) i->update();
+}
+
 void Scene::addObject(Abs_Entity* e)
 {
 	gObjects.push_back(e);
