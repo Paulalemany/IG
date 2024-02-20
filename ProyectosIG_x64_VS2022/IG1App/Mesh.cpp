@@ -165,7 +165,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 {
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_TRIANGLES;
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	
 	mesh->mNumVertices = 36;
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
