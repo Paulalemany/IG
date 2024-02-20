@@ -112,7 +112,7 @@ void RGBTriangle::update()
 
 	//rotacion en sentido horario del triangulo
 	mModelMat = rotate(mModelMat, radians(-rotationSp), dvec3(0, 0, 1));
-	//rotacion en sentido antihorario en la circunferencia
+	//rotacion en sentido antihorario en la circunferencia aaaa
 	//mModelMat = translate(mModelMat, dvec3(x,y,0)); 
 }
 
