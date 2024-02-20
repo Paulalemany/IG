@@ -26,7 +26,7 @@ public:
 
 	void render(Camera const& cam) const;
 
-	void setScene(int mId);
+	void addObject(Abs_Entity* e);
 
 protected:
 	void free();

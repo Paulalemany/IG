@@ -40,11 +40,30 @@ IG1App::init()
 	mViewPort =
 	  new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 	mCamera = new Camera(mViewPort);
-	mScene = new Scene;
+	//mScene = new Scene;
+
+	//Array de escenas
+	for (int i = 0; i < MAX_SCENES; i++) {
+		scenes[i] = new Scene;
+	}
+
+	//Objetos de escena 0 -> Figuras planas
+	//scenes[0]->addObject(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));	//Triángulo
+	scenes[0]->addObject(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
+	scenes[0]->addObject(new RGBTriangle(30.0));								//Triángulo RGB
+	scenes[0]->addObject(new RegularRectangle(400.0, 200.0));					//Rectángulo Línea
+	//scenes[0]->addObject(new RGBRectangle(200.0, 100.0));						//Rectángulo RGB
+
+	//Objetos de escena 1 -> Figuras 3D
+	//scenes[1]->addObject(new RegularCube(200.0));								//Cubo
+	scenes[1]->addObject(new RGBCube(200.0));									//Cubo RGB
 	
 
 	mCamera->set2D();
-	mScene->init();
+	//mScene->init();
+
+	//Iniciamos cada escena
+	for (auto i : scenes) i->init();
 }
 
 void
@@ -83,12 +102,18 @@ IG1App::iniWinOpenGL()
 void
 IG1App::free()
 { // release memory and resources
-	delete mScene;
-	mScene = nullptr;
+	//delete mScene;
+	for (auto i : scenes) delete i;
+	//mScene = nullptr;
 	delete mCamera;
 	mCamera = nullptr;
 	delete mViewPort;
 	mViewPort = nullptr;
+}
+
+void IG1App::setScene(int id)
+{
+	scene_index = id;
 }
 
 void
@@ -97,7 +122,8 @@ IG1App::display() const
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
 
-	mScene->render(*mCamera); // uploads the viewport and camera to the GPU
+	//mScene->render(*mCamera); // uploads the viewport and camera to the GPU
+	scenes[scene_index]->render(*mCamera);
 
 	glutSwapBuffers(); // swaps the front and back buffer
 }
@@ -135,6 +161,12 @@ IG1App::key(unsigned char key, int x, int y)
 			break;
 		case 'o':
 			mCamera->set2D();
+			break;
+		case '0':
+			setScene(0);
+			break;
+		case '1' :
+			setScene(1);
 			break;
 		default:
 			need_redisplay = false;

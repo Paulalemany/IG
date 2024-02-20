@@ -16,17 +16,6 @@ Scene::init()
 
 	// Graphics objects (entities) of the scene
 	gObjects.push_back(new EjesRGB(400.0));
-	
-	//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0)); //Triángulo
-	gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));//Círculo
-
-	gObjects.push_back(new RGBTriangle(30.0));								//Triángulo RGB
-
-	gObjects.push_back(new RegularRectangle(400.0, 200.0));					//Rectángulo Línea
-	//gObjects.push_back(new RGBRectangle(200.0, 100.0));					//Rectángulo RGB
-
-	//gObjects.push_back(new RegularCube(200.0));							//Cubo
-	//gObjects.push_back(new RGBCube(200.0));								//Cubo RGB
 }
 void
 Scene::free()
@@ -61,6 +50,8 @@ Scene::render(Camera const& cam) const
 	}
 }
 
-void Scene::setScene(int mId)
+void Scene::addObject(Abs_Entity* e)
 {
+	gObjects.push_back(e);
 }
+
