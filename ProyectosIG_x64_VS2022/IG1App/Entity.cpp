@@ -96,7 +96,8 @@ RGBTriangle::~RGBTriangle()
 void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
-		dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+		dmat4 aMat = modelViewMat * mModelMat ; // glm matrix multiplication
+		translate(mModelMat, dvec3(1, 0, 0)); //???
 		upload(aMat);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
 		mMesh->render();
@@ -107,6 +108,9 @@ void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 void RGBTriangle::update()
 {
 	std::cout << "RGBTriangle update" << std::endl;
+	//aqui modificamos mModelMat
+	mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0, 1));
+	
 }
 
 RegularRectangle::RegularRectangle(GLdouble w, GLdouble h)

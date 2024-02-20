@@ -67,6 +67,9 @@ public:
 	~RGBTriangle();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
+
+private:
+	GLdouble rotationSp = 1;
 };
 
 
