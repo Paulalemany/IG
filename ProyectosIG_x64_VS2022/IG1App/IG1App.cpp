@@ -23,6 +23,8 @@ IG1App::close()
 void IG1App::update()
 {
 	scenes[scene_index]->update();
+	glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
+	// display()
 }
 
 void
@@ -40,6 +42,8 @@ IG1App::init()
 {
 	// create an OpenGL Context
 	iniWinOpenGL();
+
+	glutIdleFunc(update);
 
 	// create the scene after creating the context
 	// allocate memory and resources
@@ -175,7 +179,7 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case 'u' :
-			glutIdleFunc(update);
+			update();
 			break;
 		default:
 			need_redisplay = false;
