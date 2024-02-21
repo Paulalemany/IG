@@ -108,11 +108,11 @@ void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 
 void RGBTriangle::update()
 {
-
 	//rotacion en sentido horario del triangulo
 	mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0, 1.0));
+
 	//rotacion en sentido antihorario en la circunferencia aaaa
-	mModelMat = translate(mModelMat, dvec3(0,17.35,0)); 
+	mModelMat = translate(mModelMat, dvec3(0, 17.35, 0)); 
 }
 
 RegularRectangle::RegularRectangle(GLdouble w, GLdouble h)

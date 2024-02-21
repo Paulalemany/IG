@@ -19,6 +19,12 @@ IG1App::close()
 	free();
 }
 
+//apartado 16
+void IG1App::update()
+{
+	scenes[scene_index]->update();
+}
+
 void
 IG1App::run() // enters the main event processing loop
 {
@@ -169,7 +175,7 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case 'u' :
-			scenes[scene_index]->update();
+			glutIdleFunc(update);
 			break;
 		default:
 			need_redisplay = false;
