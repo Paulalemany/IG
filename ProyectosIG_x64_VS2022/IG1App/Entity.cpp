@@ -43,7 +43,7 @@ EjesRGB::render(dmat4 const& modelViewMat) const
 
 void EjesRGB::update()
 {
-	std::cout << "EjesRGB update" << std::endl;
+	
 }
 
 //RegularPolygon
@@ -76,7 +76,7 @@ void RegularPolygon::render(glm::dmat4 const& modelViewMat) const
 
 void RegularPolygon::update()
 {
-	std::cout << "RegularPolygon update" << std::endl;
+	
 }
 
 //RGBTriangle
@@ -108,12 +108,11 @@ void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 
 void RGBTriangle::update()
 {
-	std::cout << "RGBTriangle update" << std::endl;
 
 	//rotacion en sentido horario del triangulo
-	mModelMat = rotate(mModelMat, radians(-rotationSp), dvec3(0, 0, 1));
+	mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0, 1.0));
 	//rotacion en sentido antihorario en la circunferencia aaaa
-	//mModelMat = translate(mModelMat, dvec3(x,y,0)); 
+	mModelMat = translate(mModelMat, dvec3(0,17.35,0)); 
 }
 
 RegularRectangle::RegularRectangle(GLdouble w, GLdouble h)
@@ -142,7 +141,7 @@ void RegularRectangle::render(glm::dmat4 const& modelViewMat) const
 
 void RegularRectangle::update()
 {
-	std::cout << "RegularRectangle update" << std::endl;
+	
 }
 
 RGBRectangle::RGBRectangle(GLdouble w, GLdouble h)
@@ -171,7 +170,7 @@ void RGBRectangle::render(glm::dmat4 const& modelViewMat) const
 
 void RGBRectangle::update()
 {
-	std::cout << "RGBRectangle update" << std::endl;
+	
 }
 
 RegularCube::RegularCube(GLdouble lenght)

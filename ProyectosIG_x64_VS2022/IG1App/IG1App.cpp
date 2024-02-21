@@ -49,7 +49,7 @@ IG1App::init()
 
 	//Objetos de escena 0 -> Figuras planas
 	//scenes[0]->addObject(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));	//Triángulo
-	scenes[0]->addObject(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
+	scenes[0]->addObject(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));		//Circunferencia
 	scenes[0]->addObject(new RGBTriangle(30.0));								//Triángulo RGB
 	scenes[0]->addObject(new RegularRectangle(400.0, 200.0));					//Rectángulo Línea
 	//scenes[0]->addObject(new RGBRectangle(200.0, 100.0));						//Rectángulo RGB

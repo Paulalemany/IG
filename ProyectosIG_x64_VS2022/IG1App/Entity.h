@@ -69,7 +69,7 @@ public:
 	virtual void update();
 
 private:
-	GLdouble rotationSp = 1;
+	GLdouble rotationSp = 5.0;
 };
 
 
