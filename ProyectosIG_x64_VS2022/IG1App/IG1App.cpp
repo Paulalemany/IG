@@ -43,7 +43,7 @@ IG1App::init()
 	// create an OpenGL Context
 	iniWinOpenGL();
 
-	glutIdleFunc(update);
+	//glutIdleFunc(update);
 
 	// create the scene after creating the context
 	// allocate memory and resources
@@ -179,7 +179,7 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case 'u' :
-			update();
+			glutIdleFunc(update);
 			break;
 		default:
 			need_redisplay = false;
