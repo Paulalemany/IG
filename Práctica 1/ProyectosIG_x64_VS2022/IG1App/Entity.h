@@ -82,6 +82,14 @@ public:
 	virtual void update();
 };
 
+class Ground : public Abs_Entity {
+	//Hará falta un ancho, un largo y el punto de origen??
+	explicit Ground(GLdouble w, GLdouble h);
+	~Ground();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+
+};
 
 
 class RGBRectangle : public Abs_Entity {

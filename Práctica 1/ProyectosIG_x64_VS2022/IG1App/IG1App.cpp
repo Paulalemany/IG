@@ -179,6 +179,9 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case 'u' :
+			update();
+			break;
+		case 'U':
 			glutIdleFunc(update);
 			break;
 		default:
