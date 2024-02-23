@@ -161,7 +161,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		: Abs_Entity()
 	{
 		//Creamos un rectángulo
-		mMesh = Mesh::generateRectangle(w, h);
+		mMesh = Mesh::generateRectangleTexCor(w, h);
 	};
 
 	Ground::~Ground()
@@ -175,7 +175,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		if (mMesh != nullptr) {
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);					//Primitiva para colorear
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
 			mMesh->render();
 		}
 	}

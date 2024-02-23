@@ -28,11 +28,17 @@ Mesh::render() const
 			  4, GL_DOUBLE, 0, vColors.data()); // components number (rgba=4), type of
 			                                    // each component, stride, pointer
 		}
+		if (vTexCoords.size() > 0) {
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glTexCoordPointer(
+				2, GL_DOUBLE, 0, vTexCoords.data());
+		}
 
 		draw();
 
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	}
 }
 
@@ -294,6 +300,19 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	return mesh;
 
 	
+}
+
+Mesh* Mesh::generateRectangleTexCor(GLdouble w, GLdouble h)
+{
+	Mesh* mesh = generateRectangle(w,h);
+	mesh->vTexCoords.reserve(mesh -> mNumVertices);
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+	mesh->vTexCoords.emplace_back(1, 1);
+	mesh->vTexCoords.emplace_back(1, 0);
+	
+
+	return mesh;
 }
 
 Mesh*

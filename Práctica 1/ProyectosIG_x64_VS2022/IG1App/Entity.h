@@ -28,8 +28,13 @@ public:
 	glm::dvec4 const& color() const { return mColor; };
 	void setColor(glm::dvec4 const& aColor) { mColor = aColor; };
 
+	//Texture
+	Texture* texture() const { return mTexture; };
+	void setTexture(Texture* tex) { mTexture = tex; };
+
 protected:
 	Mesh* mMesh = nullptr; // the mesh
+	Texture* mTexture = nullptr; // the texture
 	glm::dmat4 mModelMat;  // modeling matrix
 	glm::dvec4 mColor;	   // color de la entidad
 

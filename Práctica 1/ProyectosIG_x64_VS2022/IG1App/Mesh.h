@@ -3,6 +3,7 @@
 
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
+#include "../texturas/Texture.h"
 
 #include <vector>
 
@@ -29,12 +30,13 @@ public:
 	static Mesh* generateRGBRectangle(GLdouble w, GLdouble h);
 	static Mesh* generateCube(GLdouble length);
 	static Mesh* generateRGBCubeTriangles(GLdouble length);
+	static Mesh* generateRectangleTexCor(GLdouble w, GLdouble h);
 
 protected:
-	GLuint mPrimitive =
-	  GL_TRIANGLES;          // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
+	GLuint mPrimitive = GL_TRIANGLES;          // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
 	GLuint mNumVertices = 0; // number of elements ( = vVertices.size())
 	std::vector<glm::dvec3> vVertices; // vertex array
+	std::vector<glm::dvec2> vTexCoords; //Texture Array
 	std::vector<glm::dvec4> vColors;   // color array
 	virtual void draw() const;
 };
