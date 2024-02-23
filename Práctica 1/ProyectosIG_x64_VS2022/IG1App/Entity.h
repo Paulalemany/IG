@@ -83,6 +83,7 @@ public:
 };
 
 class Ground : public Abs_Entity {
+public:
 	//Hará falta un ancho, un largo y el punto de origen??
 	explicit Ground(GLdouble w, GLdouble h);
 	~Ground();

@@ -87,10 +87,10 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);			//reserva para el color
 
-	mesh->vVertices.emplace_back(-w/2,h/2,0);
-	mesh->vVertices.emplace_back(w/2, h / 2,0);
-	mesh->vVertices.emplace_back(-w/2, -h / 2,0);
-	mesh->vVertices.emplace_back(w/2, - h / 2, 0);
+	mesh->vVertices.emplace_back(-w/2, 0, -h / 2);
+	mesh->vVertices.emplace_back(w/2, 0, -h / 2);
+	mesh->vVertices.emplace_back(-w / 2, 0, h / 2);
+	mesh->vVertices.emplace_back(w / 2, 0, h / 2);
 
 	//Color
 	mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
