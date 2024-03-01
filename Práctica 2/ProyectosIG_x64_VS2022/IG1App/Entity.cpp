@@ -160,10 +160,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	Ground::Ground(GLdouble w, GLdouble h, std::string bmp)
 		: Abs_Entity()
 	{
-		//Textura del ground:
-		
 		//Creamos un rectángulo
 		mMesh = Mesh::generateRectangleTexCor(w, h);
+
+		//Textura del ground
+		mTexture = new Texture();
 		setTexture(bmp); //creo que aqui va esto porque el setColor tb lo pusimos aqui
 	};
 
@@ -178,9 +179,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		if (mMesh != nullptr) {
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);	//Primitiva para colorear
+			mTexture->bind(GL_MODULATE);
 			upload(aMat);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
 			mMesh->render();
+			mTexture->unbind();
 		}
 	}
 

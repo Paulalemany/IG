@@ -28,13 +28,8 @@ public:
 	glm::dvec4 const& color() const { return mColor; };
 	void setColor(glm::dvec4 const& aColor) { mColor = aColor; };
 
-	//Texture
-	Texture* texture() const { return mTexture; };
-	void setTexture(std::string bmp) const { mTexture->load(bmp); };
-
 protected:
 	Mesh* mMesh = nullptr; // the mesh
-	Texture* mTexture = nullptr; // the texture
 	glm::dmat4 mModelMat;  // modeling matrix
 	glm::dvec4 mColor;	   // color de la entidad
 
@@ -94,9 +89,11 @@ public:
 	~Ground();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
+	//Le pasamos como parámetro el nombre de la textura
+	void setTexture(std::string textura)const { mTexture->load(textura, 255); }
 
 private:
-	//Texture* mTexture;
+	Texture* mTexture;
 
 };
 

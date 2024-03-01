@@ -99,10 +99,10 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	mesh->vVertices.emplace_back(w / 2, 0, h / 2);
 
 	//Color
-	mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
+	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
+	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
+	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
 
 	return mesh;
 }

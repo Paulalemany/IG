@@ -63,7 +63,7 @@ IG1App::init()
 	//scenes[0]->addObject(new RGBTriangle(30.0));								//Triángulo RGB
 	//scenes[0]->addObject(new RegularRectangle(400.0, 200.0));					//Rectángulo Línea
 	//scenes[0]->addObject(new RGBRectangle(200.0, 100.0));						//Rectángulo RGB
-	scenes[0]->addObject(new Ground(600.0, 600.0, "baldosaC"));								//Rectángulo origen
+	scenes[0]->addObject(new Ground(600.0, 600.0, "../BmpsP1/baldosaC.bmp"));					//Rectángulo origen
 
 	//Objetos de escena 1 -> Figuras 3D
 	//scenes[1]->addObject(new RegularCube(200.0));								//Cubo
