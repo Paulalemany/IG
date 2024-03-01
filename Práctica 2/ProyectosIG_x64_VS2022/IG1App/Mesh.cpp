@@ -324,6 +324,7 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 
 	GLdouble a = length / 2;
 
+	//Cubo sin tapas
 	mesh->vVertices.emplace_back(a, -a, a); //v0
 	mesh->vVertices.emplace_back(a, a, a); //v1
 	mesh->vVertices.emplace_back(a, -a, -a); //v2
@@ -337,6 +338,22 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 
 	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
 	mesh->vVertices.push_back(mesh->vVertices[1]); //v8
+
+	//TexCoords
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+	mesh->vTexCoords.emplace_back(1, 1);
+	mesh->vTexCoords.emplace_back(1, 0);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+	mesh->vTexCoords.emplace_back(1, 1);
+	mesh->vTexCoords.emplace_back(1, 0);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
 
 	return mesh;
 }

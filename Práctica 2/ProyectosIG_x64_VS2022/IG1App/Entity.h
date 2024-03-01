@@ -132,7 +132,7 @@ public:
 
 class BoxOutline : public Abs_Entity {
 public:
-	explicit BoxOutline(GLdouble l);
+	explicit BoxOutline(GLdouble l, std::string bmp);
 	~BoxOutline();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
