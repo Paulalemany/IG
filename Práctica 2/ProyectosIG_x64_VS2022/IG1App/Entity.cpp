@@ -165,7 +165,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 		//Textura del ground
 		mTexture = new Texture();
-		setTexture(bmp); //creo que aqui va esto porque el setColor tb lo pusimos aqui
+		setTexture(bmp, mTexture); //creo que aqui va esto porque el setColor tb lo pusimos aqui
 	};
 
 	Ground::~Ground()
@@ -294,12 +294,14 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma region BoxOutline
 
-	BoxOutline::BoxOutline(GLdouble l, std::string bmp)
+	BoxOutline::BoxOutline(GLdouble l, std::string bmp, std::string bmp2)
 		: Abs_Entity()
 	{
 		mMesh = Mesh::generateBoxOutline(l);
 		mTexture = new Texture();
-		setTexture(bmp);
+		mTexture2 = new Texture();
+		setTexture(bmp, mTexture);
+		setTexture(bmp2, mTexture2);
 	}
 
 	BoxOutline::~BoxOutline()
@@ -314,11 +316,21 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		if (mMesh != nullptr) {
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			glPolygonMode(GL_BACK, GL_FILL);	//Primitiva para colorear
-			glPolygonMode(GL_FRONT, GL_LINE);
+			mTexture2->bind(GL_MODULATE);
+			glCullFace(GL_BACK);
+			mMesh->render();
+			mTexture2->unbind();
+
+			glPolygonMode(GL_FRONT, GL_FILL);
 			mTexture->bind(GL_MODULATE);
-			upload(aMat);
+			glCullFace(GL_FRONT);
 			mMesh->render();
 			mTexture->unbind();
+
+			upload(aMat);
+			mMesh->render();
+			
+			
 		}
 	}
 

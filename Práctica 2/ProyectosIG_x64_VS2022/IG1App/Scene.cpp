@@ -33,6 +33,8 @@ Scene::setGL()
 	glClearColor(0.6, 0.7, 0.8, 1.0);; // background color (alpha=1 -> opaque)
 	glEnable(GL_DEPTH_TEST);          // enable Depth test
 	glEnable(GL_TEXTURE_2D);
+	glEnable(GLUT_MULTISAMPLE);
+	glEnable(GL_CULL_FACE);
 }
 void
 Scene::resetGL()
@@ -40,6 +42,8 @@ Scene::resetGL()
 	glClearColor(.0, .0, .0, .0); // background color (alpha=1 -> opaque)
 	glDisable(GL_DEPTH_TEST);     // disable Depth test
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GLUT_MULTISAMPLE);
+	glDisable(GL_CULL_FACE);
 }
 
 void

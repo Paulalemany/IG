@@ -30,11 +30,12 @@ public:
 
 	//Texture
 	//Le pasamos como parámetro el nombre de la textura
-	void setTexture(std::string textura)const { mTexture->load(textura, 255); }
+	void setTexture(std::string textura, Texture * t)const { t->load(textura, 255); }
 
 protected:
 	Mesh* mMesh = nullptr; // the mesh
 	Texture* mTexture = nullptr;
+	Texture* mTexture2 = nullptr;
 	glm::dmat4 mModelMat;  // modeling matrix
 	glm::dvec4 mColor;	   // color de la entidad
 
@@ -132,7 +133,7 @@ public:
 
 class BoxOutline : public Abs_Entity {
 public:
-	explicit BoxOutline(GLdouble l, std::string bmp);
+	explicit BoxOutline(GLdouble l, std::string bmp, std::string bmp2);
 	~BoxOutline();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
