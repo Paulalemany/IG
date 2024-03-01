@@ -245,6 +245,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		if (mMesh != nullptr) {
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
 			upload(aMat);
 			glLineWidth(2);
 			mMesh->render();
@@ -291,5 +292,39 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma endregion
 
+#pragma region BoxOutline
+
+	BoxOutline::BoxOutline(GLdouble l)
+		: Abs_Entity()
+	{
+		mMesh = Mesh::generateBoxOutline(l);
+		mTexture = new Texture();
+		//setTexture();
+	}
+
+	BoxOutline::~BoxOutline()
+	{
+		delete mMesh;
+		delete mTexture;
+		mMesh = nullptr;
+	}
+
+	void BoxOutline::render(glm::dmat4 const& modelViewMat) const
+	{
+		if (mMesh != nullptr) {
+			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);	//Primitiva para colorear
+			mTexture->bind(GL_MODULATE);
+			upload(aMat);
+			mMesh->render();
+			mTexture->unbind();
+		}
+	}
+
+	void BoxOutline::update()
+	{
+	}
+
+#pragma endregion
 
 

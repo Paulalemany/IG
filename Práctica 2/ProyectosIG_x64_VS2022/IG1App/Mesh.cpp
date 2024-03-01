@@ -138,8 +138,6 @@ Mesh* Mesh::generateRGBRectangle(GLdouble w, GLdouble h)
 Mesh* Mesh::generateCube(GLdouble l)
 {
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
-	glPolygonMode(GL_FRONT, GL_LINE);
-	glPolygonMode(GL_BACK, GL_POINT);
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
 	mesh->mNumVertices = 14;							
@@ -314,8 +312,36 @@ Mesh* Mesh::generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh
 	return mesh;
 }
 
-Mesh*
-Mesh::createRGBAxes(GLdouble l)
+Mesh* Mesh::generateBoxOutline(GLdouble length)
+{
+	Mesh* mesh = new Mesh();					//Creamos una nueva malla
+	mesh->mPrimitive = GL_TRIANGLE_STRIP;
+
+	mesh->mNumVertices = 14;
+	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
+
+	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
+
+	GLdouble a = length / 2;
+
+	mesh->vVertices.emplace_back(a, -a, a); //v0
+	mesh->vVertices.emplace_back(a, a, a); //v1
+	mesh->vVertices.emplace_back(a, -a, -a); //v2
+
+	mesh->vVertices.emplace_back(a, a, -a); //v3
+	mesh->vVertices.emplace_back(-a, -a, -a); //v4
+	mesh->vVertices.emplace_back(-a, a, -a); //v5
+
+	mesh->vVertices.emplace_back(-a, -a, a); //v6
+	mesh->vVertices.emplace_back(-a, a, a); //v7
+
+	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
+	mesh->vVertices.push_back(mesh->vVertices[1]); //v8
+
+	return mesh;
+}
+
+Mesh* Mesh::createRGBAxes(GLdouble l)
 {
 	Mesh* mesh = new Mesh();
 
