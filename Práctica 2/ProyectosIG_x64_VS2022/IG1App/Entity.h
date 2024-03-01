@@ -85,7 +85,7 @@ public:
 class Ground : public Abs_Entity {
 public:
 	//Hará falta un ancho, un largo y el punto de origen??
-	explicit Ground(GLdouble w, GLdouble h, std::string bmp);
+	explicit Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, std::string bmp);
 	~Ground();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();

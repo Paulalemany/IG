@@ -157,11 +157,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma region Ground
 
-	Ground::Ground(GLdouble w, GLdouble h, std::string bmp)
+	Ground::Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, std::string bmp)
 		: Abs_Entity()
 	{
 		//Creamos un rectángulo
-		mMesh = Mesh::generateRectangleTexCor(w, h);
+		mMesh = Mesh::generateRectangleTexCor(w, h, rw, rh);
 
 		//Textura del ground
 		mTexture = new Texture();
