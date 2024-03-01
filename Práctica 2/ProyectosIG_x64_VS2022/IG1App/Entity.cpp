@@ -340,4 +340,23 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma endregion
 
+#pragma region Star
+	Star::Star(GLdouble l, std::string bmp, std::string bmp2)
+		:Abs_Entity()
+	{
+		//mMesh = Mesh::generateStar3D();
+	}
 
+	Star::~Star()
+	{
+	}
+
+	void Star::render(glm::dmat4 const& modelViewMat) const
+	{
+	}
+
+	void Star::update()
+	{
+	}
+
+#pragma endregion

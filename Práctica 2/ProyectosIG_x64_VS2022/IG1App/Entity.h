@@ -44,7 +44,6 @@ protected:
 };
 
 
-
 class EjesRGB : public Abs_Entity
 {
 public:
@@ -54,8 +53,6 @@ public:
 	virtual void update();
 };
 
-
-
 class RegularPolygon : public Abs_Entity 
 {
 public: 
@@ -64,8 +61,6 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
 };
-
-
 
 class RGBTriangle : public Abs_Entity {
 public:
@@ -77,8 +72,6 @@ public:
 private:
 	GLdouble rotationSp = 5.0;
 };
-
-
 
 class RegularRectangle : public Abs_Entity {
 public:
@@ -102,7 +95,6 @@ private:
 
 };
 
-
 class RGBRectangle : public Abs_Entity {
 public:
 	explicit RGBRectangle(GLdouble w, GLdouble h);
@@ -111,8 +103,6 @@ public:
 	virtual void update();
 };
 
-
-
 class RegularCube : public Abs_Entity {
 public:
 	explicit RegularCube(GLdouble lenght);
@@ -120,8 +110,6 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
 };
-
-
 
 class RGBCube : public Abs_Entity {
 public:
@@ -135,6 +123,14 @@ class BoxOutline : public Abs_Entity {
 public:
 	explicit BoxOutline(GLdouble l, std::string bmp, std::string bmp2);
 	~BoxOutline();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+};
+
+class Star : public Abs_Entity {
+public:
+	explicit Star(GLdouble l, std::string bmp, std::string bmp2);
+	~Star();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
 };

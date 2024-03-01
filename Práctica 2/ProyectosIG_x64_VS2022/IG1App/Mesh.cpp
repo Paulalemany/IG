@@ -358,6 +358,22 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 	return mesh;
 }
 
+Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
+{
+	Mesh* mesh = new Mesh();
+
+	mesh->mPrimitive = GL_TRIANGLE_FAN;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
+	mesh->mNumVertices = np*2;
+	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
+
+
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+		mesh->vVertices.emplace_back(re/2 * cos(radians((360.0 / mesh->mNumVertices) * i + 90.0)), re/2 * sin(radians((360.0 / mesh->mNumVertices) * i + 90)), 0.0); //Se supone que pone el resto de vértices
+	}
+
+	return mesh;
+}
+
 Mesh* Mesh::createRGBAxes(GLdouble l)
 {
 	Mesh* mesh = new Mesh();
