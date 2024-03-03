@@ -363,13 +363,27 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	Mesh* mesh = new Mesh();
 
 	mesh->mPrimitive = GL_TRIANGLE_FAN;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
-	mesh->mNumVertices = np*2;
+	mesh->mNumVertices = np + 1;
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
 
-	for (int i = 0; i < mesh->mNumVertices; i++) {
-		mesh->vVertices.emplace_back(re/2 * cos(radians((360.0 / mesh->mNumVertices) * i + 90.0)), re/2 * sin(radians((360.0 / mesh->mNumVertices) * i + 90)), 0.0); //Se supone que pone el resto de vértices
+	mesh->vVertices.emplace_back(0, 0, 0);						//Primer vértice (Centro) -Vertice en comun-
+	
+	for (int i = 0; i < np; i++) {
+
+		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
+		if (i % 2 == 0)	//Si es par
+		{
+			mesh->vVertices.emplace_back(re / 2 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 2 * sin(radians((360.0 / (np - 1)) * i + 90)), h); //Se supone que pone el resto de vértices
+		}
+		else {
+			mesh->vVertices.emplace_back(re / 4 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 4 * sin(radians((360.0 / (np - 1)) * i + 90)), h); //Se supone que pone el resto de vértices
+		}
+		
 	}
+
+	//Colocamos el último en el mismo punto del primeros
+	mesh->vVertices.push_back(mesh->vVertices[0]); // v14 = v1
 
 	return mesh;
 }

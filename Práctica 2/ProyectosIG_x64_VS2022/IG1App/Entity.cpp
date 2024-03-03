@@ -330,7 +330,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			upload(aMat);
 			mMesh->render();
 			
-			
 		}
 	}
 
@@ -341,7 +340,12 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 #pragma endregion
 
 #pragma region Star
-	Star::Star(GLdouble l, std::string bmp, std::string bmp2)
+	Star::Star(GLuint num, GLdouble r)
+		:Abs_Entity()
+	{
+		mMesh = Mesh::generateStar3D(num, r, 100.0);
+	}
+	Star::Star(GLuint num, GLdouble r, std::string bmp, std::string bmp2)
 		:Abs_Entity()
 	{
 		//mMesh = Mesh::generateStar3D();
@@ -349,10 +353,20 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	Star::~Star()
 	{
+		delete mMesh;
+		mMesh = nullptr;
 	}
 
 	void Star::render(glm::dmat4 const& modelViewMat) const
 	{
+		if (mMesh != nullptr) {
+			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			upload(aMat);
+			glLineWidth(2);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			mMesh->render();
+			glLineWidth(1);
+		}
 	}
 
 	void Star::update()
