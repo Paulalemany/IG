@@ -317,7 +317,7 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
-	mesh->mNumVertices = 14;
+	mesh->mNumVertices = 10;
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 
 	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
@@ -337,7 +337,7 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 	mesh->vVertices.emplace_back(-a, a, a); //v7
 
 	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
-	mesh->vVertices.push_back(mesh->vVertices[1]); //v8
+	mesh->vVertices.push_back(mesh->vVertices[1]); //v9
 
 	//TexCoords
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
