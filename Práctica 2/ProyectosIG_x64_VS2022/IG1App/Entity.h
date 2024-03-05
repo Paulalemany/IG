@@ -128,6 +128,9 @@ public:
 };
 
 class Star : public Abs_Entity {
+
+	GLdouble rotationSp = 5.0;
+
 public:
 	explicit Star(GLuint num, GLdouble r);
 	explicit Star(GLuint num, GLdouble r, std::string bmp, std::string bmp2);

@@ -373,6 +373,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void Star::update()
 	{
+		//rotacion de las estrellas
+		mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 1.0, 1.0));
+
+		////rotacion sobre el eje y
+		//mModelMat = translate(mModelMat, dvec3(0, 17.35, 0));
 	}
 
 #pragma endregion
