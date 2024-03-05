@@ -308,6 +308,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		delete mMesh;
 		delete mTexture;
+		delete mTexture2;
 		mMesh = nullptr;
 	}
 
@@ -350,7 +351,9 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	Star::Star(GLuint num, GLdouble r, GLdouble h)
 		:Abs_Entity()
 	{
-		//mMesh = Mesh::generateStar3D();
+		mMesh = Mesh::generateStar3DTexCor(num, r, h);
+		mTexture = new Texture();
+		setTexture("../BmpsP1/baldosaP.bmp", mTexture);
 	}
 
 	Star::~Star()
@@ -365,9 +368,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
 			glLineWidth(2);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			mTexture->bind(GL_MODULATE);
 			mMesh->render();
 			glLineWidth(1);
+
 		}
 	}
 

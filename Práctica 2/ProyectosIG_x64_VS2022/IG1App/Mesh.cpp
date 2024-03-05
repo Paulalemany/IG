@@ -432,6 +432,9 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 
 	}
 
+	//Colocamos el último en el mismo punto del primeros
+	mesh->vTexCoords.push_back(mesh->vTexCoords[0]); // v14 = v1
+
 	//Segunda estrella
 	for (int i = 0; i < np; i++) {
 
@@ -445,6 +448,9 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 		}
 
 	}
+
+	//Colocamos el último en el mismo punto del primeros
+	mesh->vTexCoords.push_back(mesh->vTexCoords[24]); // v24 = v15
 
 	return mesh;
 }
