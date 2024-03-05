@@ -406,6 +406,51 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	return mesh;
 }
 
+Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
+{
+	Mesh* mesh = new Mesh();
+	mesh = generateStar3D(re, np, h);
+	
+	//Le ponemos las cosas de la textura
+	//TexCoords
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+
+	//Primer vértice
+	mesh->vTexCoords.emplace_back(0, 1);
+
+	//Primera estrella
+	for (int i = 0; i < np; i++) {
+
+		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
+		if (i % 2 == 0)	//Si es par
+		{
+			mesh->vTexCoords.emplace_back(i % 2, 0); 
+		}
+		else {
+			mesh->vTexCoords.emplace_back(1, i % 2 );
+		}
+
+	}
+
+	//Segunda estrella
+	for (int i = 0; i < np; i++) {
+
+		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
+		if (i % 2 == 0)	//Si es par
+		{
+			mesh->vTexCoords.emplace_back(i % 2, 1);
+		}
+		else {
+			mesh->vTexCoords.emplace_back(0, i % 2);
+		}
+
+	}
+
+	return mesh;
+}
+
+
+
 Mesh* Mesh::createRGBAxes(GLdouble l)
 {
 	Mesh* mesh = new Mesh();

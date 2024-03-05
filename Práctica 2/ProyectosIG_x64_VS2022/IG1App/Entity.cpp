@@ -347,7 +347,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		mMesh = Mesh::generateStar3D(num, r, 100.0);
 	}
-	Star::Star(GLuint num, GLdouble r, std::string bmp, std::string bmp2)
+	Star::Star(GLuint num, GLdouble r, GLdouble h)
 		:Abs_Entity()
 	{
 		//mMesh = Mesh::generateStar3D();

@@ -133,7 +133,7 @@ class Star : public Abs_Entity {
 
 public:
 	explicit Star(GLuint num, GLdouble r);
-	explicit Star(GLuint num, GLdouble r, std::string bmp, std::string bmp2);
+	explicit Star(GLuint num, GLdouble r, GLdouble h);
 	~Star();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();

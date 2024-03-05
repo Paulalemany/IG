@@ -33,6 +33,7 @@ public:
 	static Mesh* generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh);
 	static Mesh* generateBoxOutline(GLdouble length);
 	static Mesh* generateStar3D(GLdouble re, GLuint np, GLdouble h);
+	static Mesh* generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h);
 
 protected:
 	GLuint mPrimitive = GL_TRIANGLES;          // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
