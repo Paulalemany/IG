@@ -34,7 +34,6 @@ Scene::setGL()
 	glEnable(GL_DEPTH_TEST);          // enable Depth test
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GLUT_MULTISAMPLE);
-	glEnable(GL_CULL_FACE);
 }
 void
 Scene::resetGL()
@@ -43,7 +42,6 @@ Scene::resetGL()
 	glDisable(GL_DEPTH_TEST);     // disable Depth test
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GLUT_MULTISAMPLE);
-	glDisable(GL_CULL_FACE);
 }
 
 void

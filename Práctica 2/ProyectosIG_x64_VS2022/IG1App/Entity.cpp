@@ -314,6 +314,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void BoxOutline::render(glm::dmat4 const& modelViewMat) const
 	{
 		if (mMesh != nullptr) {
+			glEnable(GL_CULL_FACE);
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			glPolygonMode(GL_BACK, GL_FILL);	//Primitiva para colorear
 			mTexture2->bind(GL_MODULATE);
@@ -326,6 +327,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			glCullFace(GL_FRONT);
 			mMesh->render();
 			mTexture->unbind();
+			glDisable(GL_CULL_FACE);
 
 			upload(aMat);
 			mMesh->render();
