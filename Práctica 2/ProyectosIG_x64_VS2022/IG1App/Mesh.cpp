@@ -358,6 +358,55 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 	return mesh;
 }
 
+Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
+{
+	Mesh* mesh = new Mesh();					//Creamos una nueva malla
+	mesh->mPrimitive = GL_TRIANGLE_STRIP;
+
+	mesh->mNumVertices = 10;
+	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
+
+	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
+
+	GLdouble a = w / 2;
+	GLdouble b = h / 2;
+
+	//Cubo sin tapas
+	mesh->vVertices.emplace_back(a, -b, a); //v0
+	mesh->vVertices.emplace_back(a, b, a); //v1
+	mesh->vVertices.emplace_back(a, -b, -a); //v2
+
+	mesh->vVertices.emplace_back(a, b, -a); //v3
+	mesh->vVertices.emplace_back(-a, -b, -a); //v4
+	mesh->vVertices.emplace_back(-a, b, -a); //v5
+
+	mesh->vVertices.emplace_back(-a, -b, a); //v6
+	mesh->vVertices.emplace_back(-a, b, a); //v7
+
+	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
+	mesh->vVertices.push_back(mesh->vVertices[1]); //v9
+
+	//TexCoords
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+	mesh->vTexCoords.emplace_back(1, 1);
+	mesh->vTexCoords.emplace_back(1, 0);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+	mesh->vTexCoords.emplace_back(1, 1);
+	mesh->vTexCoords.emplace_back(1, 0);
+
+	mesh->vTexCoords.emplace_back(0, 1);
+	mesh->vTexCoords.emplace_back(0, 0);
+
+	return mesh;
+}
+
+
+
 Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 {
 	Mesh* mesh = new Mesh();

@@ -165,7 +165,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 		//Textura del ground
 		mTexture = new Texture();
-		setTexture(bmp, mTexture); //creo que aqui va esto porque el setColor tb lo pusimos aqui
+		setTexture(bmp, mTexture, 255); //creo que aqui va esto porque el setColor tb lo pusimos aqui
 	};
 
 	Ground::~Ground()
@@ -300,8 +300,8 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		mMesh = Mesh::generateBoxOutline(l);
 		mTexture = new Texture();
 		mTexture2 = new Texture();
-		setTexture(bmp, mTexture);
-		setTexture(bmp2, mTexture2);
+		setTexture(bmp, mTexture, 255);
+		setTexture(bmp2, mTexture2, 255);
 	}
 
 	BoxOutline::~BoxOutline()
@@ -355,7 +355,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		mMesh = Mesh::generateStar3DTexCor(num, r, h);
 		mTexture = new Texture();
-		setTexture("../BmpsP1/baldosaP.bmp", mTexture);
+		setTexture("../BmpsP1/baldosaP.bmp", mTexture, 255);
 	}
 
 	Star::~Star()
@@ -392,9 +392,9 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	GlassParapet::GlassParapet(GLdouble w, GLdouble h, std::string bmp)
 		:Abs_Entity()
 	{
-		mMesh = Mesh::generateBoxOutline(w);
+		mMesh = Mesh::generateParpet(w, h);
 		mTexture = new Texture();
-		setTexture(bmp, mTexture);
+		setTexture(bmp, mTexture, 127);
 	}
 
 	GlassParapet::~GlassParapet()

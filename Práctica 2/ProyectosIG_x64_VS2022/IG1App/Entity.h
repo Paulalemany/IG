@@ -30,7 +30,7 @@ public:
 
 	//Texture
 	//Le pasamos como parámetro el nombre de la textura
-	void setTexture(std::string textura, Texture * t)const { t->load(textura, 255); }
+	void setTexture(std::string textura, Texture * t, GLuint a)const { t->load(textura, a); }
 
 protected:
 	Mesh* mMesh = nullptr; // the mesh
@@ -88,10 +88,6 @@ public:
 	~Ground();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
-	
-
-private:
-	
 
 };
 
