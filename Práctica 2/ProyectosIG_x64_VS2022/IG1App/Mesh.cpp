@@ -456,6 +456,7 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 	//Primer vértice
 	mesh->vTexCoords.emplace_back(0, 1);
 	//mesh->vTexCoords.emplace_back(0.25, 0);
+	//empiezo en 0.5, 0.5
 
 	//Primera estrella
 	for (int i = 0; i < np; i++) {
