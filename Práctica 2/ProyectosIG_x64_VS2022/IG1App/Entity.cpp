@@ -310,6 +310,8 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		delete mTexture;
 		delete mTexture2;
 		mMesh = nullptr;
+		mTexture = nullptr;
+		mTexture2 = nullptr;
 	}
 
 	void BoxOutline::render(glm::dmat4 const& modelViewMat) const
@@ -386,3 +388,39 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	}
 
 #pragma endregion
+
+	GlassParapet::GlassParapet(GLdouble w, GLdouble h, std::string bmp)
+		:Abs_Entity()
+	{
+		mMesh = Mesh::generateBoxOutline(w);
+		mTexture = new Texture();
+		setTexture(bmp, mTexture);
+	}
+
+	GlassParapet::~GlassParapet()
+	{
+		delete mMesh;
+		delete mTexture;
+		mMesh = nullptr;
+		mTexture = nullptr;
+	}
+
+	void GlassParapet::render(glm::dmat4 const& modelViewMat) const
+	{
+		if (mMesh != nullptr) {
+			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			mTexture->bind(GL_MODULATE);
+			mMesh->render();
+			mTexture->unbind();
+
+			upload(aMat);
+			mMesh->render();
+
+		}
+	}
+
+	void GlassParapet::update()
+	{
+	}

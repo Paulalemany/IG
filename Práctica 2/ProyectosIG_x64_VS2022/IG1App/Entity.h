@@ -139,4 +139,13 @@ public:
 	virtual void update();
 };
 
+class GlassParapet : public Abs_Entity{
+
+public:
+	explicit GlassParapet(GLdouble w, GLdouble h, std::string bmp);
+	~GlassParapet();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+};
+
 #endif //_H_Entities_H_
