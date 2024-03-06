@@ -62,3 +62,11 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
   glBindTexture(GL_TEXTURE_2D, 0); 
 }
 //-------------------------------------------------------------------------
+
+//Apt35
+//cargue el buffer de color (frontal o trasero) dado por el tercer argumento, como una
+//textura de dimensiones dadas por los parámetros primero y segundo.
+void loadColorBuffer(GLsizei width, GLsizei height, GLuint buffer = GL_FRONT) //buffer = GL_FRONT o GL_BACK
+{
+
+}

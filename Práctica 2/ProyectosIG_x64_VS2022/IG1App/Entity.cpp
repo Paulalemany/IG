@@ -367,14 +367,23 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void Star::render(glm::dmat4 const& modelViewMat) const
 	{
 		if (mMesh != nullptr) {
+			//La estrella la renderizamos dos veces (1 mesh, 2 renders)
+
+			mTexture->bind(GL_REPLACE);
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
 			glLineWidth(2);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-			mTexture->bind(GL_MODULATE);
-			mMesh->render();
-			glLineWidth(1);
 
+			mMesh->render();
+			dmat4 rMat = mModelMat;
+			rMat *= rotate(dmat4(1), radians(180.0), dvec3(0.0, 1.0, 0.0));
+			aMat = modelViewMat * rMat; // glm matrix multiplication
+			upload(aMat);
+
+			mMesh->render();
+			mTexture->unbind();
+			glLineWidth(1);
 		}
 	}
 

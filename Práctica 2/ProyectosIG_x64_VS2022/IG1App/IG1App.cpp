@@ -65,8 +65,8 @@ IG1App::init()
 	//scenes[0]->addObject(new RGBRectangle(200.0, 100.0));						//Rectángulo RGB
 	//scenes[0]->addObject(new Ground(600.0, 600.0, 4, 4, "../BmpsP1/baldosaC.bmp"));					//Rectángulo origen
 	//scenes[0]->addObject(new BoxOutline(200.0, "../BmpsP1/container.bmp","../BmpsP1/papelE.bmp" ));		//Caja
-	//scenes[0]->addObject(new Star(200.0, 17.0, 100.0));
-	scenes[0]->addObject(new GlassParapet(200.0, 100.0, "../BmpsP1/windowV.bmp"));		//Caja
+	scenes[0]->addObject(new Star(200.0, 17.0, 100.0));
+	//scenes[0]->addObject(new GlassParapet(200.0, 100.0, "../BmpsP1/windowV.bmp"));		//Caja
 
 	//Objetos de escena 1 -> Figuras 3D
 	//scenes[1]->addObject(new RegularCube(200.0));								//Cubo

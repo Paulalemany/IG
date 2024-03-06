@@ -441,23 +441,6 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	//Colocamos el último en el mismo punto del primeros
 	mesh->vVertices.push_back(mesh->vVertices[0]); // v14 = v1
 
-	//Segunda estrella
-	for (int i = 0; i < np; i++) {
-
-		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
-		if (i % 2 == 0)	//Si es par
-		{
-			mesh->vVertices.emplace_back(re / 2 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 2 * sin(radians((360.0 / (np - 1)) * i + 90)), -h); //Se supone que pone el resto de vértices
-		}
-		else {
-			mesh->vVertices.emplace_back(re / 4 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 4 * sin(radians((360.0 / (np - 1)) * i + 90)), -h); //Se supone que pone el resto de vértices
-		}
-
-	}
-
-	//Colocamos el último en el mismo punto del primeros
-	mesh->vVertices.push_back(mesh->vVertices[24]); // v24 = v15
-
 	return mesh;
 }
 
@@ -472,6 +455,7 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 
 	//Primer vértice
 	mesh->vTexCoords.emplace_back(0, 1);
+	//mesh->vTexCoords.emplace_back(0.25, 0);
 
 	//Primera estrella
 	for (int i = 0; i < np; i++) {
@@ -484,28 +468,10 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 		else {
 			mesh->vTexCoords.emplace_back(1, i % 2 );
 		}
-
 	}
 
 	//Colocamos el último en el mismo punto del primeros
 	mesh->vTexCoords.push_back(mesh->vTexCoords[0]); // v14 = v1
-
-	//Segunda estrella
-	for (int i = 0; i < np; i++) {
-
-		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
-		if (i % 2 == 0)	//Si es par
-		{
-			mesh->vTexCoords.emplace_back(i % 2, 1);
-		}
-		else {
-			mesh->vTexCoords.emplace_back(0, i % 2);
-		}
-
-	}
-
-	//Colocamos el último en el mismo punto del primeros
-	mesh->vTexCoords.push_back(mesh->vTexCoords[24]); // v24 = v15
 
 	return mesh;
 }
