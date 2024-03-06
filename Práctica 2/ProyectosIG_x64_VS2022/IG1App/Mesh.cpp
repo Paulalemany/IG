@@ -372,6 +372,12 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 	GLdouble b = h / 2;
 
 	//Cubo sin tapas
+
+	for (int i = 0; i < mesh->mNumVertices - 2; i++) {
+
+		//La b se va multiplicando por -1
+		b *= -1;
+	}
 	mesh->vVertices.emplace_back(a, -b, a); //v0
 	mesh->vVertices.emplace_back(a, b, a); //v1
 	mesh->vVertices.emplace_back(a, -b, -a); //v2
