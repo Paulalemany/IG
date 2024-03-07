@@ -45,6 +45,7 @@ Scene::init()
 	setScene(1);
 
 }
+
 void
 Scene::free()
 { // release memory and resources
@@ -59,6 +60,7 @@ Scene::free()
 		t = nullptr;
 	}*/
 }
+
 void
 Scene::setGL()
 {
@@ -70,6 +72,7 @@ Scene::setGL()
 	glEnable(GL_BLEND);									// enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// enable Alpha channel
 }
+
 void
 Scene::resetGL()
 {
@@ -120,7 +123,7 @@ void Scene::setScene(int i)
 		gObjects.push_back(new BoxOutline(200.0, gTextures[1], gTextures[2]));							//Caja
 		gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));									//Estrella
 		gObjects.push_back(new GlassParapet(600.0, 100.0, gTextures[4]));								//Parapet
-		//gObjects.push_back(new Photo(200.0, 100.0, gTexture[6]));										//Photo
+		gObjects.push_back(new Photo(200.0, 100.0, gTextures[5]));										//Photo
 		break;
 	default:
 		break;
