@@ -453,26 +453,17 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 	//TexCoords
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
 
-	//Primer vértice
-	mesh->vTexCoords.emplace_back(0, 1);
-	//mesh->vTexCoords.emplace_back(0.25, 0);
 	//empiezo en 0.5, 0.5
+	mesh->vTexCoords.emplace_back(0.5, 0.5);
 
-	//Primera estrella
-	for (int i = 0; i < np; i++) {
-
-		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
-		if (i % 2 == 0)	//Si es par
-		{
-			mesh->vTexCoords.emplace_back(i % 2, 0); 
-		}
-		else {
-			mesh->vTexCoords.emplace_back(1, i % 2 );
-		}
+	for (int i = 0; i < 4; i++) {
+		mesh->vTexCoords.emplace_back(0.0, 1.0);
+		mesh->vTexCoords.emplace_back(0.5, 1.0);
+		mesh->vTexCoords.emplace_back(0.0, 1.0);
+		mesh->vTexCoords.emplace_back(0.0, 0.5);
 	}
 
-	//Colocamos el último en el mismo punto del primeros
-	mesh->vTexCoords.push_back(mesh->vTexCoords[0]); // v14 = v1
+	mesh->vTexCoords.emplace_back(0.0, 1.0);
 
 	return mesh;
 }
