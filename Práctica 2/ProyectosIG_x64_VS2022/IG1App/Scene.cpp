@@ -51,7 +51,7 @@ Scene::init()
 	//gObjects.push_back(new BoxOutline(200.0, container,papelE));	//Caja
 	//gObjects.push_back(new Star(200.0, 17.0, 100.0, baldosaP));												//Estrella
 	//gObjects.push_back(new GlassParapet(200.0, 100.0, windowV));					//Parapet
-	//gObjects.push_back(new Photo(200.0, 100.0, noche));							//Photo
+	gObjects.push_back(new Photo(200.0, 100.0, noche));							//Photo
 }
 void
 Scene::free()

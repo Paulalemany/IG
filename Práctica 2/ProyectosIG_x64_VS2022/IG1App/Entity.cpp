@@ -441,7 +441,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		//Hacemos un rectángulo que se coloque en el suelo que tiene una textura
 		//Creamos un rectángulo
 		mMesh = Mesh::generateRectangle(w, h);
-		mTexture = t;
+		mTexture = new Texture();
 		mTexture->loadColorBuffer(w, h, GL_FRONT);
 	}
 
