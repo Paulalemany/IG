@@ -422,7 +422,7 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
 	//apt 38
-	GLdouble altura = 200; 
+	GLdouble altura = 0; 
 	GLdouble offsetX = 0; 
 	GLdouble offsetZ = 0; 
 

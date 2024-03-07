@@ -38,7 +38,7 @@ public:
 
 	void run();   // the main event processing loop
 	void close(); // the application
-	static void s_update(); //si no es static me da error¿¿
+
 
 protected:
 	IG1App(){};
@@ -59,6 +59,7 @@ protected:
 	static void s_resize(int newWidth, int newHeight) { s_ig1app.resize(newWidth, newHeight); };
 	static void s_key(unsigned char key, int x, int y) { s_ig1app.key(key, x, y); };
 	static void s_specialKey(int key, int x, int y) { s_ig1app.specialKey(key, x, y); };
+	static void s_update();
 
 	// Viewport position and size
 	Viewport* mViewPort = nullptr;
