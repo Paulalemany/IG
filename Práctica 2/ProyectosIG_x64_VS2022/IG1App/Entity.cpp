@@ -352,6 +352,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		:Abs_Entity()
 	{
 		mMesh = Mesh::generateStar3DTexCor(num, r, h);
+		mModelMat = translate(dmat4(1), dvec3(0.0, 200.0, 0.0)); //apt 38
 		mTexture = t;
 	}
 
@@ -386,9 +387,10 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void Star::update()
 	{
-		//rotacion de las estrellas
-		mModelMat = rotate(dmat4(1), radians(rotationSp), dvec3(0, 1.0, 0.0))
-			* rotate(dmat4(1), radians(-rotationSp), dvec3(0, 0.0, 1.0));
+		//rotacion de la estrella
+		mModelMat = translate(dmat4(1), dvec3(0.0, 200.0, 0.0)) *
+			rotate(dmat4(1), radians(rotationSp), dvec3(0.0, 1.0, 0.0)) *
+			rotate(dmat4(1), radians(-rotationSp), dvec3(0.0, 0.0, 1.0));
 
 		rotationSp += .05;
 
@@ -479,7 +481,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void Photo::update()
 	{
-		mTexture->loadColorBuffer(800.0, 600.0);
+		//mTexture->loadColorBuffer(800.0, 600.0);
 	}
 #pragma endregion
 

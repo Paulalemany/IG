@@ -45,6 +45,7 @@ Scene::init()
 	setScene(1);
 
 }
+
 void
 Scene::free()
 { // release memory and resources
@@ -59,6 +60,7 @@ Scene::free()
 		t = nullptr;
 	}*/
 }
+
 void
 Scene::setGL()
 {
@@ -70,6 +72,7 @@ Scene::setGL()
 	glEnable(GL_BLEND);									// enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// enable Alpha channel
 }
+
 void
 Scene::resetGL()
 {
