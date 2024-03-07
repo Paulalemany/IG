@@ -19,13 +19,19 @@ IG1App::close()
 	free();
 }
 
-//apartado 16
-void IG1App::s_update()
+void IG1App::update()
 {
-	scenes[scene_index]->update();
-	glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
-	// display()
+	mScene->update();
+	glutPostRedisplay();
 }
+
+////apartado 16
+//void IG1App::s_update()
+//{
+//	scenes[scene_index]->update();
+//	glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
+//	// display()
+//}
 
 void
 IG1App::run() // enters the main event processing loop
@@ -50,25 +56,11 @@ IG1App::init()
 	mViewPort =
 	  new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 	mCamera = new Camera(mViewPort);
-	//mScene = new Scene;
-
-	//Array de escenas
-	for (int i = 0; i < MAX_SCENES; i++) {
-		scenes[i] = new Scene;
-	}
-
-	//Objetos de escena 0 -> Figuras planas
-	
-	//Objetos de escena 1 -> Figuras 3D
-	//scenes[1]->addObject(new RegularCube(200.0));								//Cubo
-	scenes[1]->addObject(new RGBCube(200.0));									//Cubo RGB
-	
+	mScene = new Scene;
 	
 	mCamera->set2D();
-	//mScene->init();
+	mScene->init();
 
-	//Iniciamos cada escena
-	for (auto i : scenes) i->init();
 }
 
 void
@@ -118,7 +110,7 @@ IG1App::free()
 
 void IG1App::setScene(int id)
 {
-	scene_index = id;
+	mScene->setScene(id);
 }
 
 void
@@ -128,7 +120,7 @@ IG1App::display() const
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
 
 	//mScene->render(*mCamera); // uploads the viewport and camera to the GPU
-	scenes[scene_index]->render(*mCamera);
+	mScene->render(*mCamera);
 
 	glutSwapBuffers(); // swaps the front and back buffer
 }
@@ -174,7 +166,7 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case 'u' :
-			s_update();
+			update();
 			break;
 		case 'U':
 			glutIdleFunc(s_update);

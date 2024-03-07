@@ -38,7 +38,8 @@ public:
 
 	void run();   // the main event processing loop
 	void close(); // the application
-	static void s_update(); //si no es static me da error¿¿
+	void update();
+	static void s_update() { s_ig1app.update(); };
 
 protected:
 	IG1App(){};
@@ -64,6 +65,7 @@ protected:
 	Viewport* mViewPort = nullptr;
 	// Camera position, view volume and projection
 	Camera* mCamera = nullptr;
+	Scene* mScene = nullptr;
 
 	bool mStop = false; // main event processing loop
 	int mWinId = 0;     // window's identifier

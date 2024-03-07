@@ -387,7 +387,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void Star::update()
 	{
 		//rotacion de las estrellas
-		mModelMat = rotate(dmat4(1), radians(rotationSp), dvec3(0, 1.0, 0.0)) 
+		mModelMat = rotate(dmat4(1), radians(rotationSp), dvec3(0, 1.0, 0.0))
 			* rotate(dmat4(1), radians(-rotationSp), dvec3(0, 0.0, 1.0));
 
 		rotationSp += .05;
