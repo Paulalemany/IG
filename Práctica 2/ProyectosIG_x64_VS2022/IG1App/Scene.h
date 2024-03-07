@@ -30,6 +30,9 @@ public:
 
 	void addObject(Abs_Entity* e);
 
+	//Le pasamos como parámetro el nombre de la textura
+	void setTexture(std::string textura, Texture* t, GLuint a)const { t->load(textura, a); }
+
 protected:
 	void free();
 	void setGL();

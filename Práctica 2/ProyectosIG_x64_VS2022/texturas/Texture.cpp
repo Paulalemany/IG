@@ -69,29 +69,38 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
 //textura de dimensiones dadas por los parámetros primero y segundo.
 void Texture::loadColorBuffer(GLsizei width, GLsizei height, GLuint buffer)
 {
-	if (buffer != GL_FRONT && buffer != GL_BACK) {
-		return;
-	}
-	
-	//tamaño de la textura
-	mWidth = width;
-	mHeight = height;
 
-	//genera un nombre para la textura
-	glGenTextures(1, &mId);
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, width, height, 0);
 
-	//crea la textura y la activa
-	glBindTexture(GL_TEXTURE_2D, mId);
+	glReadBuffer(buffer);
 
-	bind(GL_REPLACE);
+	GLubyte* data = new GLubyte[width * height * 4];
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 
-	//modificar buffer
-	GLenum format = GL_RGBA;
-	if (buffer == GL_FRONT) {
-		glReadBuffer(GL_FRONT);
-	}
-	else
-		glReadBuffer(GL_BACK);
+
+	//if (buffer != GL_FRONT && buffer != GL_BACK) {
+	//	return;
+	//}
+	//
+	////tamaño de la textura
+	//mWidth = width;
+	//mHeight = height;
+
+	////genera un nombre para la textura
+	//glGenTextures(1, &mId);
+
+	////crea la textura y la activa
+	//glBindTexture(GL_TEXTURE_2D, mId);
+
+	//bind(GL_REPLACE);
+
+	////modificar buffer
+	//GLenum format = GL_RGBA;
+	//if (buffer == GL_FRONT) {
+	//	glReadBuffer(GL_FRONT);
+	//}
+	//else
+	//	glReadBuffer(GL_BACK);
 
 
 	//pasa imagen a la textura activa

@@ -84,7 +84,7 @@ public:
 class Ground : public Abs_Entity {
 public:
 	//Hará falta un ancho, un largo y el punto de origen??
-	explicit Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, std::string bmp);
+	explicit Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t);
 	~Ground();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
@@ -117,7 +117,7 @@ public:
 
 class BoxOutline : public Abs_Entity {
 public:
-	explicit BoxOutline(GLdouble l, std::string bmp, std::string bmp2);
+	explicit BoxOutline(GLdouble l, Texture* t, Texture* t2);
 	~BoxOutline();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
@@ -129,7 +129,7 @@ class Star : public Abs_Entity {
 
 public:
 	explicit Star(GLuint num, GLdouble r);
-	explicit Star(GLuint num, GLdouble r, GLdouble h);
+	explicit Star(GLuint num, GLdouble r, GLdouble h, Texture* t);
 	~Star();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
@@ -138,7 +138,7 @@ public:
 class GlassParapet : public Abs_Entity{
 
 public:
-	explicit GlassParapet(GLdouble w, GLdouble h, std::string bmp);
+	explicit GlassParapet(GLdouble w, GLdouble h, Texture* ts);
 	~GlassParapet();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
@@ -147,7 +147,7 @@ public:
 class Photo : public Abs_Entity {
 
 public:
-	explicit Photo(GLdouble w, GLdouble h, std::string bmp);
+	explicit Photo(GLdouble w, GLdouble h, Texture* t);
 	~Photo();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
