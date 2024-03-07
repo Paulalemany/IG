@@ -390,14 +390,17 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void Star::update()
 	{
 		//rotacion de las estrellas
-		mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 1.0, 1.0));
+		mModelMat = translate(mModelMat, dvec3(0, 0, 2)); // ??? funciona para colocarlo donde la circunferencia
+		mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0.0, 1.0));
 
-		////rotacion sobre el eje y
-		//mModelMat = translate(mModelMat, dvec3(0, 17.35, 0));
+		//mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 1.0, 1.0));	
+		//mModelMat = translate(mModelMat, dvec3(0, 0, 0)); // ??? funciona para colocarlo donde la circunferencia
+
 	}
 
 #pragma endregion
 
+#pragma region GlassParapet
 	GlassParapet::GlassParapet(GLdouble w, GLdouble h, std::string bmp)
 		:Abs_Entity()
 	{
@@ -433,3 +436,8 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void GlassParapet::update()
 	{
 	}
+
+#pragma endregion
+
+
+	
