@@ -157,15 +157,14 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma region Ground
 
-	Ground::Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, std::string bmp)
+	Ground::Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t)
 		: Abs_Entity()
 	{
 		//Creamos un rectángulo
 		mMesh = Mesh::generateRectangleTexCor(w, h, rw, rh);
 
 		//Textura del ground
-		mTexture = new Texture();
-		setTexture(bmp, mTexture, 255); //creo que aqui va esto porque el setColor tb lo pusimos aqui
+		mTexture = t;
 	};
 
 	Ground::~Ground()
@@ -173,6 +172,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		delete mMesh;
 		delete mTexture;
 		mMesh = nullptr;
+		mTexture = nullptr;
 	}
 
 	void Ground::render(glm::dmat4 const& modelViewMat) const
@@ -294,14 +294,12 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma region BoxOutline
 
-	BoxOutline::BoxOutline(GLdouble l, std::string bmp, std::string bmp2)
+	BoxOutline::BoxOutline(GLdouble l, Texture* t, Texture* t2)
 		: Abs_Entity()
 	{
 		mMesh = Mesh::generateBoxOutline(l);
-		mTexture = new Texture();
-		mTexture2 = new Texture();
-		setTexture(bmp, mTexture, 255);
-		setTexture(bmp2, mTexture2, 255);
+		mTexture = t;
+		mTexture2 = t2;
 	}
 
 	BoxOutline::~BoxOutline()
@@ -350,12 +348,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		mMesh = Mesh::generateStar3D(num, r, 100.0);
 	}
-	Star::Star(GLuint num, GLdouble r, GLdouble h)
+	Star::Star(GLuint num, GLdouble r, GLdouble h, Texture* t)
 		:Abs_Entity()
 	{
 		mMesh = Mesh::generateStar3DTexCor(num, r, h);
-		mTexture = new Texture();
-		setTexture("../BmpsP1/baldosaP.bmp", mTexture, 255);
+		mTexture = t;
 	}
 
 	Star::~Star()
@@ -400,12 +397,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 #pragma endregion
 
 #pragma region GlassParapet
-	GlassParapet::GlassParapet(GLdouble w, GLdouble h, std::string bmp)
+	GlassParapet::GlassParapet(GLdouble w, GLdouble h, Texture* t)
 		:Abs_Entity()
 	{
 		mMesh = Mesh::generateParpet(w, h);
-		mTexture = new Texture();
-		setTexture(bmp, mTexture, 127);
+		mTexture = t;
 	}
 
 	GlassParapet::~GlassParapet()
@@ -440,13 +436,12 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma region Photo
 
-	Photo::Photo(GLdouble w, GLdouble h, std::string bmp)
+	Photo::Photo(GLdouble w, GLdouble h, Texture* t)
 	{
 		//Hacemos un rectángulo que se coloque en el suelo que tiene una textura
 		//Creamos un rectángulo
 		mMesh = Mesh::generateRectangle(w, h);
-		mTexture = new Texture();
-		setTexture(bmp, mTexture, 255);
+		mTexture = t;
 		mTexture->loadColorBuffer(w, h, GL_FRONT);
 	}
 
