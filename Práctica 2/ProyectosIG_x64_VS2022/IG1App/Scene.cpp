@@ -47,11 +47,11 @@ Scene::init()
 	//gObjects.push_back(new RGBTriangle(30.0));													//Tri�ngulo RGB
 	//gObjects.push_back(new RegularRectangle(400.0, 200.0));										//Rect�ngulo L�nea
 	//gObjects.push_back(new RGBRectangle(200.0, 100.0));											//Rect�ngulo RGB
-	//gObjects.push_back(new Ground(600.0, 600.0, 4, 4, baldosaC));					//Suelo
-	//gObjects.push_back(new BoxOutline(200.0, container,papelE));	//Caja
-	//gObjects.push_back(new Star(200.0, 17.0, 100.0, baldosaP));												//Estrella
-	//gObjects.push_back(new GlassParapet(200.0, 100.0, windowV));					//Parapet
-	gObjects.push_back(new Photo(200.0, 100.0, noche));							//Photo
+	gObjects.push_back(new Ground(600.0, 600.0, 4, 4, baldosaC));					//Suelo
+	gObjects.push_back(new BoxOutline(200.0, container,papelE));	//Caja
+	gObjects.push_back(new Star(200.0, 17.0, 100.0, baldosaP));												//Estrella
+	gObjects.push_back(new GlassParapet(600.0, 100.0, windowV));					//Parapet
+	//gObjects.push_back(new Photo(200.0, 100.0, noche));							//Photo
 }
 void
 Scene::free()

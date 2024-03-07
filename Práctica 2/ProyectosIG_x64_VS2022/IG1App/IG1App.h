@@ -38,7 +38,7 @@ public:
 
 	void run();   // the main event processing loop
 	void close(); // the application
-	static void update(); //si no es static me da error¿¿
+	static void s_update(); //si no es static me da error¿¿
 
 protected:
 	IG1App(){};

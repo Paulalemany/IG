@@ -419,11 +419,10 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			mTexture->bind(GL_MODULATE);
-			mMesh->render();
-			mTexture->unbind();
 
 			upload(aMat);
 			mMesh->render();
+			mTexture->unbind();
 
 		}
 	}

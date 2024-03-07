@@ -376,7 +376,7 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 	GLdouble b = h / 2;
 
 	GLdouble altura = -50; //apt 38
-	GLdouble offset = 0; //apt 38
+	GLdouble offset = 199; //apt 38
 
 	mesh->vVertices.emplace_back(a+offset, -b + altura, a + offset); //v0
 	mesh->vVertices.emplace_back(a + offset, b + altura, a + offset); //v1
