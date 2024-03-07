@@ -438,5 +438,40 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma endregion
 
+#pragma region Photo
 
-	
+	Photo::Photo(GLdouble w, GLdouble h, std::string bmp)
+	{
+		//Hacemos un rectángulo que se coloque en el suelo que tiene una textura
+		//Creamos un rectángulo
+		mMesh = Mesh::generateRectangle(w, h);
+		mTexture = new Texture();
+		setTexture(bmp, mTexture, 255);
+	}
+
+	Photo::~Photo()
+	{
+		delete mTexture;
+		delete mMesh;
+		mMesh = nullptr;
+		mTexture = nullptr;
+	}
+
+	void Photo::render(glm::dmat4 const& modelViewMat) const
+	{
+		if (mMesh != nullptr) {
+			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			upload(aMat);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
+			mTexture->bind(GL_MODULATE);
+			mMesh->render();
+			mTexture->unbind();
+		}
+	}
+
+	void Photo::update()
+	{
+	}
+#pragma endregion
+
+

@@ -93,10 +93,10 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);			//reserva para el color
 
-	mesh->vVertices.emplace_back(-w/2, 0, -h / 2);
-	mesh->vVertices.emplace_back(w/2, 0, -h / 2);
-	mesh->vVertices.emplace_back(-w / 2, 0, h / 2);
-	mesh->vVertices.emplace_back(w / 2, 0, h / 2);
+	mesh->vVertices.emplace_back(-w/2, 1.5, -h / 2);
+	mesh->vVertices.emplace_back(w/2, 1.5, -h / 2);
+	mesh->vVertices.emplace_back(-w / 2, 1.5, h / 2);
+	mesh->vVertices.emplace_back(w / 2, 1.5, h / 2);
 
 	//Color
 	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
@@ -373,11 +373,11 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 
 	//Cubo sin tapas
 
-	for (int i = 0; i < mesh->mNumVertices - 2; i++) {
+	//for (int i = 0; i < mesh->mNumVertices - 2; i++) {
 
-		//La b se va multiplicando por -1
-		b *= -1;
-	}
+	//	//La b se va multiplicando por -1
+	//	b *= -1;
+	//}
 	mesh->vVertices.emplace_back(a, -b, a); //v0
 	mesh->vVertices.emplace_back(a, b, a); //v1
 	mesh->vVertices.emplace_back(a, -b, -a); //v2

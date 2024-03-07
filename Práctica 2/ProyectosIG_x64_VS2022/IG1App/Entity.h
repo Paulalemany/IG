@@ -144,4 +144,13 @@ public:
 	virtual void update();
 };
 
+class Photo : public Abs_Entity {
+
+public:
+	explicit Photo(GLdouble w, GLdouble h, std::string bmp);
+	~Photo();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+};
+
 #endif //_H_Entities_H_
