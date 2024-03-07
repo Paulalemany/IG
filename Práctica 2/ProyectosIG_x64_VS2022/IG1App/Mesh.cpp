@@ -93,10 +93,13 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);			//reserva para el color
 
-	mesh->vVertices.emplace_back(-w/2, 0, -h / 2);
-	mesh->vVertices.emplace_back(w/2, 0, -h / 2);
-	mesh->vVertices.emplace_back(-w / 2, 0, h / 2);
-	mesh->vVertices.emplace_back(w / 2, 0, h / 2);
+	GLdouble altura = -100; //apt 38
+	GLdouble offset = 199; //apt 38
+
+	mesh->vVertices.emplace_back(-w/2 +offset, altura, -h / 2 + offset);
+	mesh->vVertices.emplace_back(w/2 + offset, altura, -h / 2 + offset);
+	mesh->vVertices.emplace_back(-w / 2 + offset, altura, h / 2 + offset);
+	mesh->vVertices.emplace_back(w / 2 + offset, altura, h / 2 + offset);
 
 	//Color
 	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
@@ -322,19 +325,20 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 
 	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
 
+	GLdouble offset = 0;
 	GLdouble a = length / 2;
 
 	//Cubo sin tapas
-	mesh->vVertices.emplace_back(a, -a, a); //v0
-	mesh->vVertices.emplace_back(a, a, a); //v1
-	mesh->vVertices.emplace_back(a, -a, -a); //v2
+	mesh->vVertices.emplace_back(a + offset, -a, a + offset); //v0
+	mesh->vVertices.emplace_back(a + offset, a, a + offset); //v1
+	mesh->vVertices.emplace_back(a + offset, -a, -a + offset); //v2
 
-	mesh->vVertices.emplace_back(a, a, -a); //v3
-	mesh->vVertices.emplace_back(-a, -a, -a); //v4
-	mesh->vVertices.emplace_back(-a, a, -a); //v5
+	mesh->vVertices.emplace_back(a + offset, a, -a + offset); //v3
+	mesh->vVertices.emplace_back(-a + offset, -a, -a + offset); //v4
+	mesh->vVertices.emplace_back(-a + offset, a, -a + offset); //v5
 
-	mesh->vVertices.emplace_back(-a, -a, a); //v6
-	mesh->vVertices.emplace_back(-a, a, a); //v7
+	mesh->vVertices.emplace_back(-a + offset, -a, a + offset); //v6
+	mesh->vVertices.emplace_back(-a + offset, a, a + offset); //v7
 
 	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
 	mesh->vVertices.push_back(mesh->vVertices[1]); //v9
@@ -371,23 +375,19 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 	GLdouble a = w / 2;
 	GLdouble b = h / 2;
 
-	//Cubo sin tapas
+	GLdouble altura = -50; //apt 38
+	GLdouble offset = 0; //apt 38
 
-	//for (int i = 0; i < mesh->mNumVertices - 2; i++) {
+	mesh->vVertices.emplace_back(a+offset, -b + altura, a + offset); //v0
+	mesh->vVertices.emplace_back(a + offset, b + altura, a + offset); //v1
+	mesh->vVertices.emplace_back(a + offset, -b + altura, -a + offset); //v2
 
-	//	//La b se va multiplicando por -1
-	//	b *= -1;
-	//}
-	mesh->vVertices.emplace_back(a, -b, a); //v0
-	mesh->vVertices.emplace_back(a, b, a); //v1
-	mesh->vVertices.emplace_back(a, -b, -a); //v2
+	mesh->vVertices.emplace_back(a + offset, b + altura, -a + offset); //v3
+	mesh->vVertices.emplace_back(-a + offset, -b + altura, -a + offset); //v4
+	mesh->vVertices.emplace_back(-a + offset, b + altura, -a + offset); //v5
 
-	mesh->vVertices.emplace_back(a, b, -a); //v3
-	mesh->vVertices.emplace_back(-a, -b, -a); //v4
-	mesh->vVertices.emplace_back(-a, b, -a); //v5
-
-	mesh->vVertices.emplace_back(-a, -b, a); //v6
-	mesh->vVertices.emplace_back(-a, b, a); //v7
+	mesh->vVertices.emplace_back(-a + offset, -b + altura, a + offset); //v6
+	mesh->vVertices.emplace_back(-a + offset, b + altura, a + offset); //v7
 
 	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
 	mesh->vVertices.push_back(mesh->vVertices[1]); //v9
@@ -421,8 +421,12 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	mesh->mNumVertices = 2*(np + 1);
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
+	//apt 38
+	GLdouble altura = 200; 
+	GLdouble offsetX = 0; 
+	GLdouble offsetZ = 0; 
 
-	mesh->vVertices.emplace_back(0, 0, 0);						//Primer vértice (Centro) -Vertice en comun-
+	mesh->vVertices.emplace_back(0 + offsetX, 0 + altura, 0 - offsetZ);						//Primer vértice (Centro) -Vertice en comun-
 	
 	//Primera estrella
 	for (int i = 0; i < np; i++) {
@@ -430,10 +434,10 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
 		if (i % 2 == 0)	//Si es par
 		{
-			mesh->vVertices.emplace_back(re / 2 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 2 * sin(radians((360.0 / (np - 1)) * i + 90)), h); //Se supone que pone el resto de vértices
+			mesh->vVertices.emplace_back(re / 2 * cos(radians((360.0 / (np - 1)) * i + 90.0)) + offsetX, re / 2 * sin(radians((360.0 / (np - 1)) * i + 90)) + altura, h - offsetZ); //Se supone que pone el resto de vértices
 		}
 		else {
-			mesh->vVertices.emplace_back(re / 4 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 4 * sin(radians((360.0 / (np - 1)) * i + 90)), h); //Se supone que pone el resto de vértices
+			mesh->vVertices.emplace_back(re / 4 * cos(radians((360.0 / (np - 1)) * i + 90.0)) + offsetX, re / 4 * sin(radians((360.0 / (np - 1)) * i + 90)) + altura, h - offsetZ); //Se supone que pone el resto de vértices
 		}
 		
 	}

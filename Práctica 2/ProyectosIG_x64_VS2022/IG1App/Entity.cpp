@@ -165,7 +165,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 		//Textura del ground
 		mTexture = new Texture();
-		setTexture(bmp, mTexture, 255); //creo que aqui va esto porque el setColor tb lo pusimos aqui
+		setTexture(bmp, mTexture, 255);
 	};
 
 	Ground::~Ground()
