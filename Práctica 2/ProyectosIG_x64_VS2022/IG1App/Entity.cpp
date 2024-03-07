@@ -390,11 +390,10 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void Star::update()
 	{
 		//rotacion de las estrellas
-		mModelMat = translate(mModelMat, dvec3(0, 0, 2)); // ??? funciona para colocarlo donde la circunferencia
-		mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0.0, 1.0));
+		mModelMat = rotate(dmat4(1), radians(rotationSp), dvec3(0, 1.0, 0.0)) 
+			* rotate(dmat4(1), radians(-rotationSp), dvec3(0, 0.0, 1.0));
 
-		//mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 1.0, 1.0));	
-		//mModelMat = translate(mModelMat, dvec3(0, 0, 0)); // ??? funciona para colocarlo donde la circunferencia
+		rotationSp += .5;
 
 	}
 
