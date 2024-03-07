@@ -42,19 +42,8 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
+	setScene(1);
 
-	// Graphics objects (entities) of the scene
-	gObjects.push_back(new EjesRGB(400.0));
-	//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));						//Tri�ngulo
-	//gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));							//Circunferencia
-	//gObjects.push_back(new RGBTriangle(30.0));													//Tri�ngulo RGB
-	//gObjects.push_back(new RegularRectangle(400.0, 200.0));										//Rect�ngulo L�nea
-	//gObjects.push_back(new RGBRectangle(200.0, 100.0));											//Rect�ngulo RGB
-	gObjects.push_back(new Ground(600.0, 600.0, 4, 4, baldosaC));					//Suelo
-	gObjects.push_back(new BoxOutline(200.0, container,papelE));	//Caja
-	gObjects.push_back(new Star(200.0, 17.0, 100.0, baldosaP));												//Estrella
-	gObjects.push_back(new GlassParapet(600.0, 100.0, windowV));					//Parapet
-	gObjects.push_back(new Photo(200.0, 100.0, noche));							//Photo
 }
 void
 Scene::free()
@@ -109,5 +98,32 @@ void Scene::update()
 void Scene::addObject(Abs_Entity* e)
 {
 	gObjects.push_back(e);
+}
+
+void Scene::setScene(int i)
+{
+	switch (i)
+	{
+	case 0:
+		//gObjects.push_back(new RegularCube(200.0));								//Cubo
+		gObjects.push_back(new RGBCube(200.0));									//Cubo RGB
+		break;
+	case 1:
+		// Graphics objects (entities) of the scene
+		gObjects.push_back(new EjesRGB(400.0));
+		//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));						//Tri�ngulo
+		//gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));							//Circunferencia
+		//gObjects.push_back(new RGBTriangle(30.0));													//Triangulo RGB
+		//gObjects.push_back(new RegularRectangle(400.0, 200.0));										//Rectangulo L�nea
+		//gObjects.push_back(new RGBRectangle(200.0, 100.0));											//Rectangulo RGB
+		gObjects.push_back(new Ground(600.0, 600.0, 4, 4, gTextures[0]));								//Suelo
+		gObjects.push_back(new BoxOutline(200.0, gTextures[1], gTextures[2]));							//Caja
+		gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));									//Estrella
+		gObjects.push_back(new GlassParapet(600.0, 100.0, gTextures[4]));								//Parapet
+		//gObjects.push_back(new Photo(200.0, 100.0, gTexture[6]));										//Photo
+		break;
+	default:
+		break;
+	}
 }
 
