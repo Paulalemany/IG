@@ -61,12 +61,26 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wp);  
   glBindTexture(GL_TEXTURE_2D, 0); 
 }
+
 //-------------------------------------------------------------------------
 
 //Apt35
 //cargue el buffer de color (frontal o trasero) dado por el tercer argumento, como una
 //textura de dimensiones dadas por los parámetros primero y segundo.
-void loadColorBuffer(GLsizei width, GLsizei height, GLuint buffer = GL_FRONT) //buffer = GL_FRONT o GL_BACK
+void Texture::loadColorBuffer(GLsizei width, GLsizei height, GLuint buffer)
 {
+	glBindTexture(GL_TEXTURE_2D, mId);
 
+	//CHAT GPT:
+	// Leer el contenido del buffer de color y cargarlo en la textura
+	//glReadBuffer(buffer);
+	// Restaurar el buffer de lectura a su valor predeterminado (GL_FRONT)
+	//glReadBuffer(GL_FRONT);
+
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+
+	//CYNTHIA HA PUESTO ESTO AQUI¿?:
+	//Mesh::generateRectangleTexCor(width, height); 
 }
