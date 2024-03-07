@@ -440,9 +440,10 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		//Hacemos un rectángulo que se coloque en el suelo que tiene una textura
 		//Creamos un rectángulo
-		mMesh = Mesh::generateRectangle(w, h);
-		mTexture = new Texture();
-		mTexture->loadColorBuffer(w, h, GL_FRONT);
+		mMesh = Mesh::generateRectangleTexCor(w, h, 1, 1);
+		mModelMat = translate(mModelMat, dvec3(0.0, 0.1, 0.0));	//Para ponerlo un poco más arriba
+		mTexture = t;
+		
 	}
 
 	Photo::~Photo()
@@ -456,18 +457,30 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	void Photo::render(glm::dmat4 const& modelViewMat) const
 	{
 		if (mMesh != nullptr) {
+			//dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			//upload(aMat);
+			//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
+			//mTexture->bind(GL_REPLACE);
+			//mMesh->render();
+			//mTexture->unbind();
+
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			glLineWidth(2);
+			mTexture->bind(GL_REPLACE);
+
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
-			//mTexture->bind(GL_MODULATE);
 			mMesh->render();
-			//mTexture->unbind();
+
+			mTexture->unbind();
+			glLineWidth(1);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		}
 	}
 
 	void Photo::update()
 	{
-
+		mTexture->loadColorBuffer(800.0, 600.0);
 	}
 #pragma endregion
 
