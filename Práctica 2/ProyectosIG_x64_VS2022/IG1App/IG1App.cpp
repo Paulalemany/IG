@@ -20,7 +20,7 @@ IG1App::close()
 }
 
 //apartado 16
-void IG1App::update()
+void IG1App::s_update()
 {
 	scenes[scene_index]->update();
 	glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
@@ -174,10 +174,10 @@ IG1App::key(unsigned char key, int x, int y)
 			setScene(1);
 			break;
 		case 'u' :
-			update();
+			s_update();
 			break;
 		case 'U':
-			glutIdleFunc(update);
+			glutIdleFunc(s_update);
 			break;
 		default:
 			need_redisplay = false;

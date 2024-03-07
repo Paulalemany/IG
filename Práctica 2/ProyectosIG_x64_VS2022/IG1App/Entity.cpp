@@ -74,7 +74,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			glLineWidth(2);
 			mMesh->render();
 			glLineWidth(1);
-			glColor4d(0, 0, 0, 0);		//Restablecemos el color ¿Negro?
+			glColor4d(0, 0, 0, 0);		//Restablecemos el color ï¿½Negro?
 		}
 	}
 
@@ -90,7 +90,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	RGBTriangle::RGBTriangle(GLdouble r)
 		: Abs_Entity()
 	{
-		//Creamos un triángulo
+		//Creamos un triï¿½ngulo
 		mMesh = Mesh::generateRGBTriangle(r);
 		mModelMat = translate(mModelMat, dvec3(200, 0, 0)); // ??? funciona para colocarlo donde la circunferencia
 	}
@@ -128,7 +128,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	RegularRectangle::RegularRectangle(GLdouble w, GLdouble h)
 		: Abs_Entity()
 	{
-		//Creamos un rectángulo
+		//Creamos un rectï¿½ngulo
 		mMesh = Mesh::generateRectangle(w, h);
 	}
 
@@ -160,7 +160,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	Ground::Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t)
 		: Abs_Entity()
 	{
-		//Creamos un rectángulo
+		//Creamos un rectï¿½ngulo
 		mMesh = Mesh::generateRectangleTexCor(w, h, rw, rh);
 
 		//Textura del ground
@@ -198,7 +198,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	RGBRectangle::RGBRectangle(GLdouble w, GLdouble h)
 		: Abs_Entity()
 	{
-		//Creamos un rectángulo
+		//Creamos un rectï¿½ngulo
 		mMesh = Mesh::generateRGBRectangle(w, h);
 	}
 
@@ -419,11 +419,10 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			mTexture->bind(GL_MODULATE);
-			mMesh->render();
-			mTexture->unbind();
 
 			upload(aMat);
 			mMesh->render();
+			mTexture->unbind();
 
 		}
 	}
@@ -438,10 +437,10 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	Photo::Photo(GLdouble w, GLdouble h, Texture* t)
 	{
-		//Hacemos un rectángulo que se coloque en el suelo que tiene una textura
-		//Creamos un rectángulo
+		//Hacemos un rectï¿½ngulo que se coloque en el suelo que tiene una textura
+		//Creamos un rectï¿½ngulo
 		mMesh = Mesh::generateRectangleTexCor(w, h, 1, 1);
-		mModelMat = translate(mModelMat, dvec3(0.0, 0.1, 0.0));	//Para ponerlo un poco más arriba
+		mModelMat = translate(mModelMat, dvec3(0.0, 0.1, 0.0));	//Para ponerlo un poco mï¿½s arriba
 		mTexture = t;
 		
 	}
