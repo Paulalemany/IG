@@ -58,16 +58,7 @@ IG1App::init()
 	}
 
 	//Objetos de escena 0 -> Figuras planas
-	//scenes[0]->addObject(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));	//Triángulo
-	//scenes[0]->addObject(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));		//Circunferencia
-	//scenes[0]->addObject(new RGBTriangle(30.0));								//Triángulo RGB
-	//scenes[0]->addObject(new RegularRectangle(400.0, 200.0));					//Rectángulo Línea
-	//scenes[0]->addObject(new RGBRectangle(200.0, 100.0));						//Rectángulo RGB
-	scenes[0]->addObject(new Ground(600.0, 600.0, 4, 4, "../BmpsP1/baldosaC.bmp"));					//Rectángulo origen
-	//scenes[0]->addObject(new BoxOutline(200.0, "../BmpsP1/container.bmp","../BmpsP1/papelE.bmp" ));		//Caja
-	//scenes[0]->addObject(new Star(200.0, 17.0, 100.0));
-	//scenes[0]->addObject(new GlassParapet(200.0, 100.0, "../BmpsP1/windowV.bmp"));		//Caja
-	scenes[0]->addObject(new Photo(200.0, 100.0, "../BmpsP1/noche.bmp"));					//Photo
+	
 	//Objetos de escena 1 -> Figuras 3D
 	//scenes[1]->addObject(new RegularCube(200.0));								//Cubo
 	scenes[1]->addObject(new RGBCube(200.0));									//Cubo RGB

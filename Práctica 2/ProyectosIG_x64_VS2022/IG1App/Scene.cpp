@@ -16,6 +16,16 @@ Scene::init()
 
 	// Graphics objects (entities) of the scene
 	gObjects.push_back(new EjesRGB(400.0));
+	//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));						//Triángulo
+	//gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));							//Circunferencia
+	//gObjects.push_back(new RGBTriangle(30.0));														//Triángulo RGB
+	//gObjects.push_back(new RegularRectangle(400.0, 200.0));											//Rectángulo Línea
+	//gObjects.push_back(new RGBRectangle(200.0, 100.0));												//Rectángulo RGB
+	gObjects.push_back(new Ground(600.0, 600.0, 4, 4, "../BmpsP1/baldosaC.bmp"));					//Suelo
+	//gObjects.push_back(new BoxOutline(200.0, "../BmpsP1/container.bmp","../BmpsP1/papelE.bmp" ));	//Caja
+	//gObjects.push_back(new Star(200.0, 17.0, 100.0));												//Estrella
+	//gObjects.push_back(new GlassParapet(200.0, 100.0, "../BmpsP1/windowV.bmp"));					//Parapet
+	gObjects.push_back(new Photo(200.0, 100.0, "../BmpsP1/noche.bmp"));								//Photo
 }
 void
 Scene::free()
