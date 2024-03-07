@@ -447,6 +447,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		mMesh = Mesh::generateRectangle(w, h);
 		mTexture = new Texture();
 		setTexture(bmp, mTexture, 255);
+		mTexture->loadColorBuffer(w, h, GL_FRONT);
 	}
 
 	Photo::~Photo()
@@ -463,14 +464,15 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
-			mTexture->bind(GL_MODULATE);
+			//mTexture->bind(GL_MODULATE);
 			mMesh->render();
-			mTexture->unbind();
+			//mTexture->unbind();
 		}
 	}
 
 	void Photo::update()
 	{
+
 	}
 #pragma endregion
 

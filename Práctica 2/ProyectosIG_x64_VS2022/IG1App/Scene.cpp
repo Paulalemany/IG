@@ -13,6 +13,7 @@ Scene::init()
 	// allocate memory and load resources
 	// Lights
 	// Textures
+	
 
 	// Graphics objects (entities) of the scene
 	gObjects.push_back(new EjesRGB(400.0));
@@ -21,7 +22,7 @@ Scene::init()
 	//gObjects.push_back(new RGBTriangle(30.0));														//Triángulo RGB
 	//gObjects.push_back(new RegularRectangle(400.0, 200.0));											//Rectángulo Línea
 	//gObjects.push_back(new RGBRectangle(200.0, 100.0));												//Rectángulo RGB
-	gObjects.push_back(new Ground(600.0, 600.0, 4, 4, "../BmpsP1/baldosaC.bmp"));					//Suelo
+	//gObjects.push_back(new Ground(600.0, 600.0, 4, 4, "../BmpsP1/baldosaC.bmp"));					//Suelo
 	//gObjects.push_back(new BoxOutline(200.0, "../BmpsP1/container.bmp","../BmpsP1/papelE.bmp" ));	//Caja
 	//gObjects.push_back(new Star(200.0, 17.0, 100.0));												//Estrella
 	//gObjects.push_back(new GlassParapet(200.0, 100.0, "../BmpsP1/windowV.bmp"));					//Parapet
