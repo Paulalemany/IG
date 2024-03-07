@@ -481,7 +481,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void Photo::update()
 	{
-		//mTexture->loadColorBuffer(800.0, 600.0);
+		mTexture->loadColorBuffer(800.0, 600.0);
 	}
 #pragma endregion
 
