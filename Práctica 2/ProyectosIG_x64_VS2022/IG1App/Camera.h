@@ -41,12 +41,25 @@ public:
 		uploadPM();
 	};
 
+	//APRT 41
+	void moveLR(GLdouble cs);
+	void moveFB(GLdouble cs);
+	void moveUD(GLdouble cs);
+
+	glm::dvec3 row(glm::dmat4 matrix, int index);
+
 protected:
 	glm::dvec3 mEye = {0.0, 0.0, 500.0}; // camera's position
 	glm::dvec3 mLook = {0.0, 0.0, 0.0};  // target's position
+
 	glm::dvec3 mUp = {0.0, 1.0, 0.0};    // the up vector
 
-	glm::dmat4 mViewMat;   // view matrix = inverse of modeling matrix
+	//apt39
+	glm::dvec3 mRight;    // the right vector
+	glm::dvec3 mUpward;    // the upward vector
+	glm::dvec3 mFront;    // the front vector
+
+	glm::dmat4 mViewMat;   // view matrix = inverse of modeling matrix					 MATRIZ DE VISTA?? APT40
 	void uploadVM() const; // transfers viewMat to the GPU
 
 	glm::dmat4 mProjMat;   // projection matrix
@@ -61,6 +74,7 @@ protected:
 
 	void setVM();
 	void setPM();
+	void setAxes(); //apt39
 };
 
 #endif //_H_Camera_H_

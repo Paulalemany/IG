@@ -29,6 +29,7 @@ void
 Camera::setVM()
 {
 	mViewMat = lookAt(mEye, mLook, mUp); // glm::lookAt defines the view matrix
+	setAxes();
 }
 
 void
@@ -89,6 +90,32 @@ Camera::setScale(GLdouble s)
 	setPM();
 }
 
+void Camera::moveLR(GLdouble cs)
+{
+	mEye += mRight * cs;
+	mLook += mRight * cs;
+	setVM();
+}
+
+void Camera::moveFB(GLdouble cs)
+{
+	mEye += mFront * cs;
+	mLook += mFront * cs;
+	setVM();
+}
+
+void Camera::moveUD(GLdouble cs)
+{
+	mEye += mUpward * cs;
+	mLook += mUpward * cs;
+	setVM();
+}
+
+glm::dvec3 Camera::row(glm::dmat4 matrix, int index)
+{
+	return matrix[index];
+}
+
 void
 Camera::setPM()
 {
@@ -101,6 +128,14 @@ Camera::setPM()
 		                 mFarVal);
 		// glm::ortho defines the orthogonal projection matrix
 	}
+}
+
+void Camera::setAxes()
+{
+	mRight = row(mViewMat, 0);
+	mUpward = row(mViewMat, 1);
+	mFront = -row(mViewMat, 2);
+
 }
 
 void
