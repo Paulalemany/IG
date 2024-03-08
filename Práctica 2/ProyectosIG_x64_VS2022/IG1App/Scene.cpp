@@ -38,7 +38,7 @@ Scene::init()
 	noche->load("../BmpsP1/noche.bmp");
 	gTextures.push_back(noche);
 
-	Texture* foto = new Texture();					//Foto??
+	Texture* foto = new Texture();					//Foto
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
@@ -55,10 +55,10 @@ Scene::free()
 		el = nullptr;
 	}
 
-	/*for (Texture* t : gTextures) {
+	for (Texture* t : gTextures) {
 		delete t;
 		t = nullptr;
-	}*/
+	}
 }
 
 void

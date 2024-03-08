@@ -162,7 +162,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		//Creamos un rect�ngulo
 		mMesh = Mesh::generateRectangleTexCor(w, h, rw, rh);
-
 		//Textura del ground
 		mTexture = t;
 	};
@@ -221,7 +220,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void RGBRectangle::update()
 	{
-
 	}
 
 #pragma endregion
@@ -332,7 +330,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 			upload(aMat);
 			mMesh->render();
-			
 		}
 	}
 
@@ -359,14 +356,16 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	Star::~Star()
 	{
 		delete mMesh;
+		delete mTexture;
 		mMesh = nullptr;
+		mTexture = nullptr;
 	}
 
 	void Star::render(glm::dmat4 const& modelViewMat) const
 	{
-		if (mMesh != nullptr) {
+		if (mMesh != nullptr)
+		{
 			//La estrella la renderizamos dos veces (1 mesh, 2 renders)
-
 			mTexture->bind(GL_REPLACE);
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
@@ -393,7 +392,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			rotate(dmat4(1), radians(-rotationSp), dvec3(0.0, 0.0, 1.0));
 
 		rotationSp += .05;
-
 	}
 
 #pragma endregion
@@ -425,7 +423,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			upload(aMat);
 			mMesh->render();
 			mTexture->unbind();
-
 		}
 	}
 
@@ -444,7 +441,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		mMesh = Mesh::generateRectangleTexCor(w, h, 1, 1);
 		mModelMat = translate(mModelMat, dvec3(0.0, 0.1, 0.0));	//Para ponerlo un poco m�s arriba
 		mTexture = t;
-		
 	}
 
 	Photo::~Photo()
@@ -457,14 +453,8 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void Photo::render(glm::dmat4 const& modelViewMat) const
 	{
-		if (mMesh != nullptr) {
-			//dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
-			//upload(aMat);
-			//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);					//Primitiva para colorear
-			//mTexture->bind(GL_REPLACE);
-			//mMesh->render();
-			//mTexture->unbind();
-
+		if (mMesh != nullptr)
+		{
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			glLineWidth(2);
 			mTexture->bind(GL_REPLACE);

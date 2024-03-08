@@ -49,7 +49,6 @@ Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
 	mesh->mNumVertices = num;
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
-
 	for (int i = 0; i < num; i++) {
 		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i + 90.0)) , r * sin(radians((360.0 / num) * i + 90)), 0.0); //Se supone que pone el resto de vértices
 	}
@@ -117,7 +116,6 @@ Mesh* Mesh::generateRGBRectangle(GLdouble w, GLdouble h)
 	glPolygonMode(GL_FRONT, GL_FILL);
 
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;
-
 
 	mesh->mNumVertices = 4.0;							// v0, v1, v2, v3
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
@@ -238,7 +236,6 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	mesh->vVertices.emplace_back(m, -m, m); // v32 = v3
 	// ^^^^ - en z
 
-
 	//Color
 	//Automatización???
 	//double r = -1.0;
@@ -252,7 +249,6 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	//	g *= -1;
 	//	//b *= -1;
 	//}
-	 
 	 
 	// cara 1
 	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
@@ -297,10 +293,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
-
 	return mesh;
-
-	
 }
 
 Mesh* Mesh::generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
@@ -325,20 +318,19 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 
 	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
 
-	GLdouble offset = 0;
 	GLdouble a = length / 2;
 
 	//Cubo sin tapas
-	mesh->vVertices.emplace_back(a + offset, -a, a + offset); //v0
-	mesh->vVertices.emplace_back(a + offset, a, a + offset); //v1
-	mesh->vVertices.emplace_back(a + offset, -a, -a + offset); //v2
+	mesh->vVertices.emplace_back(a, -a, a); //v0
+	mesh->vVertices.emplace_back(a, a, a); //v1
+	mesh->vVertices.emplace_back(a, -a, -a); //v2
 
-	mesh->vVertices.emplace_back(a + offset, a, -a + offset); //v3
-	mesh->vVertices.emplace_back(-a + offset, -a, -a + offset); //v4
-	mesh->vVertices.emplace_back(-a + offset, a, -a + offset); //v5
+	mesh->vVertices.emplace_back(a, a, -a); //v3
+	mesh->vVertices.emplace_back(-a, -a, -a); //v4
+	mesh->vVertices.emplace_back(-a, a, -a); //v5
 
-	mesh->vVertices.emplace_back(-a + offset, -a, a + offset); //v6
-	mesh->vVertices.emplace_back(-a + offset, a, a + offset); //v7
+	mesh->vVertices.emplace_back(-a, -a, a); //v6
+	mesh->vVertices.emplace_back(-a, a, a); //v7
 
 	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
 	mesh->vVertices.push_back(mesh->vVertices[1]); //v9
@@ -421,12 +413,7 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	mesh->mNumVertices = 2*(np + 1);
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
-	//apt 38
-	GLdouble altura = 0; 
-	GLdouble offsetX = 0; 
-	GLdouble offsetZ = 0; 
-
-	mesh->vVertices.emplace_back(0 + offsetX, 0 + altura, 0 - offsetZ);						//Primer vértice (Centro) -Vertice en comun-
+	mesh->vVertices.emplace_back(0, 0, 0);						//Primer vértice (Centro) -Vertice en comun-
 	
 	//Primera estrella
 	for (int i = 0; i < np; i++) {
@@ -434,12 +421,11 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 		//Dividimos entre pares e impares (Unos están más arriba y otros más abajo)
 		if (i % 2 == 0)	//Si es par
 		{
-			mesh->vVertices.emplace_back(re / 2 * cos(radians((360.0 / (np - 1)) * i + 90.0)) + offsetX, re / 2 * sin(radians((360.0 / (np - 1)) * i + 90)) + altura, h - offsetZ); //Se supone que pone el resto de vértices
+			mesh->vVertices.emplace_back(re / 2 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 2 * sin(radians((360.0 / (np - 1)) * i + 90)), h); //Se supone que pone el resto de vértices
 		}
 		else {
-			mesh->vVertices.emplace_back(re / 4 * cos(radians((360.0 / (np - 1)) * i + 90.0)) + offsetX, re / 4 * sin(radians((360.0 / (np - 1)) * i + 90)) + altura, h - offsetZ); //Se supone que pone el resto de vértices
+			mesh->vVertices.emplace_back(re / 4 * cos(radians((360.0 / (np - 1)) * i + 90.0)), re / 4 * sin(radians((360.0 / (np - 1)) * i + 90)), h); //Se supone que pone el resto de vértices
 		}
-		
 	}
 
 	//Colocamos el último en el mismo punto del primeros

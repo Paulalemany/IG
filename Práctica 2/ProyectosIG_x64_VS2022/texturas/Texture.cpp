@@ -69,21 +69,27 @@ void Texture::setWrap(GLuint wp) // GL_REPEAT, GL_CLAMP
 //textura de dimensiones dadas por los parámetros primero y segundo.
 void Texture::loadColorBuffer(GLsizei width, GLsizei height, GLuint buffer)
 {
-	if (mId == 0) init();
+	if (buffer == GL_FRONT || buffer == GL_FRONT) //si el buffer es valido
+	{
+		//aseguramos que la textura esta inicializada
+		if (mId == 0) init();
 
-	mWidth = width;
-	mHeight = height;
+		mWidth = width;
+		mHeight = height;
 
-	glReadBuffer(buffer);
+		//actualizamos el buffer al que queremos usar
+		glReadBuffer(buffer);
 
-	bind(GL_MODULATE);
-	//Guardamos la imagen actual como una textura
-	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, width, height, 0);
+		//enlazamos la textura, GL_MODULATE especifica como se combinarán los valores de la textura con los valores de fragmento
+		bind(GL_MODULATE);
 
+		//Guardamos la imagen actual como una textura
+		glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, width, height, 0);
 
-	//restaurar buffer
-	glReadBuffer(GL_BACK);
+		//restaurar buffer
+		glReadBuffer(GL_BACK);
 
-	unbind();
-
+		//liberamos la textura enlazada
+		unbind();
+	}
 }
