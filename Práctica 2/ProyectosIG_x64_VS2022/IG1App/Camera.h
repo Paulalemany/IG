@@ -41,12 +41,13 @@ public:
 		uploadPM();
 	};
 
-	//APRT 41
+	//APT 41
 	void moveLR(GLdouble cs);
 	void moveFB(GLdouble cs);
 	void moveUD(GLdouble cs);
 
-	glm::dvec3 row(glm::dmat4 matrix, int index);
+	//APT 42
+	void changePrj();
 
 protected:
 	glm::dvec3 mEye = {0.0, 0.0, 500.0}; // camera's position
@@ -71,6 +72,8 @@ protected:
 	bool bOrto = true;                      // orthogonal or perspective projection
 
 	Viewport* mViewPort; // the viewport
+
+	glm::dvec3 row(glm::dmat4 matrix, int index); //apt39
 
 	void setVM();
 	void setPM();

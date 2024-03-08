@@ -171,6 +171,9 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'U':
 		glutIdleFunc(s_update);
 		break;
+	case 'p': //apt 44
+		mCamera->changePrj();
+		break;
 	default:
 		need_redisplay = false;
 		break;

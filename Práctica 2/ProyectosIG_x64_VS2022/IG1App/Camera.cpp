@@ -111,15 +111,23 @@ void Camera::moveUD(GLdouble cs)
 	setVM();
 }
 
+//cambia proyeccion ortogonal a perspectiva
+void Camera::changePrj()
+{
+	bOrto = !bOrto;
+	setPM();
+}
+
 glm::dvec3 Camera::row(glm::dmat4 matrix, int index)
 {
 	return matrix[index];
 }
 
 void
-Camera::setPM()
+Camera::setPM() //apt 42, diapo 20
 {
-	if (bOrto) { //  if orthogonal projection
+	if (bOrto) 
+	{ //  if orthogonal projection
 		mProjMat = ortho(xLeft * mScaleFact,
 		                 xRight * mScaleFact,
 		                 yBot * mScaleFact,
@@ -128,6 +136,18 @@ Camera::setPM()
 		                 mFarVal);
 		// glm::ortho defines the orthogonal projection matrix
 	}
+	else 
+	{
+		mProjMat = frustum(xLeft * mScaleFact, 
+						   xRight * mScaleFact, 
+						   yBot * mScaleFact,
+						   yTop * mScaleFact,
+						   mNearVal * 500, //500 porque lo dice la diapo 21
+						   mFarVal);
+
+		//frustrum equivale a:
+		//glm::perspective(Fovy, AspectRatio, Near, Far);
+	}
 }
 
 void Camera::setAxes()
@@ -135,7 +155,6 @@ void Camera::setAxes()
 	mRight = row(mViewMat, 0);
 	mUpward = row(mViewMat, 1);
 	mFront = -row(mViewMat, 2);
-
 }
 
 void
