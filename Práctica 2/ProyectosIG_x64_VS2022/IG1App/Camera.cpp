@@ -92,8 +92,8 @@ Camera::setScale(GLdouble s)
 
 void Camera::moveLR(GLdouble cs)
 {
-	mEye += mRight * cs;
-	mLook += mRight * cs;
+	mEye -= mRight - cs ;
+	mLook += mRight + cs;
 	setVM();
 }
 
