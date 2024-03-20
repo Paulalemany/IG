@@ -120,8 +120,8 @@ void Scene::setScene(int i)
 		//gObjects.push_back(new RegularRectangle(400.0, 200.0));										//Rectangulo L�nea
 		//gObjects.push_back(new RGBRectangle(200.0, 100.0));											//Rectangulo RGB
 		gObjects.push_back(new Ground(300.0, 300.0, 4, 4, gTextures[0]));								//Suelo
-		gObjects.push_back(new BoxOutline(200.0, gTextures[1], gTextures[2]));							//Caja
-		//gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));									//Estrella
+		gObjects.push_back(new BoxOutline(50.0, gTextures[1], gTextures[2]));							//Caja
+		//gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));								//Estrella
 		gObjects.push_back(new GlassParapet(300.0, 150.0, gTextures[4]));								//Parapet
 		gObjects.push_back(new Photo(100.0, 50.0, gTextures[6]));										//Photo
 		break;

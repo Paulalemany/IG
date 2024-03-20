@@ -92,8 +92,8 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);			//reserva para el color
 
-	GLdouble altura = 75; //apt 38
-	GLdouble offset = 150; //199; //apt 38
+	GLdouble altura = -75; //apt 38
+	GLdouble offset = 0; // 150; //199; //apt 38
 
 	mesh->vVertices.emplace_back(-w/2 +offset, altura, -h / 2 + offset);
 	mesh->vVertices.emplace_back(w/2 + offset, altura, -h / 2 + offset);
@@ -367,8 +367,8 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 	GLdouble a = w / 2;
 	GLdouble b = h / 2;
 
-	GLdouble altura = 150; //apt 38
-	GLdouble offset = 150; //apt 38
+	GLdouble altura = 0; // 150; //apt 38
+	GLdouble offset = 0; // 150; //apt 38
 
 	mesh->vVertices.emplace_back(a+offset, -b + altura, a + offset); //v0
 	mesh->vVertices.emplace_back(a + offset, b + altura, a + offset); //v1
