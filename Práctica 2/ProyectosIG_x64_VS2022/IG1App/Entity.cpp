@@ -321,6 +321,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			glEnable(GL_CULL_FACE);
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
+
 			glPolygonMode(GL_BACK, GL_FILL);	//Primitiva para colorear
 			mTexture2->bind(GL_MODULATE);
 			glCullFace(GL_BACK);

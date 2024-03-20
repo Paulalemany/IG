@@ -142,7 +142,7 @@ Camera::setPM() //apt 42, diapo 20
 						   xRight * mScaleFact, 
 						   yBot * mScaleFact,
 						   yTop * mScaleFact,
-						   mNearVal * 350, //500 porque lo dice la diapo 21
+						   mNearVal * 600, //500 porque lo dice la diapo 21
 						   mFarVal);
 
 		//frustrum equivale a:

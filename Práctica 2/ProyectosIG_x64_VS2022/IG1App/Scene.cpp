@@ -31,7 +31,7 @@ Scene::init()
 	gTextures.push_back(baldosaP);
 
 	Texture* windowV = new Texture();				//Parapet
-	windowV->load("../BmpsP1/windowV.bmp", 100);
+	windowV->load("../BmpsP1/windowV.bmp", 125);
 	gTextures.push_back(windowV);
 
 	Texture* noche = new Texture();					//Noche
@@ -123,7 +123,7 @@ void Scene::setScene(int i)
 		gObjects.push_back(new BoxOutline(50.0, gTextures[1], gTextures[2]));							//Caja
 		//gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));								//Estrella
 		gObjects.push_back(new GlassParapet(300.0, 150.0, gTextures[4]));								//Parapet
-		gObjects.push_back(new Photo(100.0, 50.0, gTextures[6]));										//Photo
+		gObjects.push_back(new Photo(125.0, 70.0, gTextures[6]));										//Photo
 		break;
 	default:
 		break;
