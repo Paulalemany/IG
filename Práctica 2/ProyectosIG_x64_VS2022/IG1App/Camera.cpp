@@ -38,6 +38,26 @@ Camera::set2D()
 	mEye = dvec3(0, 0, 500);
 	mLook = dvec3(0, 0, 0);
 	mUp = dvec3(0, 1, 0);
+
+	//APT49 - DIAPO 19
+	/*Si la cámara está en el eje X positivo, el ángulo es 0.
+		Si la cámara está en el eje X negativo, el ángulo es 180.
+		Si la cámara está en el eje Z positivo, …
+		La cámara 2D está en el eje … La cámara 3D está en …*/
+	
+	//creo q es un if pero no se muy bien como sacar si esta en el X positivo, Z positivo etc.
+	//igual con mEye?
+	/*if (mEye.x > 0) {
+		mAng = 0;
+	}
+	else if (mEye.x < 0) {
+		mAng = 180;
+	}
+	if (mEye.z > 0) {
+		mAng = ?¿¿¿
+	}
+	mRadio = 0;*/
+
 	setVM();
 }
 
@@ -47,6 +67,15 @@ Camera::set3D()
 	mEye = dvec3(500, 500, 500);
 	mLook = dvec3(0, 10, 0);
 	mUp = dvec3(0, 1, 0);
+
+	//APT49 - DIAPO 19
+	/*Si la cámara está en el eje X positivo, el ángulo es 0.
+		Si la cámara está en el eje X negativo, el ángulo es 180.
+		Si la cámara está en el eje Z positivo, …
+		La cámara 2D está en el eje … La cámara 3D está en …*/
+	mAng = 0;
+	mRadio = 0;
+
 	setVM();
 }
 
