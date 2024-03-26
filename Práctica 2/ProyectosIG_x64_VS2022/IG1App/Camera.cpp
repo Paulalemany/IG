@@ -71,6 +71,21 @@ Camera::roll(GLdouble a)
 	// glm::rotate returns mViewMat * rotationMatrix
 }
 
+void Camera::pitchReal(GLdouble cs) //rota la cam hacia arriba
+{
+	mViewMat = rotate(mViewMat, glm::radians(cs), mRight);
+}
+
+void Camera::yawReal(GLdouble cs)
+{
+	mViewMat = rotate(mViewMat, glm::radians(cs), mUpward);
+}
+
+void Camera::rollReal(GLdouble cs)
+{
+	mViewMat = rotate(mViewMat, glm::radians(cs), mFront);
+}
+
 void
 Camera::setSize(GLdouble xw, GLdouble yh)
 {

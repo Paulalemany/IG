@@ -198,7 +198,8 @@ IG1App::specialKey(int key, int x, int y)
 		//	mCamera->pitch(1); // rotates 1 on the X axis
 		
 		if (mdf == GLUT_ACTIVE_CTRL)
-			mCamera->moveLR(1);
+			//mCamera->moveLR(1);
+			mCamera->pitchReal(1);
 		else
 			mCamera->moveLR(-1);
 
@@ -210,13 +211,14 @@ IG1App::specialKey(int key, int x, int y)
 		//	mCamera->yaw(-1); // rotate -1 on the Y axis
 
 		if (mdf == GLUT_ACTIVE_CTRL)
-			mCamera->moveFB(1); 
+			//mCamera->moveFB(1); 
+			mCamera->yawReal(1);
 		else
 			mCamera->moveFB(-1);
 		break;
 	case GLUT_KEY_UP:
-		mCamera->moveUD(-1); //mueve arriba
-			
+		//mCamera->moveUD(-1); //mueve arriba
+		mCamera->rollReal(1);
 		break;
 	case GLUT_KEY_DOWN:
 		//mCamera->roll(-1); // rotates -1 on the Z axis

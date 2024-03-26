@@ -25,6 +25,12 @@ public:
 	void yaw(GLdouble a);   // rotates a degrees on the Y axis
 	void roll(GLdouble a);  // rotates a degrees on the Z axis
 
+	//apt 46 -> hay demos en el campus virtual 
+	//métodos para rotar la cámara en cada uno de sus ejes u, v y n :
+	void pitchReal(GLdouble cs);
+	void yawReal(GLdouble cs);
+	void rollReal(GLdouble cs);
+
 	// projection matrix
 	glm::dmat4 const& projMat() const { return mProjMat; };
 
