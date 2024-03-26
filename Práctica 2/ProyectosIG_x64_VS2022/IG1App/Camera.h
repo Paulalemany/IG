@@ -54,6 +54,9 @@ public:
 
 	//APT 42
 	void changePrj();
+	
+	//APT 48
+	void orbit(GLdouble incAng, GLdouble incY);
 
 protected:
 	glm::dvec3 mEye = {0.0, 0.0, 500.0}; // camera's position
@@ -62,9 +65,9 @@ protected:
 	glm::dvec3 mUp = {0.0, 1.0, 0.0};    // the up vector
 
 	//apt39
-	glm::dvec3 mRight;    // the right vector
-	glm::dvec3 mUpward;    // the upward vector
-	glm::dvec3 mFront;    // the front vector
+	glm::dvec3 mRight;    // the right vector (U)
+	glm::dvec3 mUpward;    // the upward vector (V)
+	glm::dvec3 mFront;    // the front vector (N)
 
 	glm::dmat4 mViewMat;   // view matrix = inverse of modeling matrix					 MATRIZ DE VISTA?? APT40
 	void uploadVM() const; // transfers viewMat to the GPU
@@ -84,6 +87,10 @@ protected:
 	void setVM();
 	void setPM();
 	void setAxes(); //apt39
+
+	//apt48 y diapo18 - radio y angulo de la circunferencia
+	GLdouble mRadio = 0;
+	GLdouble mAng = 0;
 };
 
 #endif //_H_Camera_H_

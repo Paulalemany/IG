@@ -133,6 +133,17 @@ void Camera::changePrj()
 	setPM();
 }
 
+void Camera::orbit(GLdouble incAng, GLdouble incY)
+{
+	//diapo 18 de Introduccion a la Camara
+	//desplazamos mEye por la circunferencia
+	mAng += incAng;
+	mEye.x = mLook.x + cos(radians(mAng)) * mRadio;
+	mEye.z = mLook.z - sin(radians(mAng)) * mRadio;
+	mEye.y += incAng;
+	setVM();
+}
+
 glm::dvec3 Camera::row(glm::dmat4 matrix, int index)
 {
 	return matrix[index];
