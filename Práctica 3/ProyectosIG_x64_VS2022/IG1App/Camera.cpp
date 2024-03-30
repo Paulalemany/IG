@@ -60,6 +60,18 @@ Camera::set3D()
 	setVM();
 }
 
+void Camera::setCenital()
+{
+	mEye = dvec3(0.1, 500, 0);
+	mLook = dvec3(0, 0, 0);
+	mUp = dvec3(0, 1, 0);
+
+	mAng = 0;
+	mRadio = 0;
+
+	setVM();
+}
+
 void
 Camera::pitch(GLdouble a)
 {
