@@ -76,6 +76,10 @@ protected:
 
 	//apt51
 	bool m2Vistas;
+
+	//apt52
+	glm::dvec2 mMouseCoord; // para guardar las coordenadas del ratón
+	int mMouseButt; //para guardar el botón pulsado
 };
 
 #endif //_H_IG1App_H_
