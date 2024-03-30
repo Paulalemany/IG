@@ -119,8 +119,16 @@ IG1App::display() const
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
 
-	//mScene->render(*mCamera); // uploads the viewport and camera to the GPU
-	mScene->render(*mCamera);
+	if (m2Vistas)
+	{
+		doubleViewport();
+	}
+	else 
+	{
+		mViewPort->setSize(mWinW, mWinH);
+		mViewPort->setPos(0, 0);
+		mScene->render(*mCamera); // uploads the viewport and camera to the GPU
+	}
 
 	glutSwapBuffers(); // swaps the front and back buffer
 }
@@ -173,6 +181,9 @@ IG1App::key(unsigned char key, int x, int y)
 		break;
 	case 'p': //apt 44
 		mCamera->changePrj();
+		break;
+	case 'k': //apt 51
+		m2Vistas = !m2Vistas;
 		break;
 	default:
 		need_redisplay = false;
@@ -232,4 +243,22 @@ IG1App::specialKey(int key, int x, int y)
 	if (need_redisplay)
 		glutPostRedisplay(); // marks the window as needing to be redisplayed -> calls to
 	// display()
+}
+
+void IG1App::doubleViewport() const
+{
+	Camera doubleCamera = *mCamera;	// Camara auxiliar copiando mCamera
+	Viewport auxVP = *mViewPort;	// Viewport auxiliar
+
+	mViewPort->setSize(mWinW / 2, mWinH);
+	doubleCamera.setSize(mViewPort->width(), mViewPort->height());
+
+	//renderizamos la camara dos veces en distintas posiciones
+
+	mViewPort->setPos(0, 0);
+	mScene->render(doubleCamera);
+
+	mViewPort->setPos(mWinW / 2, 0);
+	doubleCamera.setCenital();
+	mScene->render(doubleCamera);
 }

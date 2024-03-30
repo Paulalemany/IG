@@ -54,6 +54,8 @@ protected:
 	void key(unsigned char key, int x, int y); // keypress event
 	void specialKey(int key, int x, int y);    // keypress event for special characters
 
+	void doubleViewport() const; //apt51
+
 	// static callbacks
 	static void s_display() { s_ig1app.display(); };
 	static void s_resize(int newWidth, int newHeight) { s_ig1app.resize(newWidth, newHeight); };
@@ -71,6 +73,9 @@ protected:
 	int mWinId = 0;     // window's identifier
 	int mWinW = 800;    // window's width
 	int mWinH = 600;    // window's height
+
+	//apt51
+	bool m2Vistas;
 };
 
 #endif //_H_IG1App_H_
