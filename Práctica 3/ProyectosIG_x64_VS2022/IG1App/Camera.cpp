@@ -2,7 +2,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-// #include <glm/gtc/matrix_access.hpp>
+#include <glm/gtc/matrix_access.hpp>
 
 using namespace glm;
 
@@ -190,7 +190,7 @@ Camera::setPM() //apt 42, diapo 20
 						   xRight * mScaleFact, 
 						   yBot * mScaleFact,
 						   yTop * mScaleFact,
-						   mNearVal * 600, //500 porque lo dice la diapo 21
+						   mNearVal * 300, //500 porque lo dice la diapo 21
 						   mFarVal);
 
 		//frustrum equivale a:

@@ -92,6 +92,11 @@ IG1App::iniWinOpenGL()
 	glutSpecialFunc(s_specialKey);
 	glutDisplayFunc(s_display);
 
+	//apt53
+	glutMouseFunc(s_mouse);
+	glutMotionFunc(s_motion);
+	glutMouseWheelFunc(s_mouseWheel);
+
 	cout << glGetString(GL_VERSION) << '\n';
 	cout << glGetString(GL_VENDOR) << '\n';
 }
@@ -261,4 +266,48 @@ void IG1App::doubleViewport() const
 	mViewPort->setPos(mWinW / 2, 0);
 	doubleCamera.setCenital();
 	mScene->render(doubleCamera);
+}
+
+void IG1App::mouse(int button, int state, int x, int y)
+{
+	//captura en mMouseCoord las coordenadas del raton (x,y), y en mMouseButt, el boton pulsado
+	mInitialMouseCoord = glm::vec2(x, y); 
+	mMouseButt = button;
+}
+
+void IG1App::motion(int x, int y)
+{
+	mMouseCoord = glm::vec2(x, y);
+
+	if (mMouseButt == 0) //click izquierdo
+	{
+		//mueve la camara en sus ejes mRight(horizontal) y mUpward(vertical) el correspondiente desplazamiento
+		mCamera->moveLR(mInitialMouseCoord.x - x);
+		mCamera->moveUD(mInitialMouseCoord.y - y);
+	}
+	else if (mMouseButt == 1) //click derecho
+	{ 
+		//rota la cámara alrededor de la escena.
+		mCamera->orbit((mInitialMouseCoord.x - x) * 0.15, mInitialMouseCoord.y - y);
+	}
+
+	mInitialMouseCoord = mMouseCoord;
+}
+
+void IG1App::mouseWheel(int n, int d, int x, int y)
+{
+	//si no está pulsada ninguna tecla modificadora, desplaza la cámara en su dirección de vista(eje mFront), 
+	//hacia delante / atrás según sea d positivo / negativo; si se pulsa la tecla Ctrl, escala la escena,
+	//	de nuevo según el valor de d
+
+	int auxmodifiers = glutGetModifiers();
+
+	if (auxmodifiers == GLUT_ACTIVE_CTRL) //si se pulsa ctrl
+	{
+		mCamera->setScale(d * 0.01);
+	}
+	else if (auxmodifiers == 0) 
+	{
+		mCamera->moveFB(d * 5);
+	}
 }
