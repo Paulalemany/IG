@@ -239,10 +239,10 @@ IG1App::specialKey(int key, int x, int y)
 		//else
 		//	mCamera->yaw(-1); // rotate -1 on the Y axis
 
-		//if (mdf == GLUT_ACTIVE_CTRL)
-		//	//mCamera->moveFB(1); 
-		//	mCamera->yawReal(1);
-		//else
+		if (mdf == GLUT_ACTIVE_CTRL)
+			//mCamera->moveFB(1); 
+			mCamera->yawReal(1);
+		else
 		mCamera->rollReal(-1);
 		break;
 	case GLUT_KEY_UP:
