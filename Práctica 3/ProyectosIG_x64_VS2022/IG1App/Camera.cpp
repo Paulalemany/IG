@@ -95,6 +95,8 @@ Camera::roll(GLdouble a)
 
 void Camera::pitchReal(GLdouble cs) //rota la cam hacia arriba
 {
+	//mLook += mFront * cs;
+	//setVM();
 	mViewMat = rotate(mViewMat, glm::radians(cs), mRight);
 }
 
