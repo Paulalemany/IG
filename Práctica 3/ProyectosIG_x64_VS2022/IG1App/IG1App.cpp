@@ -190,6 +190,18 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'k': //apt 51
 		m2Vistas = !m2Vistas;
 		break;
+	case 'a':
+		mCamera->moveLR(1);
+		break;
+	case 'd':
+		mCamera->moveLR(-1);
+		break;
+	case 's':
+		mCamera->moveUD(1);
+		break;
+	case 'w':
+		mCamera->moveUD(-1);
+		break;
 	default:
 		need_redisplay = false;
 		break;
@@ -213,11 +225,12 @@ IG1App::specialKey(int key, int x, int y)
 		//else
 		//	mCamera->pitch(1); // rotates 1 on the X axis
 		
-		if (mdf == GLUT_ACTIVE_CTRL)
-			//mCamera->moveLR(1);
-			mCamera->pitchReal(1);
-		else
-			mCamera->moveLR(-1);
+		//if (mdf == GLUT_ACTIVE_CTRL)
+		//	//mCamera->moveLR(1);
+		//	mCamera->pitchReal(1);
+		//else
+
+		mCamera->rollReal(1);
 
 		break;
 	case GLUT_KEY_LEFT:
@@ -226,19 +239,20 @@ IG1App::specialKey(int key, int x, int y)
 		//else
 		//	mCamera->yaw(-1); // rotate -1 on the Y axis
 
-		if (mdf == GLUT_ACTIVE_CTRL)
-			//mCamera->moveFB(1); 
-			mCamera->yawReal(1);
-		else
-			mCamera->moveFB(-1);
+		//if (mdf == GLUT_ACTIVE_CTRL)
+		//	//mCamera->moveFB(1); 
+		//	mCamera->yawReal(1);
+		//else
+		mCamera->rollReal(-1);
 		break;
 	case GLUT_KEY_UP:
-		//mCamera->moveUD(-1); //mueve arriba
-		mCamera->rollReal(1);
+		//mCamera->moveUD(-1);
+		mCamera->pitchReal(-1);
 		break;
 	case GLUT_KEY_DOWN:
 		//mCamera->roll(-1); // rotates -1 on the Z axis
-		mCamera->moveUD(1); //mueve abajo
+
+		mCamera->pitchReal(1);
 		break;
 	default:
 		need_redisplay = false;
@@ -283,7 +297,7 @@ void IG1App::motion(int x, int y)
 	{
 		//mueve la camara en sus ejes mRight(horizontal) y mUpward(vertical) el correspondiente desplazamiento
 		mCamera->moveLR(mInitialMouseCoord.x - x);
-		mCamera->moveUD(mInitialMouseCoord.y - y);
+		mCamera->moveUD(-mInitialMouseCoord.y + y);
 	}
 	else if (mMouseButt == 1) //click derecho
 	{ 
@@ -292,6 +306,8 @@ void IG1App::motion(int x, int y)
 	}
 
 	mInitialMouseCoord = mMouseCoord;
+
+	glutPostRedisplay();
 }
 
 void IG1App::mouseWheel(int n, int d, int x, int y)
@@ -310,4 +326,6 @@ void IG1App::mouseWheel(int n, int d, int x, int y)
 	{
 		mCamera->moveFB(d * 5);
 	}
+
+	glutPostRedisplay();
 }
