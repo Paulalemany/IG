@@ -42,7 +42,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(1);
+	setScene(2);
 
 }
 
@@ -143,6 +143,8 @@ void Scene::setScene(int i)
 		gObjects.push_back(new GlassParapet(300.0, 150.0, gTextures[4]));								//Parapet
 		gObjects.push_back(new Photo(125.0, 70.0, gTextures[6]));										//Photo
 		break;
+	case 2:
+		gObjects.push_back(new Sphere(100.0));
 	default:
 		break;
 	}

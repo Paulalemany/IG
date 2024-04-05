@@ -178,6 +178,9 @@ IG1App::key(unsigned char key, int x, int y)
 	case '1':
 		setScene(1);
 		break;
+	case '2':
+		setScene(2);
+		break;
 	case 'u':
 		update();
 		break;
