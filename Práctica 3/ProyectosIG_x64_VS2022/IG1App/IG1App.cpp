@@ -248,7 +248,6 @@ IG1App::specialKey(int key, int x, int y)
 void IG1App::doubleViewport() const
 {
 	Camera doubleCamera = *mCamera;	// Camara auxiliar copiando mCamera
-	Viewport auxVP = *mViewPort;	// Viewport auxiliar
 
 	mViewPort->setSize(mWinW / 2, mWinH);
 	doubleCamera.setSize(mViewPort->width(), mViewPort->height());

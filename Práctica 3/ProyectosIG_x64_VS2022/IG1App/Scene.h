@@ -36,6 +36,8 @@ protected:
 	void free();
 	void setGL();
 	void resetGL();
+	//Apt 56
+	void sceneDirLight(Camera const& cam) const;
 
 	int mId;
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
