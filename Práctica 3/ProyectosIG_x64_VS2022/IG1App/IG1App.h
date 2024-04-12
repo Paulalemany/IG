@@ -14,7 +14,7 @@
 #include "Viewport.h"
 
 //Por ahora solo tenemos dos escenas
-static const int MAX_SCENES = 2;
+static const int MAX_SCENES = 3;
 
 static int scene_index = 0;
 //Creamos un array con todas las escenas
