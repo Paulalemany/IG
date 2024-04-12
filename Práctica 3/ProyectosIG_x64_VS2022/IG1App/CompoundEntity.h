@@ -20,11 +20,10 @@ private:
 class AdvancedTIE : public CompoundEntity
 {
 public:
-    Sphere(GLdouble r);
+    AdvancedTIE();
     void render(glm::dmat4 const& modelViewMat) const;
 
 protected:
-    GLdouble radius;
 
 };
 
