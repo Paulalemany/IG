@@ -143,8 +143,12 @@ void Scene::setScene(int i)
 		gObjects.push_back(new GlassParapet(300.0, 150.0, gTextures[4]));								//Parapet
 		gObjects.push_back(new Photo(125.0, 70.0, gTextures[6]));										//Photo
 		break;
-	case 2:
-		gObjects.push_back(new Sphere(100.0));
+
+	case 2:	//Apt 58
+		gObjects.push_back(new Sphere(100.0));															//Esfera
+		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
+		gObjects.push_back(new PartialDisk(85.0, 100.0, 0, 200));
+
 	default:
 		break;
 	}

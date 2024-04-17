@@ -49,11 +49,13 @@ protected:
 class PartialDisk : public QuadricEntity
 {
 public:
-	PartialDisk(GLdouble innerRadius, GLdouble outerRadius);	//Constructora del disco
+	PartialDisk(GLdouble innerRadius, GLdouble outerRadius, GLdouble startAngle, GLdouble sweepAngle);	//Constructora del disco
 	void render(glm::dmat4 const& modelViewMat) const;
 
 protected:
 	GLdouble innerRadius;
 	GLdouble outerRadius;
+	GLdouble startAngle;
+	GLdouble sweepAngle;
 };
 
