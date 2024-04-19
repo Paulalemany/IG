@@ -42,7 +42,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(2);
+	setScene(3);
 
 }
 
@@ -151,8 +151,6 @@ void Scene::setScene(int i)
 		gObjects.push_back(new Sphere(100.0));															//Esfera
 		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
 		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
-		//gObjects.push_back(new Cylinder(20.0, 0.0));		
-		// 											//Ojo der (azul)
 		glm::dmat4 trans = translate(dmat4(1), dvec3(35, 30, 60));
 		eye->setModelMat(trans);
 		eye->QuadricColor(0, 0, 1);
@@ -162,6 +160,8 @@ void Scene::setScene(int i)
 		eye2->setModelMat(trans);
 		eye2->QuadricColor(0.6, 0.6, 0.6);
 		gObjects.push_back(eye2);
+
+	case 3:
 
 	default:
 		

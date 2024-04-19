@@ -73,6 +73,7 @@
     <ClInclude Include="..\texturas\Texture.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CheckML.h" />
+    <ClInclude Include="CompoundEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Mesh.h" />
@@ -84,6 +85,7 @@
     <ClCompile Include="..\texturas\Pixmap32RGBA.cpp" />
     <ClCompile Include="..\texturas\Texture.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CompoundEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="IG1App.cpp" />
     <ClCompile Include="main.cpp" />
