@@ -123,6 +123,9 @@ void Scene::addObject(Abs_Entity* e)
 
 void Scene::setScene(int i)
 {
+	QuadricEntity* eye = new Cylinder(20.0, 0.0);					//ojo der
+	QuadricEntity* eye2 = new Cylinder(20.0, 0.0);					//ojo izq
+
 	switch (i)
 	{
 	case 0:
@@ -147,9 +150,21 @@ void Scene::setScene(int i)
 	case 2:	//Apt 58
 		gObjects.push_back(new Sphere(100.0));															//Esfera
 		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
-		gObjects.push_back(new PartialDisk(85.0, 100.0, 0, 200));
+		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
+		//gObjects.push_back(new Cylinder(20.0, 0.0));		
+		// 											//Ojo der (azul)
+		glm::dmat4 trans = translate(dmat4(1), dvec3(35, 30, 60));
+		eye->setModelMat(trans);
+		eye->QuadricColor(0, 0, 1);
+		gObjects.push_back(eye);
+		
+		trans = translate(dmat4(1), dvec3(-35, 30, 60));
+		eye2->setModelMat(trans);
+		eye2->QuadricColor(0.6, 0.6, 0.6);
+		gObjects.push_back(eye2);
 
 	default:
+		
 		break;
 	}
 }

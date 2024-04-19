@@ -8,8 +8,11 @@ public:
 	QuadricEntity() { q = gluNewQuadric(); }	//Constructora
 	~QuadricEntity() { gluDeleteQuadric(q); }	//Destructora
 
+	void QuadricColor(GLdouble r, GLdouble g, GLdouble b) { red = r, green = g, blue = b; }
+
 protected:
 	GLUquadricObj* q;	//Declaración de las entidades cuádricas
+	GLdouble red = 0, blue = 0, green = 0;
 };
 
 class Sphere  : public QuadricEntity

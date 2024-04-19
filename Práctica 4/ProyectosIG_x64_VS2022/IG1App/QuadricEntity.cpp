@@ -38,7 +38,6 @@ Cylinder::Cylinder(GLdouble base, GLdouble top)
 	//Creamos el cono
 	baseRadius = base;
 	topRadius = top;
-	//gluCylinder(q, baseRadius, topRadius, height, slices, stacks);
 	
 }
 
@@ -47,7 +46,18 @@ void Cylinder::render(glm::dmat4 const& modelViewMat) const
 	glm::dmat4 aMat = modelViewMat * mModelMat;
 	upload(aMat);
 
+	// Aquí se puede fijar el color:
+	glEnable(GL_COLOR_MATERIAL);
+	glColor3f(red, green, blue);
+
+	// Aquí se puede fijar el modo de dibujar:
+	gluQuadricDrawStyle(q, GLU_FILL);
+
 	gluCylinder(q, baseRadius, topRadius, 100, 50, 50);
+
+	// Aquí se debe recuperar el color :
+	glColor3f(1.0, 1.0, 1.0);
+	glDisable(GL_COLOR_MATERIAL);
 
 }
 
@@ -91,7 +101,7 @@ PartialDisk::PartialDisk(GLdouble inner, GLdouble outer, GLdouble start, GLdoubl
 	startAngle = start;
 	sweepAngle = sweep;
 
-	mModelMat = rotate(dmat4(1), radians(-80.0), dvec3(0, 0, 1)) * translate(dmat4(1), dvec3(0, 0, 40));
+	mModelMat = rotate(dmat4(1), radians(-80.0), dvec3(0, 0, 1)) * translate(dmat4(1), dvec3(0, 0, 60));
 	
 }
 
