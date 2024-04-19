@@ -7,6 +7,7 @@
 #include "Camera.h"
 #include "Entity.h"
 #include "QuadricEntity.h"
+#include "CompoundEntity.h"
 
 #include <vector>
 

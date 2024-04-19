@@ -458,6 +458,28 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 	return mesh;
 }
 
+Mesh* Mesh::generateWingAdvancedTIE(GLdouble tam)
+{
+	Mesh* mesh = new Mesh();						//Creamos una nueva malla
+	mesh->mPrimitive = GL_TRIANGLE_STRIP;			//Podemos utilizar la primitiva que queramos
+
+	mesh->mNumVertices = 7;							//Si no he contado mal son 7 y no se repite ninguno (No he tenido muy encuenta el sentido antihorario)
+	mesh->vVertices.reserve(mesh->mNumVertices);
+
+	//Tamaño utilizado para las alas
+	GLdouble a = tam / 2;
+	GLdouble b = tam / 4;
+
+	//La distancia con el centro va a ser igual a "a" (Lo dejamos para luego el offset, Aun no se que parametros me hará falta pasarle)
+	mesh->vVertices.emplace_back(a, -b, a); //v0
+	mesh->vVertices.emplace_back(a, b, a); //v1
+	mesh->vVertices.emplace_back(a, -b, -a); //v2
+
+	mesh->vVertices.emplace_back(a, b, -a); //v3
+
+	return nullptr;
+}
+
 
 
 Mesh* Mesh::createRGBAxes(GLdouble l)

@@ -126,6 +126,9 @@ void Scene::setScene(int i)
 	QuadricEntity* eye = new Cylinder(20.0, 0.0);					//ojo der
 	QuadricEntity* eye2 = new Cylinder(20.0, 0.0);					//ojo izq
 
+	CompoundEntity* TIE = new AdvancedTIE();						//Entidad base
+
+
 	switch (i)
 	{
 	case 0:
@@ -151,7 +154,9 @@ void Scene::setScene(int i)
 		gObjects.push_back(new Sphere(100.0));															//Esfera
 		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
 		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
-		glm::dmat4 trans = translate(dmat4(1), dvec3(35, 30, 60));
+
+
+		glm::dmat4 trans = translate(dmat4(1), dvec3(35, 30, 60));										//Ojos
 		eye->setModelMat(trans);
 		eye->QuadricColor(0, 0, 1);
 		gObjects.push_back(eye);
@@ -161,10 +166,10 @@ void Scene::setScene(int i)
 		eye2->QuadricColor(0.6, 0.6, 0.6);
 		gObjects.push_back(eye2);
 
-	case 3:
+	case 3: //Apt 60
+		gObjects.push_back(TIE);
 
 	default:
-		
 		break;
 	}
 }

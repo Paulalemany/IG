@@ -1,5 +1,7 @@
 #pragma once
 #include "Entity.h"
+#include "QuadricEntity.h"
+
 class CompoundEntity :
     public Abs_Entity
 {
@@ -9,11 +11,9 @@ public:
     ~CompoundEntity() {};
 
     void addEntity(Abs_Entity* ae);
-    void render(glm::dmat4 const& modelViewMat) const override;
 
-private:
+protected:
     std::vector<Abs_Entity*> gObjects;
-
 
 };
 
@@ -25,5 +25,21 @@ public:
 
 protected:
 
+    //Guardamos aquí los elementos necesarios
+    Sphere* body;
+
 };
 
+
+class WingAdvancedTIE : public CompoundEntity
+{
+public:
+    WingAdvancedTIE();
+    void render(glm::dmat4 const& modelViewMat) const;
+
+protected:
+
+    //Guardamos aquí los elementos necesarios
+    Sphere* body;
+
+};
