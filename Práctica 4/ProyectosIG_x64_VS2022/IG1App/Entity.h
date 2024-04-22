@@ -43,7 +43,6 @@ protected:
 	virtual void upload(glm::dmat4 const& mModelViewMat) const;
 };
 
-
 class EjesRGB : public Abs_Entity
 {
 public:
@@ -151,6 +150,16 @@ public:
 	~Photo();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
+};
+
+class EWingAdvancedTIE : public Abs_Entity {
+public:
+	//Hará falta un ancho, un largo y el punto de origen??
+	explicit EWingAdvancedTIE(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t);
+	~EWingAdvancedTIE();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+
 };
 
 #endif //_H_Entities_H_

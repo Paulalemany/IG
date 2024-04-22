@@ -17,6 +17,7 @@ protected:
 
 };
 
+
 class AdvancedTIE : public CompoundEntity
 {
 public:
@@ -27,6 +28,8 @@ protected:
 
     //Guardamos aquí los elementos necesarios
     Sphere* body;
+    CompoundEntity* wings;
+
 
 };
 
@@ -41,5 +44,10 @@ protected:
 
     //Guardamos aquí los elementos necesarios
     Sphere* body;
+    RGBCube* rgb;
+    Abs_Entity* wings1;
+    Abs_Entity* wings2;
+    Abs_Entity* wings3;
+    Texture* t;
 
 };

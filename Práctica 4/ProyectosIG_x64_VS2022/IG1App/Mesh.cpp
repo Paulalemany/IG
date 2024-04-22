@@ -95,10 +95,10 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	GLdouble altura = -75; //apt 38
 	GLdouble offset = 0; // 150; //199; //apt 38
 
-	mesh->vVertices.emplace_back(-w/2 +offset, altura, -h / 2 + offset);
-	mesh->vVertices.emplace_back(w/2 + offset, altura, -h / 2 + offset);
-	mesh->vVertices.emplace_back(-w / 2 + offset, altura, h / 2 + offset);
-	mesh->vVertices.emplace_back(w / 2 + offset, altura, h / 2 + offset);
+	mesh->vVertices.emplace_back(-w/2, 0, -h / 2);
+	mesh->vVertices.emplace_back(w/2, 0, -h / 2);
+	mesh->vVertices.emplace_back(-w / 2, 0, h / 2);
+	mesh->vVertices.emplace_back(w / 2, 0, h / 2);
 
 	//Color
 	mesh->vColors.emplace_back(1.0, 1.0, 1.0, 1.0);
@@ -403,8 +403,6 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 	return mesh;
 }
 
-
-
 Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 {
 	Mesh* mesh = new Mesh();
@@ -477,7 +475,7 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble tam)
 
 	mesh->vVertices.emplace_back(a, b, -a); //v3
 
-	return nullptr;
+	return mesh;
 }
 
 

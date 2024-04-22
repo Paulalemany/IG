@@ -483,4 +483,27 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	}
 #pragma endregion
 
+#pragma region WingAdvancedTIE
 
+	EWingAdvancedTIE::EWingAdvancedTIE(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t)
+	{
+
+	}
+
+	EWingAdvancedTIE::~EWingAdvancedTIE()
+	{
+
+	}
+
+	void EWingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const
+	{
+
+	}
+
+	void EWingAdvancedTIE::update()
+	{
+
+	}
+#pragma endregion
+
+	
