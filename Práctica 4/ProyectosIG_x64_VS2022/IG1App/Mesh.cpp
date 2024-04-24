@@ -522,15 +522,41 @@ Mesh* Mesh::createRGBAxes(GLdouble l)
 //render y draw de la diap37
 void IndexMesh::render() const
 {
-	 // Comandos OpenGL para enviar datos de arrays a GPU
-	// Nuevos comandos para la tabla de índices
-	if (nIndexes != nullptr) {
-		glEnableClientState(GL_INDEX_ARRAY);
-		glIndexPointer(GL_UNSIGNED_INT, 0, nIndexes);
+	if (vVertices.size() > 0) { // transfer data
+		// transfer the coordinates of the vertices
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(
+			3, GL_DOUBLE, 0, vVertices.data()); // number of coordinates per vertex, type of
+		// each coordinate, stride, pointer
+		if (vColors.size() > 0) {             // transfer colors
+			glEnableClientState(GL_COLOR_ARRAY);
+			glColorPointer(
+				4, GL_DOUBLE, 0, vColors.data()); // components number (rgba=4), type of
+			// each component, stride, pointer
+		}
+		if (vTexCoords.size() > 0) {
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glTexCoordPointer(
+				2, GL_DOUBLE, 0, vTexCoords.data());
+		}
+		//Apt61
+		if (vNormals.size() > 0) {
+			glEnableClientState(GL_NORMAL_ARRAY);
+			glNormalPointer(GL_DOUBLE, 0, vNormals.data());
+		}
+		if (nIndexes != nullptr) {
+			glEnableClientState(GL_INDEX_ARRAY);
+			glIndexPointer(GL_UNSIGNED_INT, 0, nIndexes);
+		}
+
+		draw();
+
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_INDEX_ARRAY);
 	}
-	// Comandos OpenGL para deshabilitar datos enviados
-	// Nuevo comando para la tabla de índices :
-	glDisableClientState(GL_INDEX_ARRAY);
 }
 
 void IndexMesh::draw() const
@@ -543,6 +569,10 @@ void IndexMesh::draw() const
 IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 {
 	IndexMesh* mesh = new IndexMesh();
+
+	// Elena mando un correo el 19 de abril diciendo como se hacia el cubo:
+
+	mesh->mPrimitive = GL_TRIANGLES;
 
 	/// VERTICES
 	mesh->mNumVertices = 8;
@@ -559,7 +589,7 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	mesh->vVertices.emplace_back(-l, -l, l); // v6
 	mesh->vVertices.emplace_back(-l, l, l); // v7
 
-	/// INDICES
+	/// VECTOR DE INDICES
 	mesh->nNumIndices = 36;
 	mesh->nIndexes = new GLuint[mesh->nNumIndices];
 
@@ -641,22 +671,20 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	/// NORMALES
 	//mesh->buildNormalVectors();
 
-
 	return mesh;
 }
 
-glm::dvec3 IndexMesh::calculoVectorNormalPorNewell(Cara c)
-{
-	glm::dvec3 n = { 0, 0, 0 };
-	for (int i = 0; i < c.numeroVertices; i++){
-
-		const auto vertActual = vVertices[c.getIndice(i)];
-		const auto vertSiguiente = vVertices[c.getIndice((i + 1) % c.numeroVertices)];
-
-		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
-		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
-		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
-	}
-	return normalize(n);
-
-}
+//glm::dvec3 IndexMesh::calculoVectorNormalPorNewell(Cara c)
+//{
+//	glm::dvec3 n = { 0, 0, 0 };
+//	for (int i = 0; i < c.numeroVertices; i++)
+//	{
+//		const auto vertActual = vVertices[c.getIndice(i)];
+//		const auto vertSiguiente = vVertices[c.getIndice((i + 1) % c.numeroVertices)];
+//
+//		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
+//		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
+//		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
+//	}
+//	return normalize(n);
+//}

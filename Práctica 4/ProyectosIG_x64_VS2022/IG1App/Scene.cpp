@@ -129,7 +129,7 @@ void Scene::setScene(int i)
 
 	CompoundEntity* TIE = new AdvancedTIE();						//Entidad base
 
-	Abs_Entity* box = new IndexedBox(20.0);							//APT64
+	Abs_Entity* box = new IndexedBox(200.0);							//APT64
 
 	switch (i)
 	{

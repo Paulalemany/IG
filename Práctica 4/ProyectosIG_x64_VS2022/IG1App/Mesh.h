@@ -4,7 +4,6 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include "../texturas/Texture.h"
-#include "Cara.h"
 
 #include <vector>
 
@@ -54,7 +53,7 @@ class IndexMesh : public Mesh
 protected:
 	GLuint* nIndexes = nullptr; // tabla de índices
 	GLuint nNumIndices = 0;
-	std::vector<Cara> vCaras; //??¿?¿?
+	//std::vector<Cara> vCaras; //??¿?¿?
 	
 public:
 	IndexMesh() { mPrimitive = GL_TRIANGLES; }
@@ -66,7 +65,7 @@ public:
 	static IndexMesh* generateIndexedBox(GLdouble l);
 
 	//metodo de newell (diap 38) - he creado la clase Cara
-	glm::dvec3 calculoVectorNormalPorNewell(Cara c); 
+	//glm::dvec3 calculoVectorNormalPorNewell(Cara c); 
 };
 
 #endif //_H_Scene_H_
