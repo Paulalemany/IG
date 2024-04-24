@@ -33,12 +33,18 @@ Mesh::render() const
 			glTexCoordPointer(
 				2, GL_DOUBLE, 0, vTexCoords.data());
 		}
+		//Apt61
+		if (vNormals.size() > 0) {
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glVertexPointer(3, GL_FLOAT, 0, vNormals.data());
+		}
 
 		draw();
 
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
 	}
 }
 
