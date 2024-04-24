@@ -168,6 +168,8 @@ public:
 	~IndexedBox();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	virtual void update();
+
+	void buildNormalVectors(); //apt 65
 };
 
 #endif //_H_Entities_H_

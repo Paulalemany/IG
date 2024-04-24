@@ -617,8 +617,29 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	mesh->nIndexes[34] = 7;
 	mesh->nIndexes[35] = 6;
 
-	//caras etc
-	// to do
+	/// CARAS
+	//int nV = 3;
+	//mesh->vCaras.resize(mesh->nNumIndices / nV);
+	//for (int i = 0; i < mesh->nNumIndices / nV; i++)
+	//{
+	//	//std::cout << mesh->vIndices[i * nV] << std::endl;
+	//	//std::cout << mesh->vIndices[i * nV + 1] << std::endl;
+	//	//std::cout << mesh->vIndices[i * nV + 2] << std::endl;
+
+	//	mesh->vCaras[i] = Cara(
+	//		mesh->nIndexes[i * nV],
+	//		mesh->nIndexes[i * nV + 1],
+	//		mesh->nIndexes[i * nV + 2]
+	//	);
+	//}
+
+	/// COLORES
+	mesh->vColors.reserve(mesh->mNumVertices);
+	for (int i = 0; i < mesh->mNumVertices; i++)
+		mesh->vColors.emplace_back(0, 1, 0, 1);
+
+	/// NORMALES
+	//mesh->buildNormalVectors();
 
 
 	return mesh;

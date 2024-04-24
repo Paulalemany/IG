@@ -53,6 +53,7 @@ class IndexMesh : public Mesh
 protected:
 	GLuint* nIndexes = nullptr; // tabla de índices
 	GLuint nNumIndices = 0;
+	std::vector<Cara> vCaras; //??¿?¿?
 	
 public:
 	IndexMesh() { mPrimitive = GL_TRIANGLES; }
@@ -62,6 +63,9 @@ public:
 
 	//apt63
 	static IndexMesh* generateIndexedBox(GLdouble l);
+
+	//metodo de newell (diap 38)
+	//glm::dvec3 calculoVectorNormalPorNewell(Cara c); //que cojones es Cara
 };
 
 #endif //_H_Scene_H_
