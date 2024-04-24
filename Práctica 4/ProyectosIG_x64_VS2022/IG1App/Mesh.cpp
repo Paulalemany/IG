@@ -644,3 +644,19 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 
 	return mesh;
 }
+
+glm::dvec3 IndexMesh::calculoVectorNormalPorNewell(Cara c)
+{
+	glm::dvec3 n = { 0, 0, 0 };
+	for (int i = 0; i < c.numeroVertices; i++){
+
+		const auto vertActual = vVertices[c.getIndice(i)];
+		const auto vertSiguiente = vVertices[c.getIndice((i + 1) % c.numeroVertices)];
+
+		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
+		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
+		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
+	}
+	return normalize(n);
+
+}

@@ -4,6 +4,7 @@
 #include <GL/freeglut.h>
 #include <glm/glm.hpp>
 #include "../texturas/Texture.h"
+#include "Cara.h"
 
 #include <vector>
 
@@ -64,8 +65,8 @@ public:
 	//apt63
 	static IndexMesh* generateIndexedBox(GLdouble l);
 
-	//metodo de newell (diap 38)
-	//glm::dvec3 calculoVectorNormalPorNewell(Cara c); //que cojones es Cara
+	//metodo de newell (diap 38) - he creado la clase Cara
+	glm::dvec3 calculoVectorNormalPorNewell(Cara c); 
 };
 
 #endif //_H_Scene_H_
