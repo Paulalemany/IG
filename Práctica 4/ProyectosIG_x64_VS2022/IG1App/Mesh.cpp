@@ -35,8 +35,8 @@ Mesh::render() const
 		}
 		//Apt61
 		if (vNormals.size() > 0) {
-			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(3, GL_FLOAT, 0, vNormals.data());
+			glEnableClientState(GL_NORMAL_ARRAY);
+			glNormalPointer(GL_DOUBLE, 0, vNormals.data());
 		}
 
 		draw();
@@ -44,7 +44,7 @@ Mesh::render() const
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
 	}
 }
 
@@ -517,4 +517,24 @@ Mesh* Mesh::createRGBAxes(GLdouble l)
 	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
 	return mesh;
+}
+
+//render y draw de la diap37
+void IndexMesh::render() const
+{
+	 // Comandos OpenGL para enviar datos de arrays a GPU
+	// Nuevos comandos para la tabla de índices
+	if (vIndexes != nullptr) {
+		glEnableClientState(GL_INDEX_ARRAY);
+		glIndexPointer(GL_UNSIGNED_INT, 0, vIndexes);
+	}
+	// Comandos OpenGL para deshabilitar datos enviados
+	// Nuevo comando para la tabla de índices :
+	glDisableClientState(GL_INDEX_ARRAY);
+}
+
+void IndexMesh::draw() const
+{
+	// Comando para renderizar la malla indexada enviada
+	glDrawElements(mPrimitive, nNumIndices, GL_UNSIGNED_INT, vIndexes);
 }

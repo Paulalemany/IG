@@ -18,7 +18,7 @@ public:
 	Mesh(const Mesh& m) = delete;            // no copy constructor
 	Mesh& operator=(const Mesh& m) = delete; // no copy assignment
 
-	virtual void render() const;
+	virtual void render(); //const (se lo quita)
 
 	GLuint size() const { return mNumVertices; }; // number of elements
 	std::vector<glm::dvec3> const& vertices() const { return vVertices; };
@@ -44,6 +44,20 @@ protected:
 	std::vector<glm::dvec2> vTexCoords; //Texture Array
 	std::vector<glm::dvec4> vColors;   // color array
 	std::vector<glm::dvec3> vNormals; //apt61
+	virtual void draw() const;
+};
+
+//APT62 -> copia pega de la diapo36
+class IndexMesh : public Mesh 
+{
+protected:
+	GLuint* vIndexes = nullptr; // tabla de índices
+	GLuint nNumIndices = 0;
+	
+public:
+	IndexMesh() { mPrimitive = GL_TRIANGLES; }
+	~IndexMesh() { delete[] vIndexes; }
+	virtual void render() const;
 	virtual void draw() const;
 };
 
