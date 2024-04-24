@@ -18,7 +18,7 @@ public:
 	Mesh(const Mesh& m) = delete;            // no copy constructor
 	Mesh& operator=(const Mesh& m) = delete; // no copy assignment
 
-	virtual void render(); //const (se lo quita)
+	virtual void render() const;
 
 	GLuint size() const { return mNumVertices; }; // number of elements
 	std::vector<glm::dvec3> const& vertices() const { return vVertices; };
@@ -51,14 +51,17 @@ protected:
 class IndexMesh : public Mesh 
 {
 protected:
-	GLuint* vIndexes = nullptr; // tabla de índices
+	GLuint* nIndexes = nullptr; // tabla de índices
 	GLuint nNumIndices = 0;
 	
 public:
 	IndexMesh() { mPrimitive = GL_TRIANGLES; }
-	~IndexMesh() { delete[] vIndexes; }
+	~IndexMesh() { delete[] nIndexes; }
 	virtual void render() const;
 	virtual void draw() const;
+
+	//apt63
+	static IndexMesh* generateIndexedBox(GLdouble l);
 };
 
 #endif //_H_Scene_H_

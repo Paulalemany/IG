@@ -524,9 +524,9 @@ void IndexMesh::render() const
 {
 	 // Comandos OpenGL para enviar datos de arrays a GPU
 	// Nuevos comandos para la tabla de índices
-	if (vIndexes != nullptr) {
+	if (nIndexes != nullptr) {
 		glEnableClientState(GL_INDEX_ARRAY);
-		glIndexPointer(GL_UNSIGNED_INT, 0, vIndexes);
+		glIndexPointer(GL_UNSIGNED_INT, 0, nIndexes);
 	}
 	// Comandos OpenGL para deshabilitar datos enviados
 	// Nuevo comando para la tabla de índices :
@@ -536,5 +536,90 @@ void IndexMesh::render() const
 void IndexMesh::draw() const
 {
 	// Comando para renderizar la malla indexada enviada
-	glDrawElements(mPrimitive, nNumIndices, GL_UNSIGNED_INT, vIndexes);
+	glDrawElements(mPrimitive, nNumIndices, GL_UNSIGNED_INT, nIndexes);
+}
+
+//apt63
+IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
+{
+	IndexMesh* mesh = new IndexMesh();
+
+	/// VERTICES
+	mesh->mNumVertices = 8;
+	mesh->vVertices.reserve(mesh->mNumVertices);
+
+	//vertices de la cara de detras
+	mesh->vVertices.emplace_back(l, l, -l); // v0
+	mesh->vVertices.emplace_back(l, -l, -l); // v1
+	mesh->vVertices.emplace_back(-l, -l, -l); // v2
+	mesh->vVertices.emplace_back(-l, l, -l); // v3
+	//vertices de la cara de delante
+	mesh->vVertices.emplace_back(l, l, l); // v4
+	mesh->vVertices.emplace_back(l, -l, l); // v5
+	mesh->vVertices.emplace_back(-l, -l, l); // v6
+	mesh->vVertices.emplace_back(-l, l, l); // v7
+
+	/// INDICES
+	mesh->nNumIndices = 36;
+	mesh->nIndexes = new GLuint[mesh->nNumIndices];
+
+	// cara de abajo
+	mesh->nIndexes[0] = 0;
+	mesh->nIndexes[1] = 3;
+	mesh->nIndexes[2] = 2;
+
+	mesh->nIndexes[3] = 0;
+	mesh->nIndexes[4] = 2;
+	mesh->nIndexes[5] = 1;
+
+	// cara de arriba
+	mesh->nIndexes[6] = 4;
+	mesh->nIndexes[7] = 5;
+	mesh->nIndexes[8] = 6;
+
+	mesh->nIndexes[9] = 4;
+	mesh->nIndexes[10] = 6;
+	mesh->nIndexes[11] = 7;
+
+	// cara lateral cercana izquierda
+	mesh->nIndexes[12] = 0;
+	mesh->nIndexes[13] = 4;
+	mesh->nIndexes[14] = 7;
+
+	mesh->nIndexes[15] = 0;
+	mesh->nIndexes[16] = 7;
+	mesh->nIndexes[17] = 3;
+
+	// cara lateral trasera derecha
+	mesh->nIndexes[18] = 1;
+	mesh->nIndexes[19] = 2;
+	mesh->nIndexes[20] = 6;
+
+	mesh->nIndexes[21] = 1;
+	mesh->nIndexes[22] = 6;
+	mesh->nIndexes[23] = 5;
+
+	// cara lateral cercana derecha
+	mesh->nIndexes[24] = 0;
+	mesh->nIndexes[25] = 1;
+	mesh->nIndexes[26] = 5;
+
+	mesh->nIndexes[27] = 0;
+	mesh->nIndexes[28] = 5;
+	mesh->nIndexes[29] = 4;
+
+	// cara lateral trasera izquierda
+	mesh->nIndexes[30] = 2;
+	mesh->nIndexes[31] = 3;
+	mesh->nIndexes[32] = 7;
+
+	mesh->nIndexes[33] = 2;
+	mesh->nIndexes[34] = 7;
+	mesh->nIndexes[35] = 6;
+
+	//caras etc
+	// to do
+
+
+	return mesh;
 }

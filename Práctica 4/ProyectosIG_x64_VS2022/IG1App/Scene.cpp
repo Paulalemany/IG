@@ -4,6 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace glm;
+using namespace std;
 
 void
 Scene::init()
@@ -128,6 +129,7 @@ void Scene::setScene(int i)
 
 	CompoundEntity* TIE = new AdvancedTIE();						//Entidad base
 
+	Abs_Entity* box = new IndexedBox(20.0);							//APT64
 
 	switch (i)
 	{
@@ -166,8 +168,15 @@ void Scene::setScene(int i)
 		eye2->QuadricColor(0.6, 0.6, 0.6);
 		gObjects.push_back(eye2);
 
+		break;
+
 	case 3: //Apt 60
 		gObjects.push_back(TIE);
+		break;
+		
+	case 4: //Apt 64
+		gObjects.push_back(box);
+		break;
 
 	default:
 		break;

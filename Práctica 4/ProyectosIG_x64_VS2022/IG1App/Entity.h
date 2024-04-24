@@ -162,4 +162,12 @@ public:
 
 };
 
+class IndexedBox : public Abs_Entity {
+public:
+	explicit IndexedBox(GLdouble l);
+	~IndexedBox();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+};
+
 #endif //_H_Entities_H_

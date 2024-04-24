@@ -506,4 +506,35 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	}
 #pragma endregion
 
-	
+#pragma region IndexedBox
+
+	IndexedBox::IndexedBox(GLdouble l)
+	{
+		mMesh = IndexMesh::generateIndexedBox(l);
+	}
+
+	IndexedBox::~IndexedBox()
+	{
+		delete mMesh;
+		mMesh = nullptr;
+	}
+
+	void IndexedBox::render(glm::dmat4 const& modelViewMat) const
+	{
+		if (mMesh != nullptr)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			upload(aMat);
+
+			mMesh->render();
+		}
+	}
+
+	void IndexedBox::update()
+	{
+		
+	}
+
+#pragma endregion
