@@ -134,8 +134,17 @@ void Scene::setScene(int i)
 	
 	CompoundEntity* TIE;
 
-	Abs_Entity* box = new IndexedBox(200.0);							//APT64
+	//Apt64
+	Abs_Entity* box = new IndexedBox(200.0);							
 	
+	//Apt66
+	CompoundEntity* node = new CompoundEntity();
+	RGBTriangle* triangle = new RGBTriangle(20);
+
+	node->addEntity(triangle);
+	triangle->setModelMat(glm::translate(node->modelMat(), glm::dvec3(200, 0, 0)));
+
+
 	//Apt 67
 	QuadricEntity* tatooine = new Sphere(100.0);
 	tatooine->QuadricColor(1, 255 / 233, 0);
@@ -163,7 +172,7 @@ void Scene::setScene(int i)
 
 	case 2:	//Apt 58
 
-		gObjects.push_back(cabeza);															//Esfera
+		gObjects.push_back(cabeza);																		//Esfera
 		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
 		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
 
@@ -194,7 +203,15 @@ void Scene::setScene(int i)
 		gObjects.push_back(box);
 		break;
 
-	case 5: //APT 67
+	case 5: //APT 66
+
+		gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
+		gObjects.push_back(new RGBRectangle(200, 100));
+		gObjects.push_back(triangle);
+
+		break;
+
+	case 6: //APT 67
 
 		gObjects.push_back(tatooine);
 
@@ -204,7 +221,7 @@ void Scene::setScene(int i)
 		break;
 	}
 
-	if (i == 5) {
+	if (i == 6) {
 		glClearColor(0, 0, 0, 1);
 	}
 	else {
