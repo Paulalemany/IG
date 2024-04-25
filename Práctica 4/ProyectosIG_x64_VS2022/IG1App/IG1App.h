@@ -91,6 +91,15 @@ protected:
 	void mouse(int button, int state, int x, int y);
 	void motion(int x, int y);
 	void mouseWheel(int n, int d, int x, int y);
+
+	//apt68
+	float timeToUpdate = 0.01; //cada 10 ms
+	int oldTimeStart = 0;
+	bool boolUpdate = false;
+	float timeToFrameUpdate = 0;
+
+	bool rotate = false;
+	bool orbit = false;
 };
 
 #endif //_H_IG1App_H_

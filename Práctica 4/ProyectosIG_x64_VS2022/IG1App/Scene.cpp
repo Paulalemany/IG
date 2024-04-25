@@ -127,6 +127,7 @@ void Scene::addObject(Abs_Entity* e)
 void Scene::setScene(int i)
 {
 	deleteObjects();
+	mId = i;
 
 	QuadricEntity* eye = new Cylinder(20.0, 0.0);					//ojo der
 	QuadricEntity* eye2 = new Cylinder(20.0, 0.0);					//ojo izq
@@ -239,5 +240,33 @@ void Scene::deleteObjects()
 	}
 
 	gObjects.resize(0);
+}
+
+void Scene::orbit(float time)
+{
+	//habria que ver cual es el tie para darle el setRot
+	if (mId == 6) {
+		speed = -10;
+
+		rotY += speed * time;
+		gObjects[1]->setRot(glm::dvec3(0, 0, 1), rotY);
+
+		glm::dvec3 newPos = gObjects[1]->getPos();
+		gObjects[1]->setPos(newPos);
+	}
+}
+
+void Scene::rotate(float time)
+{
+	//habria que ver cual es el tie para darle el setRot
+	if (mId == 6) {
+		speed = 10;
+
+		rotZ -= speed * time;
+		gObjects[1]->setRot(glm::dvec3(0, 1, 0), rotZ);
+
+		glm::dvec3 newPos = gObjects[1]->getPos();
+		gObjects[1]->setPos(newPos);
+	}
 }
 

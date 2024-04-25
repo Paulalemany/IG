@@ -21,8 +21,23 @@ IG1App::close()
 
 void IG1App::update()
 {
-	mScene->update();
-	glutPostRedisplay();
+	int startTime = glutGet(GLUT_ELAPSED_TIME);
+	float deltaTime = (startTime - oldTimeStart) / 1000;
+	oldTimeStart = startTime;
+
+	timeToFrameUpdate += deltaTime;
+
+	if (rotate) {
+		mScene->rotate(deltaTime);
+	}
+	if (orbit) {
+		mScene->orbit(deltaTime);
+	}
+
+	if (timeToFrameUpdate > timeToUpdate) {
+		mScene->update();
+		glutPostRedisplay();
+	}
 }
 
 ////apartado 16
@@ -216,6 +231,12 @@ IG1App::key(unsigned char key, int x, int y)
 		break;
 	case 'w':
 		mCamera->moveUD(-1);
+		break;
+	case 'f': //apt68
+		orbit = !orbit;
+		break;
+	case 'g': //apt68
+		rotate = !rotate;
 		break;
 	default:
 		need_redisplay = false;

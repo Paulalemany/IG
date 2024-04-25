@@ -7,6 +7,18 @@
 
 using namespace glm;
 
+void Abs_Entity::setRot(dvec3 nrot, GLdouble nang)
+{
+	rot = nrot;
+	ang = glm::radians(nang);
+}
+
+void Abs_Entity::addRot(dvec3 addRot, GLdouble nang)
+{
+	rot += addRot;
+	ang += glm::radians(nang);
+}
+
 //Abs_Entity
 void
 Abs_Entity::upload(dmat4 const& modelViewMat) const
