@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "CheckML.h"
+#include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -135,7 +136,7 @@ void Scene::setScene(int i)
 	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
 	cabeza->QuadricColor(1, 0, 0);
 	
-	CompoundEntity* TIE = new AdvancedTIE();
+	TIE = new AdvancedTIE();
 
 	//Apt64
 	Abs_Entity* box = new IndexedBox(200.0);							
@@ -215,12 +216,18 @@ void Scene::setScene(int i)
 
 		gObjects.push_back(tatooine);
 
+		//Inicializamos el nodo ficticio
+		inventedNode = new CompoundEntity();
+		inventedNodeRotate = new CompoundEntity();
+
 		TIE->setModelMat(
 			scale(dmat4(1), dvec3(0.3, 0.3, 0.3))
 			* translate(dmat4(1), dvec3(-100.0, 620.0, -100.0))
 			* TIE->modelMat()
 		);
 		gObjects.push_back(TIE);
+		inventedNode->addEntity(TIE);
+		inventedNodeRotate->addEntity(TIE);
 
 		break;
 
@@ -248,15 +255,20 @@ void Scene::deleteObjects()
 
 void Scene::orbit(float time)
 {
-	//habria que ver cual es el tie para darle el setRot
+	//Si estamos en la escena correcta
 	if (mId == 6) {
-		speed = -10;
 
-		rotY += speed * time;
-		gObjects[1]->setRot(glm::dvec3(0, 0, 1), rotY);
+		//Lo hacemos con el método del nodo inventado
+		//Colocamos la entidad encima del nodo (Ambos vectores deben ser iguales??)
+		TIE->setModelMat(
+			translate(inventedNode->modelMat(), dvec3(0, 0, 0))
+			* TIE->modelMat()
+		);
 
-		glm::dvec3 newPos = gObjects[1]->getPos();
-		gObjects[1]->setPos(newPos);
+		//Hay que girarlo y moverlo
+		inventedNode->setModelMat(
+			glm::rotate(dmat4(1), radians(-0.01), dvec3(0, 0, 0.1))
+		);
 	}
 }
 

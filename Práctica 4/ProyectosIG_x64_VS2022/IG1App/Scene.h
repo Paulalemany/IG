@@ -57,6 +57,12 @@ protected:
 	GLdouble rotZ = 0;
 	glm::dvec3 frontDir = glm::dvec3(1, 0, 0);
 
+
+	//Método del Nodo ficticio
+	CompoundEntity* inventedNode;
+	CompoundEntity* inventedNodeRotate;
+	CompoundEntity* TIE;
+
 };
 
 #endif //_H_Scene_H_
