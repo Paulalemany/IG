@@ -36,6 +36,10 @@ public:
 
 	void deleteObjects();
 
+	//apt68
+	void orbit(float time);
+	void rotate(float time);
+
 protected:
 	void free();
 	void setGL();
@@ -46,6 +50,12 @@ protected:
 	int mId;
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // Textures of the scene
+
+	//apt68
+	float speed;
+	GLdouble rotY = 0;
+	GLdouble rotZ = 0;
+	glm::dvec3 frontDir = glm::dvec3(1, 0, 0);
 
 };
 

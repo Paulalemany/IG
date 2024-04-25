@@ -32,12 +32,23 @@ public:
 	//Le pasamos como parámetro el nombre de la textura
 	void setTexture(std::string textura, Texture * t, GLuint a)const { t->load(textura, a); }
 
+	//apt68
+	void setRot(glm::dvec3 nrot, GLdouble nang);
+	void addRot(glm::dvec3 addRot, GLdouble nang);
+	void setPos(glm::dvec3 newpos) { pos = newpos; }
+	void setPos(GLdouble x, GLdouble y, GLdouble z) { setPos(glm::dvec3(x, y, z)); }
+	glm::dvec3 getPos() { return pos; }
+
 protected:
 	Mesh* mMesh = nullptr; // the mesh
 	Texture* mTexture = nullptr;
 	Texture* mTexture2 = nullptr;
 	glm::dmat4 mModelMat;  // modeling matrix
 	glm::dvec4 mColor;	   // color de la entidad
+
+	glm::dvec3 pos;
+	glm::dvec3 rot;
+	GLdouble ang;
 
 	// transfers modelViewMat to the GPU
 	virtual void upload(glm::dmat4 const& mModelViewMat) const;
