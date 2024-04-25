@@ -184,13 +184,21 @@ void Scene::setScene(int i)
 		gObjects.push_back(box);
 		break;
 
-	case 5:
+	case 5: //APT 67
+
 		gObjects.push_back(tatooine);
 
 		break;
 
 	default:
 		break;
+	}
+
+	if (i == 5) {
+		glClearColor(0, 0, 0, 1);
+	}
+	else {
+		glClearColor(0.6, 0.7, 0.8, 1);
 	}
 }
 
