@@ -131,8 +131,8 @@ void Scene::setScene(int i)
 
 	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
 	cabeza->QuadricColor(1, 0, 0);
-
-	CompoundEntity* TIE = new AdvancedTIE();						//Entidad base
+	
+	CompoundEntity* TIE;
 
 	Abs_Entity* box = new IndexedBox(200.0);							//APT64
 	
@@ -181,6 +181,13 @@ void Scene::setScene(int i)
 		break;
 
 	case 3: //Apt 60
+
+		TIE = new AdvancedTIE();						//Entidad base
+
+		TIE->setModelMat(
+			translate(glm::dmat4(1.0), glm::dvec3(0, 1000, 0))
+			* TIE->modelMat()
+		);
 		gObjects.push_back(TIE);
 		break;
 		
