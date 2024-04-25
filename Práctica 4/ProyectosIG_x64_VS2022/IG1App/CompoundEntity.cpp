@@ -35,19 +35,16 @@ using namespace glm;
 		wing1->setModelMat(
 			rotate(dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0))
 			* translate(mModelMat, dvec3(-100, 100, 200)) 
-			//* rotate(mModelMat, radians(180.0), dvec3(1.0, 0.0, 0.0))
 			* rotate(dmat4(1), radians(180.0), dvec3(1.0, 0.0, 0.0))
 		);
-
 		addEntity(wing1);						
 
 		wing2 = new WingAdvancedTIE(100.0, 50.0, 180);
-		//wing2->setModelMat(
-		//	translate(glm::dmat4(1), glm::dvec3(100.0, 0.0, -20.0))
-		//	//* rotate(glm::dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 1.0, 1.0))
-		//	//* rotate(glm::dmat4(1), glm::radians(90.0), glm::dvec3(0.0, 0.0, 1.0))
-		//);
-		//addEntity(wing2);
+		wing2->setModelMat(
+			rotate(dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0))
+			* translate(mModelMat, dvec3(-100, 100, 0))
+		);
+		addEntity(wing2);
 	}
 
 	AdvancedTIE::~AdvancedTIE()
