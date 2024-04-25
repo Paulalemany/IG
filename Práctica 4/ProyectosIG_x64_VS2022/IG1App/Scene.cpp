@@ -280,19 +280,15 @@ void Scene::rotate(float time)
 
 		//Necesito que siempre rote sobre si mismo
 		// coloca la entidad justo encima del nodo
-		/*TIE->setModelMat(
+		TIE->setModelMat(
 			translate(inventedNodeRotate->modelMat(), dvec3(0, 0, 0))
 			* TIE->modelMat()
 		);
 
+		dvec3 eje = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 1.0, 0.0, 0.0)));
 		inventedNodeRotate->setModelMat(
-			glm::rotate(inventedNode->modelMat(), radians(-0.1), dvec3(0, 1, 0)));*/
-
-		TIE->setModelMat(
-			glm::rotate(dmat4(1), radians(0.1), dvec3(0, 1, 0))
-			* TIE->modelMat()
+			glm::rotate(dmat4(1), radians(-0.1), eje)
 		);
-
 	}
 }
 
