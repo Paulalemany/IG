@@ -129,10 +129,13 @@ void Scene::setScene(int i)
 	QuadricEntity* eye = new Cylinder(20.0, 0.0);					//ojo der
 	QuadricEntity* eye2 = new Cylinder(20.0, 0.0);					//ojo izq
 
+	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
+	cabeza->QuadricColor(1, 0, 0);
+	
 	CompoundEntity* TIE;
 
 	Abs_Entity* box = new IndexedBox(200.0);							//APT64
-
+	
 	//Apt 67
 	QuadricEntity* tatooine = new Sphere(100.0);
 	tatooine->QuadricColor(1, 255 / 233, 0);
@@ -159,7 +162,8 @@ void Scene::setScene(int i)
 		break;
 
 	case 2:	//Apt 58
-		gObjects.push_back(new Sphere(100.0));															//Esfera
+
+		gObjects.push_back(cabeza);															//Esfera
 		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
 		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
 
