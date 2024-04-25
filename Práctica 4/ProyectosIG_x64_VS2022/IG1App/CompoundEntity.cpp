@@ -27,7 +27,7 @@ using namespace glm;
 	{
 		//Se crean los objetos que lo componen aquí
 
-		/*///Alas del TIE
+		///Alas del TIE
 		wing1 = new WingAdvancedTIE(100.0, 50.0, 0);
 		wing1->setModelMat(
 			rotate(dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0))
@@ -57,7 +57,7 @@ using namespace glm;
 		body->setModelMat(
 			translate(dmat4(1), dvec3(100, 100, 100))
 		);
-		addEntity(body);*/						
+		addEntity(body);						
 
 		///Morro
 		morro = new Cylinder(15, 15, 25);
