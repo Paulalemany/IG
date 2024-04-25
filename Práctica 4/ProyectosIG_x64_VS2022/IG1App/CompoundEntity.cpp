@@ -84,16 +84,17 @@
 		mTexture = new Texture();
 		setTexture("../BmpsP1/noche.bmp", mTexture, 200);
 
+		//Construimos el ala sobre el suelo
 		mMesh = Mesh::generateWingAdvancedTIE(w, h);
 
-		// hay que rotar el ala porque se genera apoyada en el plano xy 
+		// Movemos el ala para que se quede colocada
+		mModelMat *= rotate(glm::dmat4(1), glm::radians(90.0), glm::dvec3(0.0, 1.0, 1.0));
+
+
 		/*mModelMat = rotate(mModelMat, glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0)) *
 			translate(mModelMat, glm::dvec3(-h, w, 20)) *
 			rotate(mModelMat, glm::radians(rot), glm::dvec3(1.0, 0.0, 0.0)) *
 			rotate(mModelMat, glm::radians(90.0), glm::dvec3(0.0, 1.0, 0.0));*/
-
-		
-
 
 	}
 
