@@ -27,7 +27,7 @@ using namespace glm;
 	{
 		//Se crean los objetos que lo componen aquí
 
-		///Alas del TIE
+		/*///Alas del TIE
 		wing1 = new WingAdvancedTIE(100.0, 50.0, 0);
 		wing1->setModelMat(
 			rotate(dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0))
@@ -52,12 +52,30 @@ using namespace glm;
 		addEntity(eje);
 
 		///Cuerpo del TIE
-		body = new Sphere(50.0);
+		body = new Sphere(60.0);
 		body->QuadricColor(0.1, 0.2, 0.5);
 		body->setModelMat(
 			translate(dmat4(1), dvec3(100, 100, 100))
 		);
-		addEntity(body);						//Cuerpo del TIE
+		addEntity(body);*/						
+
+		///Morro
+		morro = new Cylinder(15, 15, 25);
+		morro->QuadricColor(0.1, 0.2, 0.5);
+		morro->setModelMat(
+			translate(dmat4(1), dvec3(155, 100, 100))
+			* rotate(dmat4(1), radians(90.0), dvec3(0.0,1.0,0.0))
+		);
+		addEntity(morro);		
+
+		///Disco del Morro
+		tapaMorro = new Disk(5, 15);
+		tapaMorro->QuadricColor(0.1, 0.2, 0.5);
+		tapaMorro->setModelMat(
+			translate(dmat4(1), dvec3(180, 100, 100))
+			* rotate(dmat4(1), radians(90.0), dvec3(0.0, 1.0, 0.0))
+		);
+		addEntity(tapaMorro);
 	}
 
 	AdvancedTIE::~AdvancedTIE()

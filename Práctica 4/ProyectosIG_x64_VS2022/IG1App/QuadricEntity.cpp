@@ -80,7 +80,7 @@ void Disk::render(glm::dmat4 const& modelViewMat) const
 
 	// Aquí se puede fijar el color:
 	glEnable(GL_COLOR_MATERIAL);
-	glColor3f(1, 0, 0);
+	glColor3f(red, green, blue);
 
 	// Aquí se puede fijar el modo de dibujar:
 	gluQuadricDrawStyle(q, GLU_FILL);
