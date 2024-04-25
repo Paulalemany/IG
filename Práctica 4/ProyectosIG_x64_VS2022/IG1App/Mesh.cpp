@@ -549,6 +549,8 @@ void IndexMesh::render() const
 			glIndexPointer(GL_UNSIGNED_INT, 0, nIndexes);
 		}
 
+		glColorMaterial(GL_FRONT_AND_BACK, GL_FILL);
+
 		draw();
 
 		glDisableClientState(GL_COLOR_ARRAY);
