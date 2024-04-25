@@ -66,7 +66,6 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void RegularPolygon::render(glm::dmat4 const& modelViewMat) const
 	{
-
 		if (mMesh != nullptr) {
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			glColor4d(mColor.r, mColor.g, mColor.b, mColor.a);	//Color del objeto
@@ -80,9 +79,9 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void RegularPolygon::update()
 	{
-
+		
 	}
-#pragma endregion
+#pragma endregionl
 
 #pragma region RGBTriangle
 
@@ -537,10 +536,5 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		
 	}
 
-	//apt 65
-	void IndexedBox::buildNormalVectors()
-	{
-
-	}
 #pragma endregion
 

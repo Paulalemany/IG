@@ -133,6 +133,10 @@ void Scene::setScene(int i)
 
 	Abs_Entity* box = new IndexedBox(200.0);							//APT64
 
+	//Apt 67
+	QuadricEntity* tatooine = new Sphere(100.0);
+	tatooine->QuadricColor(1, 255 / 233, 0);
+	
 	switch (i)
 	{
 	case 0:
@@ -187,8 +191,21 @@ void Scene::setScene(int i)
 		gObjects.push_back(box);
 		break;
 
+	case 5: //APT 67
+
+		gObjects.push_back(tatooine);
+
+		break;
+
 	default:
 		break;
+	}
+
+	if (i == 5) {
+		glClearColor(0, 0, 0, 1);
+	}
+	else {
+		glClearColor(0.6, 0.7, 0.8, 1);
 	}
 }
 
