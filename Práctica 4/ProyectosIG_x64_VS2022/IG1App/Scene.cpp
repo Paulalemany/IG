@@ -126,6 +126,8 @@ void Scene::addObject(Abs_Entity* e)
 
 void Scene::setScene(int i)
 {
+	deleteObjects();
+
 	QuadricEntity* eye = new Cylinder(20.0, 0.0);					//ojo der
 	QuadricEntity* eye2 = new Cylinder(20.0, 0.0);					//ojo izq
 
@@ -139,7 +141,7 @@ void Scene::setScene(int i)
 	
 	//Apt66
 	CompoundEntity* node = new CompoundEntity();
-	RGBTriangle* triangle = new RGBTriangle(20);
+	RGBTriangle* triangle = new RGBTriangle(30);
 
 	node->addEntity(triangle);
 	triangle->setModelMat(glm::translate(node->modelMat(), glm::dvec3(200, 0, 0)));
@@ -229,5 +231,15 @@ void Scene::setScene(int i)
 	else {
 		glClearColor(0.6, 0.7, 0.8, 1);
 	}
+}
+
+void Scene::deleteObjects()
+{
+	for (Abs_Entity* el : gObjects) {
+		delete el;
+		el = nullptr;
+	}
+
+	gObjects.resize(0);
 }
 
