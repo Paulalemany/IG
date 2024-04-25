@@ -16,7 +16,7 @@ using namespace glm;
 		//Se llama al render de todos los elementos
 		for (auto& elems : gObjects)
 		{
-			elems->render(modelViewMat);
+			elems->render(aMat);
 		}
 	}
 

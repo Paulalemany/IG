@@ -43,7 +43,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(3);
+	setScene(6);
 
 }
 
@@ -149,7 +149,7 @@ void Scene::setScene(int i)
 
 
 	//Apt 67
-	QuadricEntity* tatooine = new Sphere(100.0);
+	QuadricEntity* tatooine = new Sphere(200.0);
 	tatooine->QuadricColor(1, 255 / 233, 0);
 	
 	gObjects.push_back(new EjesRGB(400.0));
@@ -196,12 +196,6 @@ void Scene::setScene(int i)
 
 	case 3: //Apt 60
 		
-		trans = glm::scale(dmat4(1),dvec3(0.5, 0.5, 0.5));
-		TIE->setModelMat(
-			trans * TIE->modelMat()
-		);
-
-		//IE->setTranslate();
 		gObjects.push_back(TIE);
 		break;
 		
@@ -219,14 +213,13 @@ void Scene::setScene(int i)
 
 	case 6: //APT 67
 
-		//gObjects.push_back(tatooine);
+		gObjects.push_back(tatooine);
 
-		/*TIE->setModelMat(
-			scale(dmat4(1), dvec3(0.1, 0.1, 0.1))
-		);*/
-
-		trans = translate(dmat4(1), dvec3(-35, 30, 60));
-		TIE->setTranslate(trans);
+		TIE->setModelMat(
+			scale(dmat4(1), dvec3(0.3, 0.3, 0.3))
+			* translate(dmat4(1), dvec3(-100.0, 620.0, -100.0))
+			* TIE->modelMat()
+		);
 		gObjects.push_back(TIE);
 
 		break;
