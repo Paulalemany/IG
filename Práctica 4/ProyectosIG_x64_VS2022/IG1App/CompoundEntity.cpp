@@ -1,7 +1,7 @@
 #include "CompoundEntity.h"
 #include <glm/gtc/matrix_transform.hpp>
 
-
+using namespace glm;
 #pragma region CompoundEntity
 	void CompoundEntity::addEntity(Abs_Entity* ae)
 	{
@@ -30,14 +30,24 @@
 		//body->QuadricColor(0.1, 0.2, 0.5);
 		//addEntity(body);						//Cuerpo del TIE
 
-		wings = new WingAdvancedTIE(100.0, 50.0);
+		//Alas del TIE
+		wing1 = new WingAdvancedTIE(100.0, 50.0, 0);
+		wing1->setModelMat(
+			rotate(dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0))
+			* translate(mModelMat, dvec3(-100, 100, 200)) 
+			//* rotate(mModelMat, radians(180.0), dvec3(1.0, 0.0, 0.0))
+			* rotate(dmat4(1), radians(180.0), dvec3(1.0, 0.0, 0.0))
+		);
 
+		addEntity(wing1);						
 
-		/*wings->setModelMat(
-			translate(glm::dmat4(1.0), glm::dvec3(0, 500, 0))
-			* wings->modelMat()
-		);*/
-		addEntity(wings);						//Alas del TIE
+		wing2 = new WingAdvancedTIE(100.0, 50.0, 180);
+		//wing2->setModelMat(
+		//	translate(glm::dmat4(1), glm::dvec3(100.0, 0.0, -20.0))
+		//	//* rotate(glm::dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 1.0, 1.0))
+		//	//* rotate(glm::dmat4(1), glm::radians(90.0), glm::dvec3(0.0, 0.0, 1.0))
+		//);
+		//addEntity(wing2);
 	}
 
 	AdvancedTIE::~AdvancedTIE()
@@ -56,7 +66,7 @@
 #pragma endregion
 
 #pragma region WingAdvancedTIE
-	WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
+	WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h, GLdouble rot)
 	{
 		
 		//wings1->setTexture("../BmpsP1/noche.bmp", t, 200);
@@ -86,15 +96,6 @@
 
 		//Construimos el ala sobre el suelo
 		mMesh = Mesh::generateWingAdvancedTIE(w, h);
-
-		// Movemos el ala para que se quede colocada
-		mModelMat *= rotate(glm::dmat4(1), glm::radians(90.0), glm::dvec3(0.0, 1.0, 1.0));
-
-
-		/*mModelMat = rotate(mModelMat, glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0)) *
-			translate(mModelMat, glm::dvec3(-h, w, 20)) *
-			rotate(mModelMat, glm::radians(rot), glm::dvec3(1.0, 0.0, 0.0)) *
-			rotate(mModelMat, glm::radians(90.0), glm::dvec3(0.0, 1.0, 0.0));*/
 
 	}
 

@@ -40,7 +40,8 @@ protected:
 
     //Guardamos aquí los elementos necesarios
     //Mejor si lo hacemos con elementos simples que se juntan todos aquí (Le preguntaré a elena si se podía hacer como yo quería)
-    CompoundEntity* wings;
+    CompoundEntity* wing1;
+    CompoundEntity* wing2;
     Sphere* body;
     Cylinder* eje;
 
@@ -53,13 +54,10 @@ protected:
 class WingAdvancedTIE : public CompoundEntity
 {
 public:
-    WingAdvancedTIE(GLdouble w, GLdouble h);
+    WingAdvancedTIE(GLdouble w, GLdouble h, GLdouble rot);
     void render(glm::dmat4 const& modelViewMat) const override;
 
 protected:
 
-    Abs_Entity* wings1;
-    Abs_Entity* wings2;
-    Abs_Entity* wings3;
 
 };
