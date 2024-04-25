@@ -266,8 +266,9 @@ void Scene::orbit(float time)
 		);
 
 		//Hay que girarlo y moverlo
+		//Falta cambiar la dirección a la que se tiene que mover
 		inventedNode->setModelMat(
-			glm::rotate(dmat4(1), radians(-0.01), dvec3(0, 0, 0.1))
+			glm::rotate(dmat4(1), radians(-0.01), dvec3(0, 0, 1))
 		);
 	}
 }
@@ -276,13 +277,18 @@ void Scene::rotate(float time)
 {
 	//habria que ver cual es el tie para darle el setRot
 	if (mId == 6) {
-		speed = 10;
 
-		rotZ -= speed * time;
-		gObjects[1]->setRot(glm::dvec3(0, 1, 0), rotZ);
+		//Lo hacemos con el método del nodo inventado
+		//Colocamos la entidad encima del nodo (Ambos vectores deben ser iguales??)
+		// coloca la entidad justo encima del nodo
+		TIE->setModelMat(
+			translate(inventedNodeRotate->modelMat(), dvec3(0, 0, 0))
+			* TIE->modelMat()
+		);
 
-		glm::dvec3 newPos = gObjects[1]->getPos();
-		gObjects[1]->setPos(newPos);
+		inventedNodeRotate->setModelMat(
+			glm::rotate(inventedNode->modelMat(), radians(-0.1), dvec3(0, 1, 0)));
+
 	}
 }
 
