@@ -149,6 +149,8 @@ void Scene::setScene(int i)
 	QuadricEntity* tatooine = new Sphere(100.0);
 	tatooine->QuadricColor(1, 255 / 233, 0);
 	
+	gObjects.push_back(new EjesRGB(400.0));
+
 	switch (i)
 	{
 	case 0:
