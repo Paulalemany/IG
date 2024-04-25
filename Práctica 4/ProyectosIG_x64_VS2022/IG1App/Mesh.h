@@ -48,6 +48,7 @@ protected:
 	virtual void draw() const;
 };
 
+
 //APT62 -> copia pega de la diapo36
 class IndexMesh : public Mesh 
 {

@@ -135,7 +135,7 @@ void Scene::setScene(int i)
 	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
 	cabeza->QuadricColor(1, 0, 0);
 	
-	CompoundEntity* TIE;
+	CompoundEntity* TIE = new AdvancedTIE();
 
 	//Apt64
 	Abs_Entity* box = new IndexedBox(200.0);							
@@ -195,12 +195,13 @@ void Scene::setScene(int i)
 		break;
 
 	case 3: //Apt 60
+		
+		trans = glm::scale(dmat4(1),dvec3(0.5, 0.5, 0.5));
+		TIE->setModelMat(
+			trans * TIE->modelMat()
+		);
 
-		TIE = new AdvancedTIE();						//Entidad base
-
-		/*TIE->setModelMat(
-			translate(glm::dmat4(1.0), glm::dvec3(0, 1000, 0))
-		);*/
+		//IE->setTranslate();
 		gObjects.push_back(TIE);
 		break;
 		
@@ -218,7 +219,15 @@ void Scene::setScene(int i)
 
 	case 6: //APT 67
 
-		gObjects.push_back(tatooine);
+		//gObjects.push_back(tatooine);
+
+		/*TIE->setModelMat(
+			scale(dmat4(1), dvec3(0.1, 0.1, 0.1))
+		);*/
+
+		trans = translate(dmat4(1), dvec3(-35, 30, 60));
+		TIE->setTranslate(trans);
+		gObjects.push_back(TIE);
 
 		break;
 
