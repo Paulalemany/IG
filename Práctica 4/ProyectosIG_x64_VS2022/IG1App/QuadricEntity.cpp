@@ -32,13 +32,13 @@ void Sphere::render(glm::dmat4 const& modelViewMat) const
 }
 
 //Cylinder
-Cylinder::Cylinder(GLdouble base, GLdouble top)
+Cylinder::Cylinder(GLdouble base, GLdouble top, GLdouble h)
 	: QuadricEntity()
 {
 	//Creamos el cono
 	baseRadius = base;
 	topRadius = top;
-	
+	height = h;
 }
 
 void Cylinder::render(glm::dmat4 const& modelViewMat) const
@@ -53,7 +53,7 @@ void Cylinder::render(glm::dmat4 const& modelViewMat) const
 	// Aquí se puede fijar el modo de dibujar:
 	gluQuadricDrawStyle(q, GLU_FILL);
 
-	gluCylinder(q, baseRadius, topRadius, 100, 50, 50);
+	gluCylinder(q, baseRadius, topRadius, height, 50, 50);
 
 	// Aquí se debe recuperar el color :
 	glColor3f(1.0, 1.0, 1.0);

@@ -45,6 +45,14 @@ using namespace glm;
 			* translate(mModelMat, dvec3(-100, 100, 0))
 		);
 		addEntity(wing2);
+
+		//Eje del TIE
+		eje = new Cylinder(10, 10, 200);
+		eje->QuadricColor(0.1, 0.2, 0.5);
+		eje->setModelMat(
+			translate(dmat4(1), dvec3(100,100,0))
+		);
+		addEntity(eje);
 	}
 
 	AdvancedTIE::~AdvancedTIE()

@@ -29,13 +29,14 @@ protected:
 class Cylinder : public QuadricEntity
 {
 public:
-	Cylinder(GLdouble base, GLdouble top);	//Constructora del cilindro
+	Cylinder(GLdouble base, GLdouble top, GLdouble h);	//Constructora del cilindro
 
 	void render(glm::dmat4 const& modelViewMat) const;
 
 protected:
 	GLdouble baseRadius;
 	GLdouble topRadius;
+	GLdouble height;
 };
 
 class Disk : public QuadricEntity

@@ -129,8 +129,8 @@ void Scene::setScene(int i)
 	deleteObjects();
 	mId = i;
 
-	QuadricEntity* eye = new Cylinder(20.0, 0.0);					//ojo der
-	QuadricEntity* eye2 = new Cylinder(20.0, 0.0);					//ojo izq
+	QuadricEntity* eye = new Cylinder(20.0, 0.0, 50);					//ojo der
+	QuadricEntity* eye2 = new Cylinder(20.0, 0.0, 50);					//ojo izq
 
 	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
 	cabeza->QuadricColor(1, 0, 0);
