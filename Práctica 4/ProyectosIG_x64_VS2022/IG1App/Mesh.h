@@ -36,7 +36,7 @@ public:
 	static Mesh* generateParpet(GLdouble w, GLdouble h);
 	static Mesh* generateStar3D(GLdouble re, GLuint np, GLdouble h);
 	static Mesh* generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h);
-	static Mesh* generateWingAdvancedTIE(GLdouble tam);
+	static Mesh* generateWingAdvancedTIE(GLdouble w, GLdouble h);
 
 protected:
 	GLuint mPrimitive = GL_TRIANGLES;          // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
