@@ -536,10 +536,5 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		
 	}
 
-	//apt 65
-	void IndexedBox::buildNormalVectors()
-	{
-
-	}
 #pragma endregion
 
