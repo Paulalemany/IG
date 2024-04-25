@@ -471,18 +471,15 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
 
-	//Tamaño utilizado para las alas
-	GLdouble a = h / 2;
-	GLdouble b = w / 4;
+	mesh->vVertices.emplace_back(w, h, h); //v0
+	mesh->vVertices.emplace_back(w, -h, h); //v1
+	mesh->vVertices.emplace_back(h, h, 0); //v2
+	mesh->vVertices.emplace_back(h, -h, 0); //v3
+	mesh->vVertices.emplace_back(-h, h, 0); //v4
+	mesh->vVertices.emplace_back(-h, -h, 0); //v5
+	mesh->vVertices.emplace_back(-w, h, h); //v6
+	mesh->vVertices.emplace_back(-w, -h, h); //v3
 
-	mesh->vVertices.emplace_back(a, b, h); //v0
-	mesh->vVertices.emplace_back(a, -b, h); //v1
-	mesh->vVertices.emplace_back(h, b, 0); //v2
-	mesh->vVertices.emplace_back(h, -b, 0); //v3
-	mesh->vVertices.emplace_back(-h, b, 0); //v4
-	mesh->vVertices.emplace_back(-h, -b, 0); //v5
-	mesh->vVertices.emplace_back(-a, b, h); //v6
-	mesh->vVertices.emplace_back(-a, -b, h); //v3
 
 	mesh->vTexCoords.emplace_back(0.0, 0.0);	//v0
 	mesh->vTexCoords.emplace_back(0.0, 1.0);	//v1
@@ -492,8 +489,6 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h)
 	mesh->vTexCoords.emplace_back(2 * 0.33, 1.0);	//v5
 	mesh->vTexCoords.emplace_back(1.0, 0.0);	//v6
 	mesh->vTexCoords.emplace_back(1.0, 1.0);	//v7
-
-
 
 	return mesh;
 }
