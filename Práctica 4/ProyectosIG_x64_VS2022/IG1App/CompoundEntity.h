@@ -11,6 +11,7 @@ public:
     ~CompoundEntity() {};
 
     void addEntity(Abs_Entity* ae);
+    void moveModelMat(glm::dmat4 const& aMat);
 
 protected:
     std::vector<Abs_Entity*> gObjects;
