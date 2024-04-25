@@ -135,8 +135,8 @@ void Scene::setScene(int i)
 
 	//Apt 67
 	QuadricEntity* tatooine = new Sphere(100.0);
-	tatooine->setColor(glm::dvec4({ 1, 0.7, 0, 1 }));
-
+	tatooine->QuadricColor(1, 255 / 233, 0);
+	
 	switch (i)
 	{
 	case 0:
