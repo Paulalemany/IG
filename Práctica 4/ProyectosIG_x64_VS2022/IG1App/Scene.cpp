@@ -133,6 +133,10 @@ void Scene::setScene(int i)
 
 	Abs_Entity* box = new IndexedBox(200.0);							//APT64
 
+	//Apt 67
+	QuadricEntity* tatooine = new Sphere(100.0);
+	tatooine->setColor(glm::dvec4({ 1, 0.7, 0, 1 }));
+
 	switch (i)
 	{
 	case 0:
@@ -178,6 +182,11 @@ void Scene::setScene(int i)
 		
 	case 4: //Apt 64
 		gObjects.push_back(box);
+		break;
+
+	case 5:
+		gObjects.push_back(tatooine);
+
 		break;
 
 	default:
