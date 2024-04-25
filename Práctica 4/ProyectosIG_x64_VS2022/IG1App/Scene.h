@@ -34,6 +34,8 @@ public:
 
 	void setScene(int i);
 
+	void deleteObjects();
+
 protected:
 	void free();
 	void setGL();
