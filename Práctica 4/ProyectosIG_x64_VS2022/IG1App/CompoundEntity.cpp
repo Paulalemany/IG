@@ -58,42 +58,58 @@
 #pragma region WingAdvancedTIE
 	WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h)
 	{
-		//Ponemos la textura a todas las partes
-		t = new Texture();
-		wings1->setTexture("../BmpsP1/noche.bmp", t, 200);
-		wings2->setTexture("../BmpsP1/noche.bmp", t, 200);
-		wings3->setTexture("../BmpsP1/noche.bmp", t, 200);
+		
+		//wings1->setTexture("../BmpsP1/noche.bmp", t, 200);
+		//wings2->setTexture("../BmpsP1/noche.bmp", t, 200);
+		//wings3->setTexture("../BmpsP1/noche.bmp", t, 200);
 
-		//Creamos cada parte del ala
-		wings1 = new Ground(w, h, 1, 1, t);
-		wings2 = new Ground(w, h, 1, 1, t);
-		wings3 = new Ground(w, h, 1, 1, t);
+		////Creamos cada parte del ala
+		//wings1 = new Ground(w, h, 1, 1, t);
+		//wings2 = new Ground(w, h, 1, 1, t);
+		//wings3 = new Ground(w, h, 1, 1, t);
 
-		//Colocamos las alas de los extremos para que hagan la forma
-		glm::dmat4 trans = translate(glm::dmat4(1), glm::dvec3(0, 17, 42)) * rotate(glm::dmat4(1), glm::radians(45.0), glm::dvec3(-1.0, 0, 0));
-		wings2->setModelMat(trans);
+		////Colocamos las alas de los extremos para que hagan la forma
+		//glm::dmat4 trans = translate(glm::dmat4(1), glm::dvec3(0, 17, 42)) * rotate(glm::dmat4(1), glm::radians(45.0), glm::dvec3(-1.0, 0, 0));
+		//wings2->setModelMat(trans);
 
-		trans = translate(glm::dmat4(1), glm::dvec3(0, 17, -42)) * rotate(glm::dmat4(1), glm::radians(45.0), glm::dvec3(1.0, 0, 0));
-		wings3->setModelMat(trans);
+		//trans = translate(glm::dmat4(1), glm::dvec3(0, 17, -42)) * rotate(glm::dmat4(1), glm::radians(45.0), glm::dvec3(1.0, 0, 0));
+		//wings3->setModelMat(trans);
 
-		//Añadimos la entidad
-		addEntity(wings1);
-		addEntity(wings2);
-		addEntity(wings3);
+		////Añadimos la entidad
+		//addEntity(wings1);
+		//addEntity(wings2);
+		//addEntity(wings3);
+		
+		//Ponemos la textura
+		mTexture = new Texture();
+		setTexture("../BmpsP1/noche.bmp", mTexture, 200);
 
-		//mMesh = wings1->modelMat() + wings2->modelMat() + wings3->mModelMat();
+		mMesh = Mesh::generateWingAdvancedTIE(w, h);
+
+		// hay que rotar el ala porque se genera apoyada en el plano xy 
+		/*mModelMat = rotate(mModelMat, glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0)) *
+			translate(mModelMat, glm::dvec3(-h, w, 20)) *
+			rotate(mModelMat, glm::radians(rot), glm::dvec3(1.0, 0.0, 0.0)) *
+			rotate(mModelMat, glm::radians(90.0), glm::dvec3(0.0, 1.0, 0.0));*/
+
+		
+
 
 	}
 
 	void WingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const
 	{
-		glm::dmat4 aMat = modelViewMat * mModelMat;
-		upload(aMat);
+		if (mMesh != nullptr) {
 
-		//Se llama al render de todos los elementos
-		for (auto& elems : gObjects)
-		{
-			elems->render(modelViewMat);
+			glm::dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);	//Primitiva para colorear
+			mTexture->bind(GL_MODULATE);
+
+			upload(aMat);
+			mMesh->render();
+
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			mTexture->unbind();
 		}
 	}
 #pragma endregion

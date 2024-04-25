@@ -180,10 +180,9 @@ void Scene::setScene(int i)
 
 		TIE = new AdvancedTIE();						//Entidad base
 
-		TIE->setModelMat(
+		/*TIE->setModelMat(
 			translate(glm::dmat4(1.0), glm::dvec3(0, 1000, 0))
-			* TIE->modelMat()
-		);
+		);*/
 		gObjects.push_back(TIE);
 		break;
 		

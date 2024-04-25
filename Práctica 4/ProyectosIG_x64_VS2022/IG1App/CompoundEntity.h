@@ -62,7 +62,4 @@ protected:
     Abs_Entity* wings2;
     Abs_Entity* wings3;
 
-    //Texturas
-    Texture* t;
-
 };
