@@ -650,20 +650,16 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	mesh->nIndexes[35] = 6;
 
 	/// CARAS
-	//int nV = 3;
-	//mesh->vCaras.resize(mesh->nNumIndices / nV);
-	//for (int i = 0; i < mesh->nNumIndices / nV; i++)
-	//{
-	//	//std::cout << mesh->vIndices[i * nV] << std::endl;
-	//	//std::cout << mesh->vIndices[i * nV + 1] << std::endl;
-	//	//std::cout << mesh->vIndices[i * nV + 2] << std::endl;
-
-	//	mesh->vCaras[i] = Cara(
-	//		mesh->nIndexes[i * nV],
-	//		mesh->nIndexes[i * nV + 1],
-	//		mesh->nIndexes[i * nV + 2]
-	//	);
-	//}
+	int nV = 3;
+	mesh->vCaras.resize(mesh->nNumIndices / nV);
+	for (int i = 0; i < mesh->nNumIndices / nV; i++)
+	{
+		mesh->vCaras[i] = Cara(
+			mesh->nIndexes[i * nV],
+			mesh->nIndexes[i * nV + 1],
+			mesh->nIndexes[i * nV + 2]
+		);
+	}
 
 	/// COLORES
 	mesh->vColors.reserve(mesh->mNumVertices);
@@ -671,22 +667,34 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 		mesh->vColors.emplace_back(0, 1, 0, 1);
 
 	/// NORMALES
-	//mesh->buildNormalVectors();
+	mesh->buildNormalVectors();
 
 	return mesh;
 }
 
-//glm::dvec3 IndexMesh::calculoVectorNormalPorNewell(Cara c)
-//{
-//	glm::dvec3 n = { 0, 0, 0 };
-//	for (int i = 0; i < c.numeroVertices; i++)
-//	{
-//		const auto vertActual = vVertices[c.getIndice(i)];
-//		const auto vertSiguiente = vVertices[c.getIndice((i + 1) % c.numeroVertices)];
-//
-//		n.x += (vertActual.y - vertSiguiente.y) * (vertActual.z + vertSiguiente.z);
-//		n.y += (vertActual.z - vertSiguiente.z) * (vertActual.x + vertSiguiente.x);
-//		n.z += (vertActual.x - vertSiguiente.x) * (vertActual.y + vertSiguiente.y);
-//	}
-//	return normalize(n);
-//}
+void IndexMesh::buildNormalVectors()
+{
+	for (int i = 0; i < mNumVertices; i++) {
+		vNormals.push_back(dvec3(0, 0, 0));
+	}
+
+	for (int i = 0; i < nNumIndices / 3; i++) 
+	{
+		dvec3 n;
+		dvec3 v0 = vVertices[nIndexes[(i * 3)]];
+		dvec3 v1 = vVertices[nIndexes[((i * 3) + 1)]];
+		dvec3 v2 = vVertices[nIndexes[((i * 3) + 2)]];
+
+
+		n = normalize(cross((v2 - v1), (v0 - v1)));
+
+		vNormals[nIndexes[(i * 3)]] += n;
+		vNormals[nIndexes[(i * 3) + 1]] += n;
+		vNormals[nIndexes[(i * 3) + 2]] += n;
+	}
+
+	for (int i = 0; i < mNumVertices; i++) {
+		vNormals[i] = normalize(vNormals[i]);
+	}
+}
+
