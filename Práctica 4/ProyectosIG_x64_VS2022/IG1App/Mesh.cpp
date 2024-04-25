@@ -241,20 +241,6 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	mesh->vVertices.emplace_back(-m, -m, m); // v31 = v28
 	mesh->vVertices.emplace_back(m, -m, m); // v32 = v3
 	// ^^^^ - en z
-
-	//Color
-	//Automatización???
-	//double r = -1.0;
-	//double g = 1.0;
-	//double b = 1.0;
-	//for (int i = 0; i < 6; i++) {
-	//	for (int j = 0; j < 6; j++) {
-	//		mesh->vColors.emplace_back(r, g, b, 1.0);
-	//	}
-	//	r *= -1;
-	//	g *= -1;
-	//	//b *= -1;
-	//}
 	 
 	// cara 1
 	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
@@ -495,8 +481,6 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h)
 	return mesh;
 }
 
-
-
 Mesh* Mesh::createRGBAxes(GLdouble l)
 {
 	Mesh* mesh = new Mesh();
@@ -560,7 +544,7 @@ void IndexMesh::render() const
 			glIndexPointer(GL_UNSIGNED_INT, 0, nIndexes);
 		}
 
-		glColorMaterial(GL_FRONT_AND_BACK, GL_FILL);
+		//glColorMaterial(GL_FRONT_AND_BACK, GL_FILL);
 
 		draw();
 
@@ -675,7 +659,7 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	/// COLORES
 	mesh->vColors.reserve(mesh->mNumVertices);
 	for (int i = 0; i < mesh->mNumVertices; i++)
-		mesh->vColors.emplace_back(0, 1, 0, 1);
+		mesh->vColors.emplace_back(0, 1, 0, 1); //green
 
 	/// NORMALES
 	mesh->buildNormalVectors();
@@ -685,17 +669,18 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 
 void IndexMesh::buildNormalVectors()
 {
+	// Inicializamos vNormals
 	for (int i = 0; i < mNumVertices; i++) {
 		vNormals.push_back(dvec3(0, 0, 0));
 	}
 
+	// Newell
 	for (int i = 0; i < nNumIndices / 3; i++) 
 	{
 		dvec3 n;
 		dvec3 v0 = vVertices[nIndexes[(i * 3)]];
 		dvec3 v1 = vVertices[nIndexes[((i * 3) + 1)]];
 		dvec3 v2 = vVertices[nIndexes[((i * 3) + 2)]];
-
 
 		n = normalize(cross((v2 - v1), (v0 - v1)));
 
