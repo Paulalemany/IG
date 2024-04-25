@@ -471,14 +471,16 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
 
-	mesh->vVertices.emplace_back(w, h, h); //v0
-	mesh->vVertices.emplace_back(w, -h, h); //v1
-	mesh->vVertices.emplace_back(h, h, 0); //v2
-	mesh->vVertices.emplace_back(h, -h, 0); //v3
-	mesh->vVertices.emplace_back(-h, h, 0); //v4
-	mesh->vVertices.emplace_back(-h, -h, 0); //v5
-	mesh->vVertices.emplace_back(-w, h, h); //v6
-	mesh->vVertices.emplace_back(-w, -h, h); //v3
+
+
+	mesh->vVertices.emplace_back(w/2, h, h); //v0
+	mesh->vVertices.emplace_back(w/2, -h, h); //v1
+	mesh->vVertices.emplace_back(h/2, h, 0); //v2
+	mesh->vVertices.emplace_back(h/2, -h, 0); //v3
+	mesh->vVertices.emplace_back(-h/2, h, 0); //v4
+	mesh->vVertices.emplace_back(-h/2, -h, 0); //v5
+	mesh->vVertices.emplace_back(-w/2, h, h); //v6
+	mesh->vVertices.emplace_back(-w/2, -h, h); //v3
 
 
 	mesh->vTexCoords.emplace_back(0.0, 0.0);	//v0
