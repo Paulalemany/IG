@@ -548,8 +548,8 @@ void IndexMesh::render() const
 
 		draw();
 
-		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
 		glDisableClientState(GL_INDEX_ARRAY);
@@ -659,7 +659,7 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	/// COLORES
 	mesh->vColors.reserve(mesh->mNumVertices);
 	for (int i = 0; i < mesh->mNumVertices; i++)
-		mesh->vColors.emplace_back(0, 1, 0, 1); //green
+		mesh->vColors.emplace_back(0, 1.0, 0, 1.0); //green
 
 	/// NORMALES
 	mesh->buildNormalVectors();
