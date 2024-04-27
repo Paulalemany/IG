@@ -44,7 +44,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(6);
+	setScene(4);
 
 }
 
@@ -130,6 +130,7 @@ void Scene::setScene(int i)
 	deleteObjects();
 	mId = i;
 
+	QuadricEntity* sombrero = new Disk(50.0, 150.0);					//Sombrero
 	QuadricEntity* eye = new Cylinder(20.0, 0.0, 50);					//ojo der
 	QuadricEntity* eye2 = new Cylinder(20.0, 0.0, 50);					//ojo izq
 
@@ -178,8 +179,12 @@ void Scene::setScene(int i)
 
 	case 2:	//Apt 58
 
+		cabeza->QuadricColor(1, 0.5, 0);
 		gObjects.push_back(cabeza);																		//Esfera
-		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
+
+		sombrero = new Disk(50.0, 150.0);
+		sombrero->QuadricColor(1, 0, 0);
+		gObjects.push_back(sombrero);														//Sombrero
 		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
 
 
@@ -268,7 +273,7 @@ void Scene::orbit(float time)
 		//Hay que girarlo y moverlo
 		dvec3 direction = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 0.0, 1.0, 0.0)));
 		inventedNode->setModelMat(
-			glm::rotate(dmat4(1), radians(-0.01), direction)
+			glm::rotate(dmat4(1), radians(-0.1), direction)
 		);
 	}
 }
@@ -287,7 +292,7 @@ void Scene::rotate(float time)
 
 		dvec3 eje = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 1.0, 0.0, 0.0)));
 		inventedNodeRotate->setModelMat(
-			glm::rotate(dmat4(1), radians(-0.1), eje)
+			glm::rotate(dmat4(1), radians(-0.5), eje)
 		);
 	}
 }

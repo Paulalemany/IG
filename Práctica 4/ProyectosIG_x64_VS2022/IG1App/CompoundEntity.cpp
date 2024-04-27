@@ -97,27 +97,6 @@ using namespace glm;
 	WingAdvancedTIE::WingAdvancedTIE(GLdouble w, GLdouble h, GLdouble rot)
 	{
 		
-		//wings1->setTexture("../BmpsP1/noche.bmp", t, 200);
-		//wings2->setTexture("../BmpsP1/noche.bmp", t, 200);
-		//wings3->setTexture("../BmpsP1/noche.bmp", t, 200);
-
-		////Creamos cada parte del ala
-		//wings1 = new Ground(w, h, 1, 1, t);
-		//wings2 = new Ground(w, h, 1, 1, t);
-		//wings3 = new Ground(w, h, 1, 1, t);
-
-		////Colocamos las alas de los extremos para que hagan la forma
-		//glm::dmat4 trans = translate(glm::dmat4(1), glm::dvec3(0, 17, 42)) * rotate(glm::dmat4(1), glm::radians(45.0), glm::dvec3(-1.0, 0, 0));
-		//wings2->setModelMat(trans);
-
-		//trans = translate(glm::dmat4(1), glm::dvec3(0, 17, -42)) * rotate(glm::dmat4(1), glm::radians(45.0), glm::dvec3(1.0, 0, 0));
-		//wings3->setModelMat(trans);
-
-		////Añadimos la entidad
-		//addEntity(wings1);
-		//addEntity(wings2);
-		//addEntity(wings3);
-		
 		//Ponemos la textura
 		mTexture = new Texture();
 		setTexture("../BmpsP1/noche.bmp", mTexture, 200);
