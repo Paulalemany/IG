@@ -694,3 +694,29 @@ void IndexMesh::buildNormalVectors()
 	}
 }
 
+//APT 70 a medias ->Está más o menos en las diaposs
+MbR* MbR::generateIndexMbR(int mm, int mn, glm::dvec3* perfil)
+{
+	MbR* mesh = new MbR(mm, mn, perfil);	//Creamos la malla
+
+	mesh->mPrimitive = GL_TRIANGLES;		//Primitiva
+	mesh->mNumVertices = mn * mm;			//Número de vértices
+
+	dvec3* vs = new dvec3[mesh->mNumVertices];	//Vector auxliar de vértices
+
+	for (int i = 0; i < mn; i++) {
+
+		//Genera la muestra i-ésima de vértices
+		GLdouble theta = i * 360 / mn;
+		GLdouble c = cos(radians(theta));
+		GLdouble s = sin(radians(theta));
+
+		for (int j = 0; j < mm; j++) {
+			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
+			//¿Indice? ¿La x de donde sale????
+			//vs[i] = dvec3(x, perfil[j].y, z);
+		}
+	}
+
+	return nullptr;
+}
