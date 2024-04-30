@@ -70,4 +70,18 @@ public:
 	void buildNormalVectors();
 };
 
+//APT 69
+class MbR : public IndexMesh 
+{
+protected:
+
+	int n;			//Número de muestras al girar al rededor del eje
+	dvec3* perfil;	//Array de vértices que define el perfil que va a hacerse girar
+	int m;			//Número de puntos del perfil
+
+public:
+
+	MbR() { n = 0, perfil = nullptr, m = 0; }
+};
+
 #endif //_H_Scene_H_
