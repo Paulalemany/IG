@@ -4,13 +4,15 @@
 using namespace std;
 using namespace glm;
 
+
+#pragma region Mesh
 void
 Mesh::draw() const
 {
 	glDrawArrays(
-	  mPrimitive,
-	  0,
-	  size()); // primitive graphic, first index and number of elements to be rendered
+		mPrimitive,
+		0,
+		size()); // primitive graphic, first index and number of elements to be rendered
 }
 
 void
@@ -20,13 +22,13 @@ Mesh::render() const
 		// transfer the coordinates of the vertices
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(
-		  3, GL_DOUBLE, 0, vVertices.data()); // number of coordinates per vertex, type of
-		                                      // each coordinate, stride, pointer
+			3, GL_DOUBLE, 0, vVertices.data()); // number of coordinates per vertex, type of
+		// each coordinate, stride, pointer
 		if (vColors.size() > 0) {             // transfer colors
 			glEnableClientState(GL_COLOR_ARRAY);
 			glColorPointer(
-			  4, GL_DOUBLE, 0, vColors.data()); // components number (rgba=4), type of
-			                                    // each component, stride, pointer
+				4, GL_DOUBLE, 0, vColors.data()); // components number (rgba=4), type of
+			// each component, stride, pointer
 		}
 		if (vTexCoords.size() > 0) {
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -49,14 +51,14 @@ Mesh::render() const
 }
 
 Mesh* Mesh::generateRegularPolygon(GLuint num, GLdouble r)
-{	
+{
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_LINE_LOOP;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
 	mesh->mNumVertices = num;
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
 	for (int i = 0; i < num; i++) {
-		mesh->vVertices.emplace_back(r * cos(radians((360.0/num) * i + 90.0)) , r * sin(radians((360.0 / num) * i + 90)), 0.0); //Se supone que pone el resto de vértices
+		mesh->vVertices.emplace_back(r * cos(radians((360.0 / num) * i + 90.0)), r * sin(radians((360.0 / num) * i + 90)), 0.0); //Se supone que pone el resto de vértices
 	}
 
 	return mesh;
@@ -79,8 +81,8 @@ Mesh* Mesh::generateRGBTriangle(GLdouble r)
 	}
 
 	//Cambiar color de los vértices
-	
-	mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);	
+
+	mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
 	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
 	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
@@ -92,7 +94,7 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	Mesh* mesh = new Mesh();							//Creamos una nueva malla
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);					//Primitiva para colorear
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;
-	
+
 
 	mesh->mNumVertices = 4.0;							// v0, v1, v2, v3
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
@@ -101,8 +103,8 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 	GLdouble altura = -75; //apt 38
 	GLdouble offset = 0; // 150; //199; //apt 38
 
-	mesh->vVertices.emplace_back(-w/2, 0, -h / 2);
-	mesh->vVertices.emplace_back(w/2, 0, -h / 2);
+	mesh->vVertices.emplace_back(-w / 2, 0, -h / 2);
+	mesh->vVertices.emplace_back(w / 2, 0, -h / 2);
 	mesh->vVertices.emplace_back(-w / 2, 0, h / 2);
 	mesh->vVertices.emplace_back(w / 2, 0, h / 2);
 
@@ -147,7 +149,7 @@ Mesh* Mesh::generateCube(GLdouble l)
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
-	mesh->mNumVertices = 14;							
+	mesh->mNumVertices = 14;
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 
 	//lo que hace el triangle strip -> coge dos vertices anteriores para hacer el triangulo
@@ -168,7 +170,7 @@ Mesh* Mesh::generateCube(GLdouble l)
 	mesh->vVertices.push_back(mesh->vVertices[4]); //v11 = v4
 	mesh->vVertices.push_back(mesh->vVertices[8]); //v12 = v8
 	mesh->vVertices.push_back(mesh->vVertices[6]); //v13 = v6
-	
+
 	return mesh;
 }
 
@@ -177,7 +179,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	Mesh* mesh = new Mesh();					//Creamos una nueva malla
 	mesh->mPrimitive = GL_TRIANGLES;
 	//glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	
+
 	mesh->mNumVertices = 36;
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
 	mesh->vColors.reserve(mesh->mNumVertices);			//Reerva espacio para los colores
@@ -241,7 +243,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 	mesh->vVertices.emplace_back(-m, -m, m); // v31 = v28
 	mesh->vVertices.emplace_back(m, -m, m); // v32 = v3
 	// ^^^^ - en z
-	 
+
 	// cara 1
 	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
 	mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
@@ -290,8 +292,8 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble l)
 
 Mesh* Mesh::generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 {
-	Mesh* mesh = generateRectangle(w,h);
-	mesh->vTexCoords.reserve(mesh -> mNumVertices);
+	Mesh* mesh = generateRectangle(w, h);
+	mesh->vTexCoords.reserve(mesh->mNumVertices);
 	mesh->vTexCoords.emplace_back(0, rh);
 	mesh->vTexCoords.emplace_back(rw, rh);
 	mesh->vTexCoords.emplace_back(0, 0);
@@ -362,7 +364,7 @@ Mesh* Mesh::generateParpet(GLdouble w, GLdouble h)
 	GLdouble altura = 0; // 150; //apt 38
 	GLdouble offset = 0; // 150; //apt 38
 
-	mesh->vVertices.emplace_back(a+offset, -b + altura, a + offset); //v0
+	mesh->vVertices.emplace_back(a + offset, -b + altura, a + offset); //v0
 	mesh->vVertices.emplace_back(a + offset, b + altura, a + offset); //v1
 	mesh->vVertices.emplace_back(a + offset, -b + altura, -a + offset); //v2
 
@@ -400,11 +402,11 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	Mesh* mesh = new Mesh();
 
 	mesh->mPrimitive = GL_TRIANGLE_FAN;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
-	mesh->mNumVertices = 2*(np + 1);
+	mesh->mNumVertices = 2 * (np + 1);
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
 	mesh->vVertices.emplace_back(0, 0, 0);						//Primer vértice (Centro) -Vertice en comun-
-	
+
 	//Primera estrella
 	for (int i = 0; i < np; i++) {
 
@@ -428,7 +430,7 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 {
 	Mesh* mesh = new Mesh();
 	mesh = generateStar3D(re, np, h);
-	
+
 	//Le ponemos las cosas de la textura
 	//TexCoords
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
@@ -453,20 +455,20 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h)
 	Mesh* mesh = new Mesh();						//Creamos una nueva malla
 	mesh->mPrimitive = GL_TRIANGLE_STRIP;			//Podemos utilizar la primitiva que queramos
 
-	mesh->mNumVertices = 8;							
+	mesh->mNumVertices = 8;
 	mesh->vVertices.reserve(mesh->mNumVertices);
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
 
 
 
-	mesh->vVertices.emplace_back(w/2, h, h); //v0
-	mesh->vVertices.emplace_back(w/2, -h, h); //v1
-	mesh->vVertices.emplace_back(h/2, h, 0); //v2
-	mesh->vVertices.emplace_back(h/2, -h, 0); //v3
-	mesh->vVertices.emplace_back(-h/2, h, 0); //v4
-	mesh->vVertices.emplace_back(-h/2, -h, 0); //v5
-	mesh->vVertices.emplace_back(-w/2, h, h); //v6
-	mesh->vVertices.emplace_back(-w/2, -h, h); //v3
+	mesh->vVertices.emplace_back(w / 2, h, h); //v0
+	mesh->vVertices.emplace_back(w / 2, -h, h); //v1
+	mesh->vVertices.emplace_back(h / 2, h, 0); //v2
+	mesh->vVertices.emplace_back(h / 2, -h, 0); //v3
+	mesh->vVertices.emplace_back(-h / 2, h, 0); //v4
+	mesh->vVertices.emplace_back(-h / 2, -h, 0); //v5
+	mesh->vVertices.emplace_back(-w / 2, h, h); //v6
+	mesh->vVertices.emplace_back(-w / 2, -h, h); //v3
 
 
 	mesh->vTexCoords.emplace_back(0.0, 0.0);	//v0
@@ -513,7 +515,9 @@ Mesh* Mesh::createRGBAxes(GLdouble l)
 
 	return mesh;
 }
+#pragma endregion
 
+#pragma region IndexMesh
 //render y draw de la diap37
 void IndexMesh::render() const
 {
@@ -675,7 +679,7 @@ void IndexMesh::buildNormalVectors()
 	}
 
 	// Newell
-	for (int i = 0; i < nNumIndices / 3; i++) 
+	for (int i = 0; i < nNumIndices / 3; i++)
 	{
 		dvec3 n;
 		dvec3 v0 = vVertices[nIndexes[(i * 3)]];
@@ -692,6 +696,14 @@ void IndexMesh::buildNormalVectors()
 	for (int i = 0; i < mNumVertices; i++) {
 		vNormals[i] = normalize(vNormals[i]);
 	}
+}
+
+#pragma endregion
+
+#pragma region MbR
+
+MbR::MbR(GLint mm, GLint mn, glm::dvec3* perfil)
+{
 }
 
 //APT 70 a medias ->Está más o menos en las diaposs
@@ -720,3 +732,4 @@ MbR* MbR::generateIndexMbR(int mm, int mn, glm::dvec3* perfil)
 
 	return nullptr;
 }
+#pragma endregion

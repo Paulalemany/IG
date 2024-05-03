@@ -75,15 +75,16 @@ class MbR : public IndexMesh
 {
 protected:
 
-	int n;				//Número de muestras al girar al rededor del eje
+	GLint m;				//Número de puntos del perfil
+	GLint n;				//Número de muestras al girar al rededor del eje
 						//(Damos por hecho que van de abajo a arriba)
 	glm::dvec3* perfil;	//Array de vértices que define el perfil que va a hacerse girar 
-	int m;				//Número de puntos del perfil
 
 public:
 
-	MbR(int mm, int mn, glm::dvec3* perfil) { n = mn, perfil = perfil, m = mm; }
-	static MbR* generateIndexMbR(int mm, int mn, glm::dvec3* perfil);
+	MbR(GLint mm, GLint mn, glm::dvec3* perfil);
+	~MbR() override = default;
+	static MbR* generateIndexMbR(GLint mm, GLint mn, glm::dvec3* perfil);
 };
 
 #endif //_H_Scene_H_
