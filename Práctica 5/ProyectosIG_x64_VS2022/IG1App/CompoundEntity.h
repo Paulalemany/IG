@@ -42,7 +42,7 @@ protected:
     //Mejor si lo hacemos con elementos simples que se juntan todos aquí (Le preguntaré a elena si se podía hacer como yo quería)
     CompoundEntity* wing1;
     CompoundEntity* wing2;
-    Sphere* body;
+    QuadricSphere* body;
     Cylinder* eje;
 
     //Morro

@@ -5,14 +5,14 @@
 
 using namespace glm;
 //Sphere
-Sphere::Sphere(GLdouble r)
+QuadricSphere::QuadricSphere(GLdouble r)
 	: QuadricEntity()
 {
 	//Creamos la esfera
 	radius = r;
 }
 
-void Sphere::render(glm::dmat4 const& modelViewMat) const
+void QuadricSphere::render(glm::dmat4 const& modelViewMat) const
 {
 	glm::dmat4 aMat = modelViewMat * mModelMat;
 	upload(aMat);

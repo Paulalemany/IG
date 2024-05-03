@@ -15,10 +15,10 @@ protected:
 	GLdouble red = 0, blue = 0, green = 0;
 };
 
-class Sphere  : public QuadricEntity
+class QuadricSphere : public QuadricEntity
 {
 public:
-	Sphere(GLdouble r);	
+	QuadricSphere(GLdouble r);	
 	void render(glm::dmat4 const& modelViewMat) const;
 
 protected:

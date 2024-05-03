@@ -183,4 +183,17 @@ public:
 	//void buildNormalVectors(); //apt 65
 };
 
+class Sphere : public Abs_Entity {
+public:
+	Sphere(GLdouble r, GLint p, GLint m);
+	~Sphere() {};
+	virtual void render(glm::dmat4 const& modelViewMat) const override;
+	virtual void update() override;
+
+protected:
+	GLdouble radio;
+	GLint meridiano;	//Número de muestras que se toman
+	GLint paralelos;
+};
+
 #endif //_H_Entities_H_

@@ -44,7 +44,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(4);
+	setScene(7);
 
 }
 
@@ -134,7 +134,7 @@ void Scene::setScene(int i)
 	QuadricEntity* eye = new Cylinder(20.0, 0.0, 50);					//ojo der
 	QuadricEntity* eye2 = new Cylinder(20.0, 0.0, 50);					//ojo izq
 
-	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
+	QuadricEntity* cabeza = new QuadricSphere(100.0); //cabeza
 	cabeza->QuadricColor(1, 0, 0);
 	
 	TIE = new AdvancedTIE();
@@ -151,7 +151,7 @@ void Scene::setScene(int i)
 
 
 	//Apt 67
-	QuadricEntity* tatooine = new Sphere(200.0);
+	QuadricEntity* tatooine = new QuadricSphere(200.0);
 	tatooine->QuadricColor(1, 255 / 233, 0);
 	
 	gObjects.push_back(new EjesRGB(400.0));
@@ -234,6 +234,10 @@ void Scene::setScene(int i)
 		inventedNode->addEntity(TIE);
 		inventedNodeRotate->addEntity(TIE);
 
+		break;
+
+	case 7:
+		gObjects.push_back(new Sphere(100, 30, 30));
 		break;
 
 	default:

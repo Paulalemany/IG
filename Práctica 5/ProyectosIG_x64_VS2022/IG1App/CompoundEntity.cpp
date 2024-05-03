@@ -52,7 +52,7 @@ using namespace glm;
 		addEntity(eje);
 
 		///Cuerpo del TIE
-		body = new Sphere(60.0);
+		body = new QuadricSphere(60.0);
 		body->QuadricColor(0.1, 0.2, 0.5);
 		body->setModelMat(
 			translate(dmat4(1), dvec3(100, 100, 100))

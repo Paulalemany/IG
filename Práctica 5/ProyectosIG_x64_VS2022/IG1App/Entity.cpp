@@ -7,6 +7,8 @@
 
 using namespace glm;
 
+
+#pragma region Abs_Entity
 void Abs_Entity::setRot(dvec3 nrot, GLdouble nang)
 {
 	rot = nrot;
@@ -26,7 +28,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixd(value_ptr(modelViewMat)); // transfers modelView matrix to the GPU
 }
-
+#pragma endregion
 
 #pragma region EjesRGB
 	//EjesRGB
@@ -93,7 +95,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		
 	}
-#pragma endregionl
+#pragma endregion
 
 #pragma region RGBTriangle
 
@@ -550,3 +552,57 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma endregion
 
+#pragma region Sphere
+
+	Sphere::Sphere(GLdouble r, GLint p, GLint m)
+	{
+		dvec3* perfil = new dvec3[p];
+
+		//Variables para colocar los puntos
+		GLdouble alpha = 180 / p - 1;	//ángulo entre los puntos del perfil
+		GLdouble angle = -90;			//ángulo incial
+
+		//Colocamos los puntos en el perfil
+		for (int i = 1; i < m; i++) {
+
+			perfil[i] = dvec3(
+				cos(radians(alpha * i + angle)) * r,
+				sin(radians(alpha * i + angle)) * r,
+				0 //Queremos que gire sobre este eje por lo que no debe cambiar
+			);
+		}
+
+		//Una vez colocados creamos la malla
+		mMesh = new MbR(p, m, perfil);
+	}
+
+	void Sphere::render(glm::dmat4 const& modelViewMat) const
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		dmat4 aMat = modelViewMat * mModelMat;	// glm matrix multiplication
+		upload(aMat);
+
+		//set
+		if (mColor.a > 0) {
+			glColor4f(mColor.r, mColor.g, mColor.b, mColor.a);
+		}
+		
+		mMesh->render();
+
+		//reset
+		glColor3f(1.0, 1.0, 1.0);
+		glColor4f(0, 0, 0, 0);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE); // Defecto
+		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
+		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		glDisable(GL_COLOR_MATERIAL);
+	}
+
+	void Sphere::update()
+	{
+	}
+#pragma endregion
+
+	
