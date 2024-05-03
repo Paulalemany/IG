@@ -702,10 +702,6 @@ void IndexMesh::buildNormalVectors()
 
 #pragma region MbR
 
-MbR::MbR(GLint mm, GLint mn, glm::dvec3* perfil)
-{
-}
-
 //APT 70 a medias ->Está más o menos en las diaposs
 MbR* MbR::generateIndexMbR(int mm, int mn, glm::dvec3* perfil)
 {
@@ -725,11 +721,58 @@ MbR* MbR::generateIndexMbR(int mm, int mn, glm::dvec3* perfil)
 
 		for (int j = 0; j < mm; j++) {
 			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
-			//¿Indice? ¿La x de donde sale????
-			//vs[i] = dvec3(x, perfil[j].y, z);
+			GLdouble x = c * perfil[j].x + s * perfil[j].z;
+
+			int Indice = i * mm + j;
+			vs[i] = dvec3(x, perfil[j].y, z);
 		}
 	}
 
-	return nullptr;
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+		mesh->vVertices.push_back(vs[i]);
+	}
+	delete[] vs;
+
+	int indiceMayor = 0;
+	mesh->nNumIndices = mesh->mNumVertices * 6;
+	mesh->nIndexes = new GLuint[mesh->nNumIndices];
+
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+		mesh->nIndexes[i] = 0;
+	}
+
+	//I recorre las muestras al rededor del eje Y
+	for (int i = 0; i < mn; i++) {
+
+		//j recorre los vertices del perfil
+		for (int j = 0; j < mm - 1; j++) {
+
+			//indice cuenta los indices generados hasta ahora
+			const int indice = i * mm + j;
+
+			mesh->nIndexes[indiceMayor] = indice;
+			indiceMayor++;
+
+			mesh->nIndexes[indiceMayor] = (indice + mm) % (mn * mm);
+			indiceMayor++;
+
+			mesh->nIndexes[indiceMayor] = (indice + mm + 1) % (mn * mm);
+			indiceMayor++;
+
+			mesh->nIndexes[indiceMayor] = (indice + mm + 1) % (mn * mm);
+			indiceMayor++;
+
+			mesh->nIndexes[indiceMayor] = (indice + mm) % (mn * mm);
+			indiceMayor++;
+
+			mesh->nIndexes[indiceMayor] = indice;
+			indiceMayor++;
+		}
+	}
+
+	mesh->vNormals.reserve(mesh->mNumVertices);
+	mesh->buildNormalVectors();
+
+	return mesh;
 }
 #pragma endregion
