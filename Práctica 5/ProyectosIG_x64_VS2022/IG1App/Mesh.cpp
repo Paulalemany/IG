@@ -673,8 +673,11 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 
 void IndexMesh::buildNormalVectors()
 {
+	vNormals.resize(mNumVertices);
+
 	// Inicializamos vNormals
-	for (int i = 0; i < mNumVertices; i++) {
+	for (int i = 0; i < mNumVertices; i++) 
+	{
 		vNormals.push_back(dvec3(0, 0, 0));
 	}
 
@@ -702,10 +705,14 @@ void IndexMesh::buildNormalVectors()
 
 #pragma region MbR
 
-//APT 70 a medias -> Está más o menos en las diaposs
+// APT 70 - Siguiendo las diapositivas Mallas por Revolucion
 // 3.
 MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 {
+	// mm: numero de puntos del perfil
+	// nn: numero de rotaciones
+	// perfil: perfil en el plano XY
+
 	MbR* mesh = new MbR(mm, nn, perfil);	//Creamos la malla
 
 	mesh->mPrimitive = GL_TRIANGLES;		//Primitiva

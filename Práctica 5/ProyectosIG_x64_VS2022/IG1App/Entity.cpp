@@ -577,12 +577,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		}
 
 		//Una vez colocados creamos la malla
-		mMesh = new MbR(p, m, perfil);
-	}
-
-	Sphere::~Sphere()
-	{
-		delete mMesh;
+		//mMesh = MbR::generateIndexMbR(m, p, perfil); //es esto 100%
 	}
 
 	void Sphere::render(glm::dmat4 const& modelViewMat) const
@@ -593,6 +588,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		upload(aMat);
 
 		//set
+		glLineWidth(2);
 		if (mColor.a > 0) {
 			glColor4f(mColor.r, mColor.g, mColor.b, mColor.a);
 		}
@@ -602,16 +598,13 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		//reset
 		glColor3f(1.0, 1.0, 1.0);
 		glColor4f(0, 0, 0, 0);
+		glLineWidth(1);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE); // Defecto
-		glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
-		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
-		glDisable(GL_COLOR_MATERIAL);
-	}
-
-	void Sphere::update()
-	{
+		//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE); // Defecto
+		//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
+		//glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		//glDisable(GL_COLOR_MATERIAL);
 	}
 #pragma endregion
 
-	
+
