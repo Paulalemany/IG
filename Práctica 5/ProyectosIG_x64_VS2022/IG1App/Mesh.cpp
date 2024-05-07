@@ -673,8 +673,6 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 
 void IndexMesh::buildNormalVectors()
 {
-	vNormals.resize(mNumVertices);
-
 	// Inicializamos vNormals
 	for (int i = 0; i < mNumVertices; i++) 
 	{

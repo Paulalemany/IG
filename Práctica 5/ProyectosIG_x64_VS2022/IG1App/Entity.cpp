@@ -577,7 +577,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		}
 
 		//Una vez colocados creamos la malla
-		//mMesh = MbR::generateIndexMbR(m, p, perfil); //es esto 100%
+		mMesh = MbR::generateIndexMbR(p, m, perfil);
 	}
 
 	void Sphere::render(glm::dmat4 const& modelViewMat) const
