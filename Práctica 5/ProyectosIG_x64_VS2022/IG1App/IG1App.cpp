@@ -68,8 +68,7 @@ IG1App::init()
 
 	// create the scene after creating the context
 	// allocate memory and resources
-	mViewPort =
-		new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
+	mViewPort =	new Viewport(mWinW, mWinH); // glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 	mCamera = new Camera(mViewPort);
 	mScene = new Scene;
 
@@ -207,6 +206,9 @@ IG1App::key(unsigned char key, int x, int y)
 		break;
 	case '6':
 		setScene(6);
+		break;
+	case '7': // la esfera MbR
+		setScene(7);
 		break;
 	case 'u':
 		update();

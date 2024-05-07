@@ -82,9 +82,9 @@ protected:
 
 public:
 
-	MbR(GLint mm, GLint mn, glm::dvec3* perfil) { n = mn, perfil = perfil, m = mm; }
+	MbR(GLint mm, GLint nn, glm::dvec3* perfil) { n = nn, perfil = perfil, m = mm; }
 	~MbR() override = default;
-	static MbR* generateIndexMbR(GLint mm, GLint mn, glm::dvec3* perfil);
+	static MbR* generateIndexMbR(int mm, int nn, glm::dvec3* perfil);
 };
 
 #endif //_H_Scene_H_

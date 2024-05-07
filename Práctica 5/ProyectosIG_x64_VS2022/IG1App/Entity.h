@@ -186,7 +186,7 @@ public:
 class Sphere : public Abs_Entity {
 public:
 	Sphere(GLdouble r, GLint p, GLint m);
-	~Sphere() {};
+	~Sphere();
 	virtual void render(glm::dmat4 const& modelViewMat) const override;
 	virtual void update() override;
 

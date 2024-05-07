@@ -552,19 +552,23 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma endregion
 
-#pragma region Sphere
+#pragma region Sphere MbR
 
 	Sphere::Sphere(GLdouble r, GLint p, GLint m)
 	{
+		//r: radio de la esfera
+		//p: puntos que tiene el perfil
+		//m: numero de puntos que hay en el perfil
+
 		dvec3* perfil = new dvec3[p];
 
 		//Variables para colocar los puntos
-		GLdouble alpha = 180 / p - 1;	//ángulo entre los puntos del perfil
+		GLdouble alpha = 180 / (p - 1);	//ángulo entre los puntos del perfil
 		GLdouble angle = -90;			//ángulo incial
 
 		//Colocamos los puntos en el perfil
-		for (int i = 1; i < m; i++) {
-
+		for (int i = 1; i < m; i++) 
+		{
 			perfil[i] = dvec3(
 				cos(radians(alpha * i + angle)) * r,
 				sin(radians(alpha * i + angle)) * r,
@@ -574,6 +578,11 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 		//Una vez colocados creamos la malla
 		mMesh = new MbR(p, m, perfil);
+	}
+
+	Sphere::~Sphere()
+	{
+		delete mMesh;
 	}
 
 	void Sphere::render(glm::dmat4 const& modelViewMat) const
