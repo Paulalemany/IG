@@ -252,7 +252,7 @@ void Scene::setScene(int i)
 		break;
 
 	case 7:
-		gObjects.push_back(new Sphere(100, 50, 50));
+		gObjects.push_back(new Sphere(100, 20, 20));
 		break;
 
 	case 8:

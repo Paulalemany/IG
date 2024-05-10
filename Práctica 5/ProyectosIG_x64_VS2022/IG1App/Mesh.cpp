@@ -682,7 +682,7 @@ void IndexMesh::buildNormalVectors()
 	// Newell
 	for (int i = 0; i < a; i++)
 	{
-		std::cout << nIndexes[(i * 3)] << std::endl;
+		//std::cout << nIndexes[(i * 3)] << std::endl;
 
 		dvec3 v0 = vVertices[nIndexes[(i * 3)]];
 		dvec3 v1 = vVertices[nIndexes[((i * 3) + 1)]];

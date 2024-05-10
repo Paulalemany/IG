@@ -607,6 +607,7 @@ void Sphere::render(glm::dmat4 const& modelViewMat) const
 }
 #pragma endregion
 
+#pragma region Toroid
 Toroid::Toroid(GLuint r, GLuint R, GLuint p, GLuint m) : Abs_Entity()
 {
 	// r: grosor de la rosquilla
