@@ -1,5 +1,10 @@
 #include "Light.h"
 
+#include "Entity.h"
+#include <iostream>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 Light::Light()
 {
 	if (cont < GL_MAX_LIGHTS) {
