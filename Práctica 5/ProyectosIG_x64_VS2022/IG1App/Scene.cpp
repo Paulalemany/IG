@@ -45,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(7);
+	setScene(8);
 
 }
 
@@ -254,6 +254,11 @@ void Scene::setScene(int i)
 	case 7:
 		gObjects.push_back(new Sphere(100, 50, 50));
 		break;
+
+	case 8:
+		gObjects.push_back(new Toroid(50, 100, 20, 20));
+		break;
+
 
 	default:
 		break;
