@@ -210,6 +210,9 @@ IG1App::key(unsigned char key, int x, int y)
 	case '7': // la esfera MbR
 		setScene(7);
 		break;
+	case '8': // el toroid
+		setScene(8);
+		break;
 	case 'u':
 		update();
 		break;
