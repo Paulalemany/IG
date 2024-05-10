@@ -1,6 +1,7 @@
 #include "Mesh.h"
 #include "CheckML.h"
 #include <fstream>
+#include <iostream>
 using namespace std;
 using namespace glm;
 
@@ -673,29 +674,31 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 
 void IndexMesh::buildNormalVectors()
 {
-	// Inicializamos vNormals
-	for (int i = 0; i < mNumVertices; i++) 
-	{
-		vNormals.push_back(dvec3(0, 0, 0));
-	}
+	vNormals.resize(nNumIndices);
+	std::vector<glm::dvec3> vAuxNormals = vNormals; // vector auxiliar
+
+	GLuint a = nNumIndices / 3;
 
 	// Newell
-	for (int i = 0; i < nNumIndices / 3; i++)
+	for (int i = 0; i < a; i++)
 	{
-		dvec3 n;
+		std::cout << nIndexes[(i * 3)] << std::endl;
+
 		dvec3 v0 = vVertices[nIndexes[(i * 3)]];
 		dvec3 v1 = vVertices[nIndexes[((i * 3) + 1)]];
 		dvec3 v2 = vVertices[nIndexes[((i * 3) + 2)]];
 
-		n = normalize(cross((v2 - v1), (v0 - v1)));
+		glm::dvec3 v = v1 - v0;
+		glm::dvec3 w = v2 - v0;
+		const glm::dvec3 n = normalize(cross(v, w));
 
-		vNormals[nIndexes[(i * 3)]] += n;
-		vNormals[nIndexes[(i * 3) + 1]] += n;
-		vNormals[nIndexes[(i * 3) + 2]] += n;
+		vAuxNormals[nIndexes[i * 3]] += n;
+		vAuxNormals[nIndexes[i * 3 + 1]] += n;
+		vAuxNormals[nIndexes[i * 3 + 2]] += n;
 	}
 
 	for (int i = 0; i < mNumVertices; i++) {
-		vNormals[i] = normalize(vNormals[i]);
+		vNormals[i] = normalize(vAuxNormals[i]);
 	}
 }
 
@@ -716,6 +719,8 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	mesh->mPrimitive = GL_TRIANGLES;		//Primitiva
 	mesh->mNumVertices = nn * mm;			//Número de vértices
 
+	mesh->vVertices.reserve(mesh->mNumVertices);
+
 	dvec3* vs = new dvec3[mesh->mNumVertices];	//Vector auxiliar de vértices
 
 	for (int i = 0; i < nn; i++)
@@ -730,15 +735,15 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
 			GLdouble x = c * perfil[j].x + s * perfil[j].z;
 
-			int Indice = i * mm + j;
-			vs[i] = dvec3(x, perfil[j].y, z);
+			int Indice = (i * mm) + j;
+			vs[Indice] = dvec3(x, perfil[j].y, z);
 		}
 	}
 
 	// 4. Volcar el array auxiliar vértices en el array de vértices
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
-		mesh->vVertices.push_back(vs[i]);
+		mesh->vVertices.emplace_back(vs[i]);
 	}
 	delete[] vs;
 
@@ -758,7 +763,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	for (int i = 0; i < nn; i++)
 	{
 		// j recorre los vertices del perfil
-		for (int j = 0; j < mm - 1; j++)
+		for (int j = 0; j < mm; j++)
 		{
 			// 7.
 			//indice cuenta los indices generados hasta ahora

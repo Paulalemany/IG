@@ -183,7 +183,7 @@ public:
 	//void buildNormalVectors(); //apt 65
 };
 
-class Sphere : public Abs_Entity 
+class Sphere : public Abs_Entity
 {
 public:
 	Sphere(GLdouble r, GLint p, GLint m);
@@ -192,9 +192,8 @@ public:
 	virtual void update() override {};
 
 protected:
-	GLdouble radio;
-	GLint meridiano;	//Número de muestras que se toman
-	GLint paralelos;
+
+	glm::dvec3* perfil;
 };
 
 #endif //_H_Entities_H_

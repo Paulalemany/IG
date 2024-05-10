@@ -140,7 +140,7 @@ void Scene::setScene(int i)
 	TIE = new AdvancedTIE();
 
 	//Apt64
-	Abs_Entity* box = new IndexedBox(200.0);							
+	//Abs_Entity* box = new IndexedBox(200.0);							
 	
 	//Apt66
 	CompoundEntity* node = new CompoundEntity();
@@ -206,7 +206,7 @@ void Scene::setScene(int i)
 		break;
 		
 	case 4: //Apt 64
-		gObjects.push_back(box);
+		//gObjects.push_back(box);
 		break;
 
 	case 5: //APT 66
@@ -237,7 +237,7 @@ void Scene::setScene(int i)
 		break;
 
 	case 7:
-		//gObjects.push_back(new Sphere(100, 30, 30));
+		gObjects.push_back(new Sphere(100, 50, 50));
 		break;
 
 	default:
