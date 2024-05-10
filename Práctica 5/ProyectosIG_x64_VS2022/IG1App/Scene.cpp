@@ -171,6 +171,9 @@ void Scene::setScene(int i)
 	
 	gObjects.push_back(new EjesRGB(400.0));
 
+	//Apt72
+	auto c = new Toroid(50, 100, 60, 60);
+
 	switch (i)
 	{
 	case 0:
@@ -256,7 +259,8 @@ void Scene::setScene(int i)
 		break;
 
 	case 8:
-		gObjects.push_back(new Toroid(50, 100, 20, 20));
+		c->setColor(dvec4(0, 1, 0, 1));
+		gObjects.push_back(new Toroid(50, 100, 100, 100));
 		break;
 
 
