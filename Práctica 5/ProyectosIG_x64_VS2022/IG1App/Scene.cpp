@@ -240,6 +240,10 @@ void Scene::setScene(int i)
 		gObjects.push_back(new Sphere(100, 20, 20));
 		break;
 
+	case 8:
+		gObjects.push_back(new Toroid(50, 100, 20, 20));
+		break;
+
 	default:
 		break;
 	}
