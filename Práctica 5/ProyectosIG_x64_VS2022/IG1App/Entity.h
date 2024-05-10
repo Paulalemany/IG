@@ -10,7 +10,7 @@ class Abs_Entity // abstract class
 {
 public:
 	Abs_Entity()
-	  : mModelMat(1.0), mColor(1) {}; // 4x4 identity matrix
+		: mModelMat(1.0), mColor(1) {}; // 4x4 identity matrix
 
 	virtual ~Abs_Entity() = default;
 
@@ -29,8 +29,8 @@ public:
 	void setColor(glm::dvec4 const& aColor) { mColor = aColor; };
 
 	//Texture
-	//Le pasamos como parámetro el nombre de la textura
-	void setTexture(std::string textura, Texture * t, GLuint a)const { t->load(textura, a); }
+	//Le pasamos como parï¿½metro el nombre de la textura
+	void setTexture(std::string textura, Texture* t, GLuint a)const { t->load(textura, a); }
 
 	//apt68
 	void setRot(glm::dvec3 nrot, GLdouble nang);
@@ -63,9 +63,9 @@ public:
 	virtual void update();
 };
 
-class RegularPolygon : public Abs_Entity 
+class RegularPolygon : public Abs_Entity
 {
-public: 
+public:
 	explicit RegularPolygon(glm::dvec4 mColor, GLuint num, GLdouble r);
 	~RegularPolygon();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
@@ -93,7 +93,7 @@ public:
 
 class Ground : public Abs_Entity {
 public:
-	//Hará falta un ancho, un largo y el punto de origen??
+	//Harï¿½ falta un ancho, un largo y el punto de origen??
 	explicit Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t);
 	~Ground();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
@@ -145,7 +145,7 @@ public:
 	virtual void update();
 };
 
-class GlassParapet : public Abs_Entity{
+class GlassParapet : public Abs_Entity {
 
 public:
 	explicit GlassParapet(GLdouble w, GLdouble h, Texture* ts);
@@ -165,7 +165,7 @@ public:
 
 class EWingAdvancedTIE : public Abs_Entity {
 public:
-	//Hará falta un ancho, un largo y el punto de origen??
+	//Harï¿½ falta un ancho, un largo y el punto de origen??
 	explicit EWingAdvancedTIE(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t);
 	~EWingAdvancedTIE();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
@@ -195,5 +195,20 @@ protected:
 
 	glm::dvec3* perfil;
 };
+
+class Toroid :public Abs_Entity
+{
+public:
+	Toroid(GLuint r, GLuint R, GLuint p, GLuint m);
+	~Toroid();
+
+	virtual void render(glm::dmat4 const& modelViewMat) const override;
+	virtual void update() override {};
+protected:
+
+	glm::dvec3* perfil;
+
+};
+
 
 #endif //_H_Entities_H_

@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "QuadricEntity.h"
 #include "CompoundEntity.h"
+#include "Light.h"
 
 #include <vector>
 
@@ -40,6 +41,8 @@ public:
 	void orbit(float time);
 	void rotate(float time);
 
+	void setLights();
+
 protected:
 	void free();
 	void setGL();
@@ -57,11 +60,15 @@ protected:
 	GLdouble rotZ = 0;
 	glm::dvec3 frontDir = glm::dvec3(1, 0, 0);
 
-
 	//Método del Nodo ficticio
 	CompoundEntity* inventedNode;
 	CompoundEntity* inventedNodeRotate;
 	CompoundEntity* TIE;
+
+	// Apartados 76,77,78
+	DirLight* dirLight;
+	PosLight* posLight;
+	SpotLight* spotLight;
 
 };
 
