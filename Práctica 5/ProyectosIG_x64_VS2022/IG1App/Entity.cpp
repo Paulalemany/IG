@@ -563,14 +563,14 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		perfil = new dvec3[p];
 
 		//Variables para colocar los puntos
-		const double alpha = 3.14 * 2 / (p - 1);	//ángulo entre los puntos del perfil
+		const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
 
 		//Colocamos los puntos en el perfil
 		for (int i = 1; i < p; i++) 
 		{
 			perfil[i] = dvec3(
-				cos(alpha * i ) * r,
 				sin(alpha * i ) * r,
+				cos(alpha * i ) * r,
 				0 //Queremos que gire sobre este eje por lo que no debe cambiar
 			);
 		}

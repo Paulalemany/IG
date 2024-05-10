@@ -1,6 +1,6 @@
 #include "Toroid.h"
 
-Toroid::Toroid(GLuint r, GLuint R, GLuint p, GLuint m) : Abs_Entity()
+Toroid::Toroid(GLuint r, GLuint R, GLuint m, GLuint p) : Abs_Entity()
 {
 	// r: grosor de la rosquilla
 	// R: radio de la rosquilla
