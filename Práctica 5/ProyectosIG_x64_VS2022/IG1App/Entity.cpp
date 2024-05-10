@@ -582,7 +582,7 @@ Sphere::Sphere(GLdouble r, GLint p, GLint m)
 
 void Sphere::render(glm::dmat4 const& modelViewMat) const
 {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	dmat4 aMat = modelViewMat * mModelMat;	// glm matrix multiplication
 	upload(aMat);
