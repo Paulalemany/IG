@@ -106,7 +106,13 @@ void Scene::sceneDirLight(Camera const& cam) const
 void
 Scene::render(Camera const& cam) const
 {
-	sceneDirLight(cam); //Apt 56
+	//sceneDirLight(cam); //Apt 56
+
+	//luz
+	dirLight->upload(cam.viewMat());
+	posLight->upload(cam.viewMat());
+	spotLight->upload(cam.viewMat());
+
 	cam.upload();
 
 	for (Abs_Entity* el : gObjects) {
@@ -303,5 +309,26 @@ void Scene::rotate(float time)
 			glm::rotate(dmat4(1), radians(-0.5), eje)
 		);
 	}
+}
+
+void Scene::setLights()
+{
+	dirLight = new DirLight();
+	dirLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	dirLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
+	dirLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	dirLight->setPosDir(glm::fvec3(1.0, 1.0, 1.0));
+
+	posLight = new PosLight();
+	posLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	posLight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
+	posLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	posLight->setPosDir(glm::fvec3(100.0, 1500.0, 0.0));
+
+	spotLight = new SpotLight();
+	spotLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	spotLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
+	spotLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	spotLight->setPosDir(glm::fvec3(100.0, 300.0, 3000.0));
 }
 

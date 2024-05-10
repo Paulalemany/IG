@@ -10,7 +10,7 @@ class Abs_Entity // abstract class
 {
 public:
 	Abs_Entity()
-	  : mModelMat(1.0), mColor(1) {}; // 4x4 identity matrix
+		: mModelMat(1.0), mColor(1) {}; // 4x4 identity matrix
 
 	virtual ~Abs_Entity() = default;
 
@@ -30,7 +30,7 @@ public:
 
 	//Texture
 	//Le pasamos como parámetro el nombre de la textura
-	void setTexture(std::string textura, Texture * t, GLuint a)const { t->load(textura, a); }
+	void setTexture(std::string textura, Texture* t, GLuint a)const { t->load(textura, a); }
 
 	//apt68
 	void setRot(glm::dvec3 nrot, GLdouble nang);
@@ -63,9 +63,9 @@ public:
 	virtual void update();
 };
 
-class RegularPolygon : public Abs_Entity 
+class RegularPolygon : public Abs_Entity
 {
-public: 
+public:
 	explicit RegularPolygon(glm::dvec4 mColor, GLuint num, GLdouble r);
 	~RegularPolygon();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
@@ -145,7 +145,7 @@ public:
 	virtual void update();
 };
 
-class GlassParapet : public Abs_Entity{
+class GlassParapet : public Abs_Entity {
 
 public:
 	explicit GlassParapet(GLdouble w, GLdouble h, Texture* ts);
@@ -209,5 +209,6 @@ protected:
 	glm::dvec3* perfil;
 
 };
+
 
 #endif //_H_Entities_H_

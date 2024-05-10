@@ -27,9 +27,9 @@ public:
 	void disable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glDisable(id); };
 	void enable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glEnable(id); };
 
-	void setAmb(glm::fvec4 amb) {
-		ambient = amb; uploadL();
-	}; // setDiff () , setSpec (
+	void setAmb(glm::fvec4 amb) { ambient = amb; uploadL();	};
+	void setDiff(glm::fvec4 diff) { diffuse = diff; uploadL(); }
+	void setSpec(glm::fvec4 spec) { specular = spec; uploadL(); }
 };
 
 class DirLight : public Light 
@@ -47,6 +47,19 @@ public:
 	virtual void upload(glm::dmat4 const& modelViewMat) const;
 	void setPosDir(glm::fvec3 dir);
 	void setAtte(GLfloat kc, GLfloat kl, GLfloat kq);
+};
+
+class SpotLight : public PosLight 
+{
+protected:
+	// Atributos del foco
+	glm::fvec4 direction = { 0 , 0 , -1 , 0 };
+	GLfloat cutoff = 180;
+	GLfloat exp = 0;
+public:
+	SpotLight();
+	virtual void upload(glm::dmat4 const& modelViewMat) const;
+	void setSpot(glm::fvec3 dir, GLfloat cf, GLfloat e);
 };
 
 

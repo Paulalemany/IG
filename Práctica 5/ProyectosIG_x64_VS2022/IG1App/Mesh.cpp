@@ -720,6 +720,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	mesh->mNumVertices = nn * mm;			//Número de vértices
 
 	mesh->vVertices.reserve(mesh->mNumVertices);
+	mesh->vNormals.reserve(mesh->mNumVertices);
 
 	dvec3* vs = new dvec3[mesh->mNumVertices];	//Vector auxiliar de vértices
 
@@ -743,7 +744,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 4. Volcar el array auxiliar vértices en el array de vértices
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
-		mesh->vVertices.push_back(vs[i]);
+		mesh->vVertices.emplace_back(vs[i]);
 	}
 	delete[] vs;
 

@@ -243,6 +243,9 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'g': //apt68
 		rotate = !rotate;
 		break;
+	case 'q': //apt76
+
+		break;
 	default:
 		need_redisplay = false;
 		break;
