@@ -567,7 +567,7 @@ Sphere::Sphere(GLdouble r, GLint p, GLint m)
 	const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
 
 	//Colocamos los puntos en el perfil
-	for (int i = 1; i < p; i++)
+	for (int i = 0; i < p; i++)
 	{
 		perfil[i] = dvec3(
 			sin(alpha * i) * r,
