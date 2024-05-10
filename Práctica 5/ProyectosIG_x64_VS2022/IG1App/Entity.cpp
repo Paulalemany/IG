@@ -625,9 +625,20 @@ Toroid::Toroid(GLuint r, GLuint R, GLuint p, GLuint m) : Abs_Entity()
 	for (int i = 1; i < p; i++)
 	{
 		//Variables para colocar los puntos
-		const double alpha = (3.14 * 2 / (p - 1)) * i;	//ángulo entre los puntos del perfil
+		const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
 
-		perfil[i] = { R + (r * sin(alpha)),	-(r * cos(alpha)), 0 };
+		//Colocamos los puntos en el perfil
+		for (int i = 1; i < p; i++) 
+		{
+			perfil[i] = dvec3(
+				sin(alpha * i ) * r,
+				cos(alpha * i ) * r,
+				0 //Queremos que gire sobre este eje por lo que no debe cambiar
+			);
+		}
+
+		//Una vez colocados creamos la malla
+		mMesh = MbR::generateIndexMbR(p, m, perfil);
 	}
 
 	mMesh = MbR::generateIndexMbR(p, m, perfil);
