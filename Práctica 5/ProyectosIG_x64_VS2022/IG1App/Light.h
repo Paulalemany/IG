@@ -30,6 +30,8 @@ public:
 	void setAmb(glm::fvec4 amb) { ambient = amb; uploadL();	};
 	void setDiff(glm::fvec4 diff) { diffuse = diff; uploadL(); }
 	void setSpec(glm::fvec4 spec) { specular = spec; uploadL(); }
+
+	void setId(GLuint i) { id = i; };
 };
 
 class DirLight : public Light 
