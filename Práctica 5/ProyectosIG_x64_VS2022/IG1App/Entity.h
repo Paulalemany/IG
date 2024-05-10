@@ -196,18 +196,4 @@ protected:
 	glm::dvec3* perfil;
 };
 
-class Toroid :public Abs_Entity
-{
-public:
-	Toroid(GLuint r, GLuint R, GLuint p, GLuint m);
-	~Toroid();
-
-	virtual void render(glm::dmat4 const& modelViewMat) const override;
-	virtual void update() override {};
-protected:
-
-	glm::dvec3* perfil;
-
-};
-
 #endif //_H_Entities_H_

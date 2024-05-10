@@ -682,7 +682,7 @@ void IndexMesh::buildNormalVectors()
 	// Newell
 	for (int i = 0; i < a; i++)
 	{
-		//std::cout << nIndexes[(i * 3)] << std::endl;
+		std::cout << nIndexes[(i * 3)] << std::endl;
 
 		dvec3 v0 = vVertices[nIndexes[(i * 3)]];
 		dvec3 v1 = vVertices[nIndexes[((i * 3) + 1)]];
@@ -743,7 +743,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 4. Volcar el array auxiliar vértices en el array de vértices
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
-		mesh->vVertices.push_back(vs[i]);
+		mesh->vVertices.emplace_back(vs[i]);
 	}
 	delete[] vs;
 
