@@ -77,6 +77,7 @@
     <ClInclude Include="CompoundEntity.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="IG1App.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="QuadricEntity.h" />
     <ClInclude Include="Scene.h" />
@@ -91,6 +92,7 @@
     <ClCompile Include="CompoundEntity.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="IG1App.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="QuadricEntity.cpp" />

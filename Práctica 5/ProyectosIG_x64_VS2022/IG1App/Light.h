@@ -20,9 +20,8 @@ protected:
 public:
 	Light();
 	virtual ~Light() { disable(); }
-	void uploadL();
 
-	// Método abstracto
+	void uploadL() const; // Método abstracto
 	virtual void upload(glm::dmat4 const& modelViewMat) const = 0;
 
 	void disable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) glDisable(id); };
@@ -32,5 +31,23 @@ public:
 		ambient = amb; uploadL();
 	}; // setDiff () , setSpec (
 };
+
+class DirLight : public Light 
+{
+public:
+	void upload(glm::dmat4 const& modelViewMat) const override;
+	void setPosDir(glm::fvec3 dir);
+};
+
+class PosLight : public Light {
+protected:
+	// Factores de atenuación
+	GLfloat kc = 1, kl = 0, kq = 0;
+public:
+	virtual void upload(glm::dmat4 const& modelViewMat) const;
+	void setPosDir(glm::fvec3 dir);
+	void setAtte(GLfloat kc, GLfloat kl, GLfloat kq);
+};
+
 
 
