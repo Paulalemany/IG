@@ -80,6 +80,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="QuadricEntity.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Toroid.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +95,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="QuadricEntity.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Toroid.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
