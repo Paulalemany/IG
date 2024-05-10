@@ -14,6 +14,7 @@ Scene::init()
 
 	// allocate memory and load resources
 	// Lights
+	setLights();
 	// Textures
 			//Creamos y cargamos todas las texturas que se van a utilizar
 	Texture* baldosaC = new Texture();				//Suelo
@@ -61,6 +62,12 @@ Scene::free()
 		delete t;
 		t = nullptr;
 	}
+
+	for (Light* l : gLights)
+	{
+		delete l;
+		l = nullptr;
+	}
 }
 
 void
@@ -74,6 +81,7 @@ Scene::setGL()
 	glEnable(GL_BLEND);									// enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// enable Alpha channel
 	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHTING);
 }
 
 void
@@ -84,6 +92,7 @@ Scene::resetGL()
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GLUT_MULTISAMPLE);
 	glDisable(GL_COLOR_MATERIAL);
+	glDisable(GL_LIGHTING);
 }
 
 //Apt 56

@@ -222,27 +222,45 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'k': //apt 51
 		m2Vistas = !m2Vistas;
 		break;
-	case 'a':
-		mCamera->moveLR(1);
-		break;
+	//case 'a':
+	//	mCamera->moveLR(1);
+	//	break;
 	case 'd':
 		mCamera->moveLR(-1);
 		break;
-	case 's':
-		mCamera->moveUD(1);
-		break;
-	case 'w':
-		mCamera->moveUD(-1);
-		break;
+	//case 's':
+	//	mCamera->moveUD(1);
+	//	break;
+	//case 'w':
+	//	mCamera->moveUD(-1);
+	//	break;
 	case 'f': //apt68
 		orbit = !orbit;
 		break;
 	case 'g': //apt68
 		rotate = !rotate;
 		break;
-	case 'q': //apt76
 
+		//luces
+	case 'q':
+		mScene->switchDirLight(true);
 		break;
+	case 'w': 
+		mScene->switchDirLight(false);
+		break;
+	case 'a':
+		mScene->switchPosLight(true);
+		break;
+	case 's':
+		mScene->switchPosLight(false);
+		break;
+	case 'z':
+		mScene->switchSpotLight(true);
+		break;
+	case 'x':
+		mScene->switchSpotLight(false);
+		break;
+
 	default:
 		need_redisplay = false;
 		break;
