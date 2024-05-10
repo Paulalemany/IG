@@ -1,6 +1,6 @@
 #include "Toroid.h"
 
-Toroid::Toroid(GLuint r, GLuint R, GLuint m, GLuint p) : Abs_Entity()
+Toroid::Toroid(GLuint r, GLuint R, GLuint p, GLuint m) : Abs_Entity()
 {
 	// r: grosor de la rosquilla
 	// R: radio de la rosquilla
@@ -15,7 +15,7 @@ Toroid::Toroid(GLuint r, GLuint R, GLuint m, GLuint p) : Abs_Entity()
 	glm::dvec3* perfil = new glm::dvec3[p];
 
 	//Variables para colocar los puntos
-	const double alpha = 3.14 * 2 / (p - 1);	//ángulo entre los puntos del perfil
+	const double alpha = 3.14 * 2 / (p - 1);	//ï¿½ngulo entre los puntos del perfil
 
 	//Colocamos los puntos en el perfil
 	for (int i = 1; i < p; i++)
