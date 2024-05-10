@@ -43,6 +43,20 @@ public:
 
 	void setLights();
 
+	void switchDirLight(bool s) {
+		if (s) { dirLight->enable();}
+		else {dirLight->disable();}
+	}
+	void switchPosLight(bool s) { 
+		if (s) {posLight->enable();	}
+		else {posLight->disable();}
+	}
+	void switchSpotLight(bool s) {
+		if (s) { spotLight->enable();}
+		else {spotLight->disable();}
+	}
+
+
 protected:
 	void free();
 	void setGL();
@@ -53,6 +67,7 @@ protected:
 	int mId;
 	std::vector<Abs_Entity*> gObjects; // Entities (graphic objects) of the scene
 	std::vector<Texture*> gTextures; // Textures of the scene
+	std::vector<Light*> gLights;	// Lights
 
 	//apt68
 	float speed;
