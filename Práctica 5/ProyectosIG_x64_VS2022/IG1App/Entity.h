@@ -29,7 +29,7 @@ public:
 	void setColor(glm::dvec4 const& aColor) { mColor = aColor; };
 
 	//Texture
-	//Le pasamos como parï¿½metro el nombre de la textura
+	//Le pasamos como parámetro el nombre de la textura
 	void setTexture(std::string textura, Texture* t, GLuint a)const { t->load(textura, a); }
 
 	//apt68
@@ -93,7 +93,7 @@ public:
 
 class Ground : public Abs_Entity {
 public:
-	//Harï¿½ falta un ancho, un largo y el punto de origen??
+	//Hará falta un ancho, un largo y el punto de origen??
 	explicit Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t);
 	~Ground();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
@@ -165,7 +165,7 @@ public:
 
 class EWingAdvancedTIE : public Abs_Entity {
 public:
-	//Harï¿½ falta un ancho, un largo y el punto de origen??
+	//Hará falta un ancho, un largo y el punto de origen??
 	explicit EWingAdvancedTIE(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t);
 	~EWingAdvancedTIE();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
