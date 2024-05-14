@@ -45,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(7);
+	setScene(8);
 
 }
 
@@ -155,7 +155,7 @@ void Scene::setScene(int i)
 	TIE = new AdvancedTIE();
 
 	//Apt64
-	Abs_Entity* box = new IndexedBox(200.0);							
+	//Abs_Entity* box = new IndexedBox(200.0);							
 	
 	//Apt66
 	CompoundEntity* node = new CompoundEntity();
@@ -170,6 +170,9 @@ void Scene::setScene(int i)
 	tatooine->QuadricColor(1, 255 / 233, 0);
 	
 	gObjects.push_back(new EjesRGB(400.0));
+
+	//Apt72
+	auto c = new Toroid(50, 100, 60, 60);
 
 	switch (i)
 	{
@@ -221,7 +224,7 @@ void Scene::setScene(int i)
 		break;
 		
 	case 4: //Apt 64
-		gObjects.push_back(box);
+		//gObjects.push_back(box);
 		break;
 
 	case 5: //APT 66
@@ -256,8 +259,10 @@ void Scene::setScene(int i)
 		break;
 
 	case 8:
-		gObjects.push_back(new Toroid(50, 100, 20, 20));
+		c->setColor(dvec4(0, 1, 0, 1));
+		gObjects.push_back(new Toroid(50, 100, 100, 100));
 		break;
+
 
 	default:
 		break;
