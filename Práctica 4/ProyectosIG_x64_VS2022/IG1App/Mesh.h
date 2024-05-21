@@ -70,4 +70,21 @@ public:
 	void buildNormalVectors();
 };
 
+//Apt 69
+class MbR : public IndexMesh
+{
+protected:
+
+	GLint m;				//Número de puntos del perfil
+	GLint n;				//Número de muestras al girar al rededor del eje
+	//(Damos por hecho que van de abajo a arriba)
+	glm::dvec3* perfil;	//Array de vértices que define el perfil que va a hacerse girar 
+
+public:
+
+	MbR(GLint mm, GLint nn, glm::dvec3* perfil) { n = nn, perfil = perfil, m = mm; }
+	~MbR() override = default;
+	static MbR* generateIndexMbR(int mm, int nn, glm::dvec3* perfil);
+};
+
 #endif //_H_Scene_H_

@@ -183,4 +183,17 @@ public:
 	//void buildNormalVectors(); //apt 65
 };
 
+class RbmSphere : public Abs_Entity {
+public:
+
+	RbmSphere(GLdouble r, GLint p, GLint m);
+	~RbmSphere() { delete mMesh; }
+	virtual void render(glm::dmat4 const& modelViewMat) const override;
+	virtual void update() override {};
+
+protected:
+	glm::dvec3* perfil;
+
+};
+
 #endif //_H_Entities_H_

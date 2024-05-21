@@ -550,3 +550,59 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma endregion
 
+#pragma region RBM
+
+	RbmSphere::RbmSphere(GLdouble r, GLint p, GLint m)
+	{
+		//r: radio de la esfera
+		//p: puntos que tiene el perfil
+		//m: numero de puntos que hay en el perfil
+
+		perfil = new dvec3[p];
+
+		//Variables para colocar los puntos
+		const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
+
+		//Colocamos los puntos en el perfil
+		for (int i = 0; i < p; i++)
+		{
+			perfil[i] = dvec3(
+				sin(alpha * i) * r,
+				cos(alpha * i) * r,
+				0 //Queremos que gire sobre este eje por lo que no debe cambiar
+			);
+		}
+
+		//Una vez colocados creamos la malla
+		mMesh = MbR::generateIndexMbR(p, m, perfil);
+	}
+
+	void RbmSphere::render(glm::dmat4 const& modelViewMat) const
+	{
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+		dmat4 aMat = modelViewMat * mModelMat;	// glm matrix multiplication
+		upload(aMat);
+
+		//set
+		glLineWidth(2);
+		if (mColor.a > 0) {
+			glColor4f(mColor.r, mColor.g, mColor.b, mColor.a);
+		}
+
+		mMesh->render();
+
+		//reset
+		glColor3f(1.0, 1.0, 1.0);
+		glColor4f(0, 0, 0, 0);
+		glLineWidth(1);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		//glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE); // Defecto
+		//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
+		//glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+		//glDisable(GL_COLOR_MATERIAL);
+	}
+
+#pragma endregion
+
+	
