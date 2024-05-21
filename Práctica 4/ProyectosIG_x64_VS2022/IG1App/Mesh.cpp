@@ -565,103 +565,171 @@ void IndexMesh::draw() const
 //apt63
 IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 {
-	IndexMesh* mesh = new IndexMesh();
+#pragma region Versión 1
 
-	// Elena mando un correo el 19 de abril diciendo como se hacia el cubo:
+	//IndexMesh* mesh = new IndexMesh();
 
-	mesh->mPrimitive = GL_TRIANGLES;
+	//// Elena mando un correo el 19 de abril diciendo como se hacia el cubo:
 
-	/// VERTICES
+	//mesh->mPrimitive = GL_TRIANGLES;
+
+	///// VERTICES
+	//mesh->mNumVertices = 8;
+	//mesh->vVertices.reserve(mesh->mNumVertices);
+
+	////vertices de la cara de detras
+	//mesh->vVertices.emplace_back(l, l, -l); // v0
+	//mesh->vVertices.emplace_back(l, -l, -l); // v1
+	//mesh->vVertices.emplace_back(-l, -l, -l); // v2
+	//mesh->vVertices.emplace_back(-l, l, -l); // v3
+	////vertices de la cara de delante
+	//mesh->vVertices.emplace_back(l, l, l); // v4
+	//mesh->vVertices.emplace_back(l, -l, l); // v5
+	//mesh->vVertices.emplace_back(-l, -l, l); // v6
+	//mesh->vVertices.emplace_back(-l, l, l); // v7
+
+	///// VECTOR DE INDICES
+	//mesh->nNumIndices = 36;
+	//mesh->nIndexes = new GLuint[mesh->nNumIndices];
+
+	//// cara de abajo
+	//mesh->nIndexes[0] = 0;
+	//mesh->nIndexes[1] = 3;
+	//mesh->nIndexes[2] = 2;
+
+	//mesh->nIndexes[3] = 0;
+	//mesh->nIndexes[4] = 2;
+	//mesh->nIndexes[5] = 1;
+
+	//// cara de arriba
+	//mesh->nIndexes[6] = 4;
+	//mesh->nIndexes[7] = 5;
+	//mesh->nIndexes[8] = 6;
+
+	//mesh->nIndexes[9] = 4;
+	//mesh->nIndexes[10] = 6;
+	//mesh->nIndexes[11] = 7;
+
+	//// cara lateral cercana izquierda
+	//mesh->nIndexes[12] = 0;
+	//mesh->nIndexes[13] = 4;
+	//mesh->nIndexes[14] = 7;
+
+	//mesh->nIndexes[15] = 0;
+	//mesh->nIndexes[16] = 7;
+	//mesh->nIndexes[17] = 3;
+
+	//// cara lateral trasera derecha
+	//mesh->nIndexes[18] = 1;
+	//mesh->nIndexes[19] = 2;
+	//mesh->nIndexes[20] = 6;
+
+	//mesh->nIndexes[21] = 1;
+	//mesh->nIndexes[22] = 6;
+	//mesh->nIndexes[23] = 5;
+
+	//// cara lateral cercana derecha
+	//mesh->nIndexes[24] = 0;
+	//mesh->nIndexes[25] = 1;
+	//mesh->nIndexes[26] = 5;
+
+	//mesh->nIndexes[27] = 0;
+	//mesh->nIndexes[28] = 5;
+	//mesh->nIndexes[29] = 4;
+
+	//// cara lateral trasera izquierda
+	//mesh->nIndexes[30] = 2;
+	//mesh->nIndexes[31] = 3;
+	//mesh->nIndexes[32] = 7;
+
+	//mesh->nIndexes[33] = 2;
+	//mesh->nIndexes[34] = 7;
+	//mesh->nIndexes[35] = 6;
+
+	///// CARAS
+	//int nV = 3;
+	//mesh->vCaras.resize(mesh->nNumIndices / nV);
+	//for (int i = 0; i < mesh->nNumIndices / nV; i++)
+	//{
+	//	mesh->vCaras[i] = Cara(
+	//		mesh->nIndexes[i * nV],
+	//		mesh->nIndexes[i * nV + 1],
+	//		mesh->nIndexes[i * nV + 2]
+	//	);
+	//}
+
+	///// COLORES
+	//mesh->vColors.reserve(mesh->mNumVertices);
+	//for (int i = 0; i < mesh->mNumVertices; i++)
+	//	mesh->vColors.emplace_back(0, 1, 0, 1); //green
+
+	///// NORMALES
+	//mesh->buildNormalVectors();
+#pragma endregion
+
+	//Versión de la profe
+	const auto mesh = new IndexMesh();
+
+	///Vértices
+	//Reservamos el número de vértices
 	mesh->mNumVertices = 8;
 	mesh->vVertices.reserve(mesh->mNumVertices);
 
-	//vertices de la cara de detras
-	mesh->vVertices.emplace_back(l, l, -l); // v0
-	mesh->vVertices.emplace_back(l, -l, -l); // v1
-	mesh->vVertices.emplace_back(-l, -l, -l); // v2
-	mesh->vVertices.emplace_back(-l, l, -l); // v3
+	const GLdouble m = l / 2;
+	//Colocamos los vértices en su sitio
+	mesh->vVertices.emplace_back(-m, m, m);		// v0
+	mesh->vVertices.emplace_back(-m, -m, m);	// v1
+	mesh->vVertices.emplace_back(m, m, m);		// v2
+	mesh->vVertices.emplace_back(m, -m, m);		// v3
 	//vertices de la cara de delante
-	mesh->vVertices.emplace_back(l, l, l); // v4
-	mesh->vVertices.emplace_back(l, -l, l); // v5
-	mesh->vVertices.emplace_back(-l, -l, l); // v6
-	mesh->vVertices.emplace_back(-l, l, l); // v7
+	mesh->vVertices.emplace_back(m, m, -m);		// v4
+	mesh->vVertices.emplace_back(m, -m, -m);	// v5
+	mesh->vVertices.emplace_back(-m, m, -m);	// v6
+	mesh->vVertices.emplace_back(-m, -m, -m);	// v7
 
-	/// VECTOR DE INDICES
+	///Índices
+	//Definimos los 36 índices 
+	//(3 vértices por cada triángulo, 12 triángulos) de 3 en 3
+	//Se crean en sentido ANTIHORARIO para que las normales se coloquen correctamente
+
 	mesh->nNumIndices = 36;
 	mesh->nIndexes = new GLuint[mesh->nNumIndices];
 
-	// cara de abajo
-	mesh->nIndexes[0] = 0;
-	mesh->nIndexes[1] = 3;
-	mesh->nIndexes[2] = 2;
+	const GLuint arr[36] =
+	{
+		0, 1, 2, 1, 3, 2, 2, 3, 4,
+		3, 5, 4, 4, 5, 6, 5, 7, 6,
+		//diagonal al derecho en la cara lateral izquierda
+		//6, 7, 0, 7, 1, 0,
+		//diafonal  al contrario en la cara lateral izquierda
+		0, 6, 1, 6, 7, 1,
+		0, 2, 4, 4, 6, 0, 1, 5, 3, 1, 7, 5
+	};
 
-	mesh->nIndexes[3] = 0;
-	mesh->nIndexes[4] = 2;
-	mesh->nIndexes[5] = 1;
+	for (int i = 0; i < mesh->nNumIndices; i++) {
+		mesh->nIndexes[i] = arr[i];
+	}
 
-	// cara de arriba
-	mesh->nIndexes[6] = 4;
-	mesh->nIndexes[7] = 5;
-	mesh->nIndexes[8] = 6;
-
-	mesh->nIndexes[9] = 4;
-	mesh->nIndexes[10] = 6;
-	mesh->nIndexes[11] = 7;
-
-	// cara lateral cercana izquierda
-	mesh->nIndexes[12] = 0;
-	mesh->nIndexes[13] = 4;
-	mesh->nIndexes[14] = 7;
-
-	mesh->nIndexes[15] = 0;
-	mesh->nIndexes[16] = 7;
-	mesh->nIndexes[17] = 3;
-
-	// cara lateral trasera derecha
-	mesh->nIndexes[18] = 1;
-	mesh->nIndexes[19] = 2;
-	mesh->nIndexes[20] = 6;
-
-	mesh->nIndexes[21] = 1;
-	mesh->nIndexes[22] = 6;
-	mesh->nIndexes[23] = 5;
-
-	// cara lateral cercana derecha
-	mesh->nIndexes[24] = 0;
-	mesh->nIndexes[25] = 1;
-	mesh->nIndexes[26] = 5;
-
-	mesh->nIndexes[27] = 0;
-	mesh->nIndexes[28] = 5;
-	mesh->nIndexes[29] = 4;
-
-	// cara lateral trasera izquierda
-	mesh->nIndexes[30] = 2;
-	mesh->nIndexes[31] = 3;
-	mesh->nIndexes[32] = 7;
-
-	mesh->nIndexes[33] = 2;
-	mesh->nIndexes[34] = 7;
-	mesh->nIndexes[35] = 6;
-
-	/// CARAS
+	///Caras
 	int nV = 3;
 	mesh->vCaras.resize(mesh->nNumIndices / nV);
-	for (int i = 0; i < mesh->nNumIndices / nV; i++)
-	{
+	for (int i = 0; i < mesh->nNumIndices / nV; i++) {
+
+		int realNv = i * nV;
 		mesh->vCaras[i] = Cara(
-			mesh->nIndexes[i * nV],
-			mesh->nIndexes[i * nV + 1],
-			mesh->nIndexes[i * nV + 2]
+			mesh->nIndexes[realNv],
+			mesh->nIndexes[realNv + 1],
+			mesh->nIndexes[realNv + 2]
 		);
 	}
 
-	/// COLORES
+	///Colores
 	mesh->vColors.reserve(mesh->mNumVertices);
-	for (int i = 0; i < mesh->mNumVertices; i++)
-		mesh->vColors.emplace_back(0, 1, 0, 1); //green
-
-	/// NORMALES
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+		mesh->vColors.emplace_back(0, 1, 0, 1);
+	}
+	
+	///Normales
 	mesh->buildNormalVectors();
 
 	return mesh;
