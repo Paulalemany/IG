@@ -518,6 +518,7 @@ Mesh* Mesh::createRGBAxes(GLdouble l)
 void IndexMesh::render() const
 {
 	if (vVertices.size() > 0) { // transfer data
+
 		// transfer the coordinates of the vertices
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(
@@ -539,20 +540,23 @@ void IndexMesh::render() const
 			glEnableClientState(GL_NORMAL_ARRAY);
 			glNormalPointer(GL_DOUBLE, 0, vNormals.data());
 		}
+
 		if (nIndexes != nullptr) {
 			glEnableClientState(GL_INDEX_ARRAY);
 			glIndexPointer(GL_UNSIGNED_INT, 0, nIndexes);
 		}
 
-		//glColorMaterial(GL_FRONT_AND_BACK, GL_FILL);
+		glEnable(GL_COLOR_MATERIAL);
+		glColorMaterial(GL_FRONT_AND_BACK, GL_FILL);
 
 		draw();
 
+		glDisableClientState(GL_INDEX_ARRAY);
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
-		glDisableClientState(GL_INDEX_ARRAY);
+		
 	}
 }
 

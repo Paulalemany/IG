@@ -93,7 +93,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		
 	}
-#pragma endregionl
+#pragma endregion
 
 #pragma region RGBTriangle
 
@@ -545,7 +545,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	void IndexedBox::update()
 	{
-		
+		Abs_Entity::update();
 	}
 
 #pragma endregion
