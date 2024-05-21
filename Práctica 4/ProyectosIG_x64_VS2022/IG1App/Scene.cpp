@@ -44,7 +44,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(6);
+	setScene(4);
 
 }
 
