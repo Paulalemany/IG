@@ -554,6 +554,8 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	RbmSphere::RbmSphere(GLdouble r, GLint p, GLint m)
 	{
+
+
 		//r: radio de la esfera
 		//p: puntos que tiene el perfil
 		//m: numero de puntos que hay en el perfil
@@ -601,6 +603,66 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		//glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT);
 		//glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
 		//glDisable(GL_COLOR_MATERIAL);
+	}
+
+	RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint p, GLuint m)
+	{
+#pragma region Versión mikele
+		//// r: grosor de la rosquilla
+		//// R: radio de la rosquilla
+		//// m: numero de muestras
+		//// p: numero de puntos con que se aproxima la circunferencia
+		//// Perfil:
+		//// r: radio de la circunferencia
+		//// R: distancia del origen al centro de la circunferencia
+
+		//perfil = new glm::dvec3[p];
+
+		////Colocamos los puntos en el perfil
+		//for (int i = 0; i < p; i++)
+		//{
+		//	//Variables para colocar los puntos
+		//	const double alpha = (3.14 * 2 / (p - 1)) * i;	//ángulo entre los puntos del perfil
+
+		//	perfil[i] = { R + (r * sin(alpha)),	-(r * cos(alpha)), 0 };
+		//}
+
+		//mMesh = MbR::generateIndexMbR(p, m, perfil);
+#pragma endregion
+
+		perfil = new dvec3[p];
+
+		const float alpha = 360.0f / (p - 1);	//angulo entre puntos
+		constexpr float offset = -90.0f;	//angulo inicial
+
+		for (int i = 0; i < p; i++) {
+			perfil[i] = dvec3(
+				cos(radians(alpha * i)) * R + r + R,
+				sin(radians(alpha * i)) * R,
+				0
+			);
+		}
+
+		mMesh = MbR::generateIndexMbR(p, m, perfil);
+	}
+
+	void RbmToroid::render(glm::dmat4 const& modelViewMat) const
+	{
+		if (mMesh != nullptr) {
+
+			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+			dmat4 aMat = modelViewMat * mModelMat;	// glm matrix multiplication
+			upload(aMat);
+
+			glColor4f(mColor.r, mColor.g, mColor.b, mColor.a);
+
+			mMesh->render();
+
+			glColor4f(0, 0, 0, 0);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		}
+		
 	}
 
 #pragma endregion

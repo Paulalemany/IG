@@ -196,4 +196,17 @@ protected:
 
 };
 
+class RbmToroid : public Abs_Entity {
+public:
+
+	RbmToroid(GLuint r, GLuint R, GLuint p, GLuint m);
+	~RbmToroid() { delete mMesh; }
+	virtual void render(glm::dmat4 const& modelViewMat) const override;
+	virtual void update() override {};
+
+protected:
+	glm::dvec3* perfil;
+
+};
+
 #endif //_H_Entities_H_

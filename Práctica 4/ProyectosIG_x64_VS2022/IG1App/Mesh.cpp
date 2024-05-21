@@ -809,6 +809,11 @@ void IndexMesh::buildNormalVectors()
 // 3.
 MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 {
+
+#pragma region V0
+
+#pragma endregion
+
 	// mm: numero de puntos del perfil
 	// nn: numero de rotaciones
 	// perfil: perfil en el plano XY
@@ -835,7 +840,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 			GLdouble z = -s * perfil[j].x + c * perfil[j].z;
 			GLdouble x = c * perfil[j].x + s * perfil[j].z;
 
-			int Indice = (i * mm) + j;
+			int Indice = i * mm + j;
 			vs[Indice] = dvec3(x, perfil[j].y, z);
 		}
 	}
@@ -843,7 +848,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 4. Volcar el array auxiliar vértices en el array de vértices
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
-		mesh->vVertices.emplace_back(vs[i]);
+		mesh->vVertices.push_back(vs[i]);
 	}
 	delete[] vs;
 
@@ -853,7 +858,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	mesh->nIndexes = new GLuint[mesh->nNumIndices];
 
 	// Inicializamos nIndexes a 0
-	for (int i = 0; i < mesh->mNumVertices; i++)
+	for (int i = 0; i < mesh->mNumVertices * 6; i++)
 	{
 		mesh->nIndexes[i] = 0;
 	}
@@ -863,7 +868,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	for (int i = 0; i < nn; i++)
 	{
 		// j recorre los vertices del perfil
-		for (int j = 0; j < mm; j++)
+		for (int j = 0; j < mm - 1; j++)
 		{
 			// 7.
 			//indice cuenta los indices generados hasta ahora
@@ -877,6 +882,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 
 			mesh->nIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
 			indiceMayor++;
+			
 
 			mesh->nIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
 			indiceMayor++;

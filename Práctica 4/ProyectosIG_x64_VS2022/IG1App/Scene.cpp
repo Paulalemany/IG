@@ -44,7 +44,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(7);
+	setScene(8);
 
 }
 
@@ -158,6 +158,9 @@ void Scene::setScene(int i)
 	//apt 71
 	RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
 
+	//apt 72
+	RbmToroid* rbmToroid = new RbmToroid(50, 100, 20, 30);
+
 	gObjects.push_back(new EjesRGB(400.0));
 #pragma endregion
 
@@ -240,6 +243,11 @@ void Scene::setScene(int i)
 	case 7:
 		rbmSphere->setColor(dvec4(0, 0, 1, 1));
 		gObjects.push_back(rbmSphere);
+		break;
+
+	case 8:
+		rbmToroid->setColor(dvec4(0, 1, 0, 1));
+		gObjects.push_back(rbmToroid);
 		break;
 
 	default:
