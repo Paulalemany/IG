@@ -159,7 +159,7 @@ void Scene::setScene(int i)
 	RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
 
 	//apt 72
-	RbmToroid* rbmToroid = new RbmToroid(50, 100, 20, 30);
+	RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20);
 
 	gObjects.push_back(new EjesRGB(400.0));
 #pragma endregion

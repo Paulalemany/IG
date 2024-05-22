@@ -810,10 +810,6 @@ void IndexMesh::buildNormalVectors()
 MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 {
 
-#pragma region V0
-
-#pragma endregion
-
 	// mm: numero de puntos del perfil
 	// nn: numero de rotaciones
 	// perfil: perfil en el plano XY
@@ -824,9 +820,8 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	mesh->mNumVertices = nn * mm;			//Número de vértices
 
 	mesh->vVertices.reserve(mesh->mNumVertices);
-	mesh->vNormals.reserve(mesh->mNumVertices);
 
-	dvec3* vs = new dvec3[mesh->mNumVertices];	//Vector auxiliar de vértices
+	auto vs = new dvec3[mesh->mNumVertices];	//Vector auxiliar de vértices
 
 	for (int i = 0; i < nn; i++)
 	{
@@ -848,7 +843,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 4. Volcar el array auxiliar vértices en el array de vértices
 	for (int i = 0; i < mesh->mNumVertices; i++)
 	{
-		mesh->vVertices.push_back(vs[i]);
+		mesh->vVertices.emplace_back(vs[i]);
 	}
 	delete[] vs;
 
@@ -858,17 +853,18 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	mesh->nIndexes = new GLuint[mesh->nNumIndices];
 
 	// Inicializamos nIndexes a 0
-	for (int i = 0; i < mesh->mNumVertices * 6; i++)
+	/*for (int i = 0; i < mesh->mNumVertices * 6; i++)
 	{
 		mesh->nIndexes[i] = 0;
-	}
+	}*/
 
 	// 6. Se rellena nIndexes
 	// i recorre las muestras alrededor del eje Y
+	//De alguna manera dejabamos algún indice suelto
 	for (int i = 0; i < nn; i++)
 	{
 		// j recorre los vertices del perfil
-		for (int j = 0; j < mm - 1; j++)
+		for (int j = 0; j < mm; j++)
 		{
 			// 7.
 			//indice cuenta los indices generados hasta ahora
@@ -877,21 +873,30 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 			mesh->nIndexes[indiceMayor] = indice;
 			indiceMayor++;
 
-			mesh->nIndexes[indiceMayor] = (indice + mm) % (nn * mm);
+			int n = (indice + mm) % (nn * mm);
+
+			mesh->nIndexes[indiceMayor] = n;
 			indiceMayor++;
 
 			mesh->nIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
 			indiceMayor++;
-			
 
 			mesh->nIndexes[indiceMayor] = (indice + mm + 1) % (nn * mm);
 			indiceMayor++;
 
-			mesh->nIndexes[indiceMayor] = (indice + mm) % (nn * mm);
+
+			n = (indice + 1) % (nn * mm);
+
+			mesh->nIndexes[indiceMayor] = n;
 			indiceMayor++;
 
-			mesh->nIndexes[indiceMayor] = indice;
+			mesh->nIndexes[indiceMayor] = indice % (nn * mm);
 			indiceMayor++;
+
+			/*
+			índice0 , índice1 , índice2 ,
+			índice2 , índice3 , índice0
+			*/
 		}
 	}
 

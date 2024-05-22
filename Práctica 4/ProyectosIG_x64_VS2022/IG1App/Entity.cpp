@@ -552,7 +552,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 #pragma region RBM
 
-	RbmSphere::RbmSphere(GLdouble r, GLint p, GLint m)
+	RbmSphere::RbmSphere(GLdouble r, GLint m, GLint p)
 	{
 
 
@@ -560,13 +560,13 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		//p: puntos que tiene el perfil
 		//m: numero de puntos que hay en el perfil
 
-		perfil = new dvec3[p];
+		perfil = new dvec3[m];
 
 		//Variables para colocar los puntos
-		const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
+		const double alpha = 3.14 / (m - 1);	//ángulo entre los puntos del perfil
 
 		//Colocamos los puntos en el perfil
-		for (int i = 0; i < p; i++)
+		for (int i = 0; i < m; i++)
 		{
 			perfil[i] = dvec3(
 				sin(alpha * i) * r,
@@ -576,7 +576,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		}
 
 		//Una vez colocados creamos la malla
-		mMesh = MbR::generateIndexMbR(p, m, perfil);
+		mMesh = MbR::generateIndexMbR(m, p, perfil);
 	}
 
 	void RbmSphere::render(glm::dmat4 const& modelViewMat) const
@@ -605,7 +605,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		//glDisable(GL_COLOR_MATERIAL);
 	}
 
-	RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint p, GLuint m)
+	RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p)
 	{
 #pragma region Versión mikele
 		//// r: grosor de la rosquilla
@@ -650,7 +650,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		if (mMesh != nullptr) {
 
-			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 			dmat4 aMat = modelViewMat * mModelMat;	// glm matrix multiplication
 			upload(aMat);
