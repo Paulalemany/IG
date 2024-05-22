@@ -607,40 +607,23 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 
 	RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p)
 	{
-#pragma region Versión mikele
-		//// r: grosor de la rosquilla
-		//// R: radio de la rosquilla
-		//// m: numero de muestras
-		//// p: numero de puntos con que se aproxima la circunferencia
-		//// Perfil:
-		//// r: radio de la circunferencia
-		//// R: distancia del origen al centro de la circunferencia
+		// r: grosor de la rosquilla
+		// R: radio de la rosquilla
+		// m: numero de muestras
+		// p: numero de puntos con que se aproxima la circunferencia
+		// Perfil:
+		// r: radio de la circunferencia
+		// R: distancia del origen al centro de la circunferencia
 
-		//perfil = new glm::dvec3[p];
+		perfil = new glm::dvec3[p];
 
-		////Colocamos los puntos en el perfil
-		//for (int i = 0; i < p; i++)
-		//{
-		//	//Variables para colocar los puntos
-		//	const double alpha = (3.14 * 2 / (p - 1)) * i;	//ángulo entre los puntos del perfil
+		//Colocamos los puntos en el perfil
+		for (int i = 0; i < p; i++)
+		{
+			//Variables para colocar los puntos
+			const double alpha = (3.14 * 2 / (p - 1)) * i;	//ángulo entre los puntos del perfil
 
-		//	perfil[i] = { R + (r * sin(alpha)),	-(r * cos(alpha)), 0 };
-		//}
-
-		//mMesh = MbR::generateIndexMbR(p, m, perfil);
-#pragma endregion
-
-		perfil = new dvec3[p];
-
-		const float alpha = 360.0f / (p - 1);	//angulo entre puntos
-		constexpr float offset = -90.0f;	//angulo inicial
-
-		for (int i = 0; i < p; i++) {
-			perfil[i] = dvec3(
-				cos(radians(alpha * i)) * R + r + R,
-				sin(radians(alpha * i)) * R,
-				0
-			);
+			perfil[i] = { R + (r * sin(alpha)),	-(r * cos(alpha)), 0 };
 		}
 
 		mMesh = MbR::generateIndexMbR(p, m, perfil);
