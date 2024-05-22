@@ -17,6 +17,14 @@ public:
 	Abs_Entity(const Abs_Entity& e) = delete;            // no copy constructor
 	Abs_Entity& operator=(const Abs_Entity& e) = delete; // no copy assignment
 
+	/// * Transformaciones con mModelMat *
+	/// ModelView MATRIX = VIEW MATRIX * MODEL MATRIX
+	// Sera donde se aplicaran las transformaciones (translate, rotate, scale)
+	// -> glm::translate(dmat4, dvec3)			// aqui dmat4 sera generalmente la matriz identidad (dmat4(1))
+	// -> glm::rotate(dmat4, beta, dvec3);		// beta en radianes, si el angulo es positivo, el giro sera antihorario (CCW)
+	// -> glm::scale(dmat4, dvec3)				// aqui dmat4 sera generalmente la matriz identidad (dmat4(1))
+
+
 	virtual void render(glm::dmat4 const& modelViewMat) const = 0; // abstract method
 	virtual void update() {}	//Modifica el mModelMat de las entidades que la cambien
 

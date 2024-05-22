@@ -130,7 +130,14 @@ void RGBTriangle::render(glm::dmat4 const& modelViewMat) const
 void RGBTriangle::update()
 {
 	//rotacion en sentido horario del triangulo
-	mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0, 1.0));
+	mModelMat = rotate(mModelMat, radians(rotationSp), dvec3(0, 0, 1.0)); // el ultimo dvec3 es para que rote en el eje Z
+
+	/// Rotacion sobre otros ejes:
+	// ZRoll:	m = rotate(dmat4, beta, dvec3(0, 0, 1));
+	// YYaw:	m = rotate(dmat4, beta, dvec3(0, 1, 0));
+	// XPitch:	m = rotate(dmat4, beta, dvec3(1, 0, 0));
+	// beta siempre en radianes
+
 
 	//rotacion en sentido antihorario en la circunferencia aaaa
 	mModelMat = translate(mModelMat, dvec3(0, 17.35, 0));
@@ -311,7 +318,7 @@ BoxOutline::BoxOutline(GLdouble l, Texture* t, Texture* t2)
 {
 	mMesh = Mesh::generateBoxOutline(l);
 
-	//movemos la caja
+	//movemos la caja, multiplicaremos la translacion:
 	mModelMat = translate(dmat4(1), dvec3(0.0, -50, 0.0));
 
 	mTexture = t;

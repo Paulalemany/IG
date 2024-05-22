@@ -263,6 +263,7 @@ void Scene::setScene(int i)
 		break;
 	}
 
+	// Color de fondo de la ventana (tienen que ser valores entre 0 y 1)
 	if (i == 6) {
 		glClearColor(0, 0, 0, 1);
 	}

@@ -94,8 +94,9 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 {
 	Mesh* mesh = new Mesh();							//Creamos una nueva malla
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);					//Primitiva para colorear
-	mesh->mPrimitive = GL_TRIANGLE_STRIP;
-
+	mesh->mPrimitive = GL_TRIANGLE_STRIP;				// Dibuja los triangulos en sentido antihorario, tomando el triangulo anterior.
+														// -> Ej. Si tenemos 6 vertices: v0, v1, v2...
+														//        Se colocaran 0,1,2 / luego 2,1,3 / 2,3,4 / 4,3,5 / 4,5,6
 
 	mesh->mNumVertices = 4.0;							// v0, v1, v2, v3
 	mesh->vVertices.reserve(mesh->mNumVertices);		//Reserva espacio para el número de vértices
@@ -402,7 +403,7 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 {
 	Mesh* mesh = new Mesh();
 
-	mesh->mPrimitive = GL_TRIANGLE_FAN;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
+	mesh->mPrimitive = GL_TRIANGLE_FAN;			// Todos los triangulos comparten un vertice comun.
 	mesh->mNumVertices = 2 * (np + 1);
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
