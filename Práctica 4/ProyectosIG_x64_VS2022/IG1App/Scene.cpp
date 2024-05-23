@@ -45,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(6);
+	setScene(2);
 
 }
 
@@ -155,163 +155,168 @@ void Scene::addObject(Abs_Entity* e)
 
 void Scene::setScene(int i)
 {
-	deleteObjects();
-	mId = i;
+	if (mId != i) // si estamos en la escena que se pulsa, que no se borren los objetos, ni se instancien de nuevo
+	{ 
+		deleteObjects();
 
 #pragma region Creación de objetos
-	QuadricEntity* eye = new Cylinder(20.0, 0.0, 50);					//ojo der
-	QuadricEntity* eye2 = new Cylinder(20.0, 0.0, 50);					//ojo izq
+		QuadricEntity* eye = new Cylinder(20.0, 0.0, 50);					//ojo der
+		QuadricEntity* eye2 = new Cylinder(20.0, 0.0, 50);					//ojo izq
 
-	QuadricEntity* cabeza = new Sphere(100.0); //cabeza
-	cabeza->QuadricColor(1, 0, 0);
+		QuadricEntity* cabeza = new Sphere(100.0); //cabeza
+		cabeza->QuadricColor(1, 0, 0);
 
-	TIE = new AdvancedTIE();
+		TIE = new AdvancedTIE();
 
-	//Apt64
-	Abs_Entity* box = new IndexedBox(200.0);
+		//Apt64
+		Abs_Entity* box = new IndexedBox(200.0);
 
-	//Apt66
-	CompoundEntity* node = new CompoundEntity();
-	RGBTriangle* triangle = new RGBTriangle(30);
+		//Apt66
+		CompoundEntity* node = new CompoundEntity();
+		RGBTriangle* triangle = new RGBTriangle(30);
 
-	node->addEntity(triangle);
-	triangle->setModelMat(glm::translate(node->modelMat(), glm::dvec3(200, 0, 0)));
+		node->addEntity(triangle);
+		triangle->setModelMat(glm::translate(node->modelMat(), glm::dvec3(200, 0, 0)));
 
 
-	//Apt 67
-	QuadricEntity* tatooine = new Sphere(200.0);
-	tatooine->QuadricColor(1, 255 / 233, 0);
+		//Apt 67
+		QuadricEntity* tatooine = new Sphere(200.0);
+		tatooine->QuadricColor(1, 255 / 233, 0);
 
-	//apt 71
-	RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
+		//apt 71
+		RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
 
-	//apt 72
-	RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20);
+		//apt 72
+		RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20);
 
-	gObjects.push_back(new EjesRGB(400.0));
+		gObjects.push_back(new EjesRGB(400.0));
 
-	//apt74
-	RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
-	RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
-	Material* goldMaterial = new Material();
+		//apt74
+		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
+		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
+		Material* goldMaterial = new Material();
 
 #pragma endregion
 
-	switch (i)
-	{
-	case 0:
-		//gObjects.push_back(new RegularCube(200.0));								//Cubo
-		gObjects.push_back(new RGBCube(200.0));									//Cubo RGB
-		break;
-	case 1:
-		// Graphics objects (entities) of the scene
-		gObjects.push_back(new EjesRGB(400.0));
-		//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));						//Tri�ngulo
-		//gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));							//Circunferencia
-		//gObjects.push_back(new RGBTriangle(30.0));													//Triangulo RGB
-		//gObjects.push_back(new RegularRectangle(400.0, 200.0));										//Rectangulo L�nea
-		//gObjects.push_back(new RGBRectangle(200.0, 100.0));											//Rectangulo RGB
-		gObjects.push_back(new Ground(300.0, 300.0, 4, 4, gTextures[0]));								//Suelo
-		gObjects.push_back(new BoxOutline(50.0, gTextures[1], gTextures[2]));							//Caja
-		//gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));								//Estrella
-		gObjects.push_back(new GlassParapet(300.0, 150.0, gTextures[4]));								//Parapet
-		gObjects.push_back(new Photo(125.0, 70.0, gTextures[6]));										//Photo
-		break;
+		switch (i)
+		{
+		case 0:
+			//gObjects.push_back(new RegularCube(200.0));								//Cubo
+			gObjects.push_back(new RGBCube(200.0));									//Cubo RGB
+			break;
+		case 1:
+			// Graphics objects (entities) of the scene
+			gObjects.push_back(new EjesRGB(400.0));
+			//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));						//Tri�ngulo
+			//gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));							//Circunferencia
+			//gObjects.push_back(new RGBTriangle(30.0));													//Triangulo RGB
+			//gObjects.push_back(new RegularRectangle(400.0, 200.0));										//Rectangulo L�nea
+			//gObjects.push_back(new RGBRectangle(200.0, 100.0));											//Rectangulo RGB
+			gObjects.push_back(new Ground(300.0, 300.0, 4, 4, gTextures[0]));								//Suelo
+			gObjects.push_back(new BoxOutline(50.0, gTextures[1], gTextures[2]));							//Caja
+			//gObjects.push_back(new Star(200.0, 17.0, 100.0, gTextures[3]));								//Estrella
+			gObjects.push_back(new GlassParapet(300.0, 150.0, gTextures[4]));								//Parapet
+			gObjects.push_back(new Photo(125.0, 70.0, gTextures[6]));										//Photo
+			break;
 
-	case 2:	//Apt 58
+		case 2:	//Apt 58
 
-		gObjects.push_back(cabeza);																		//Esfera
-		gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
-		gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
+			gObjects.push_back(cabeza);																		//Esfera
+			gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
+			gObjects.push_back(new PartialDisk(70.0, 90.0, 0, 200));										//Sonrisa
 
 
-		glm::dmat4 trans = translate(dmat4(1), dvec3(35, 30, 60));										//Ojos
-		eye->setModelMat(trans);
-		eye->QuadricColor(0, 0, 1);
-		gObjects.push_back(eye);
-		
-		trans = translate(dmat4(1), dvec3(-35, 30, 60));
-		eye2->setModelMat(trans);
-		eye2->QuadricColor(0.6, 0.6, 0.6);
-		gObjects.push_back(eye2);
+			glm::dmat4 trans = translate(dmat4(1), dvec3(35, 30, 60));										//Ojos
+			eye->setModelMat(trans);
+			eye->QuadricColor(0, 0, 1);
+			gObjects.push_back(eye);
 
-		break;
+			trans = translate(dmat4(1), dvec3(-35, 30, 60));
+			eye2->setModelMat(trans);
+			eye2->QuadricColor(0.6, 0.6, 0.6);
+			gObjects.push_back(eye2);
 
-	case 3: //Apt 60
-		
-		gObjects.push_back(TIE);
-		break;
-		
-	case 4: //Apt 64
-		gObjects.push_back(box);
-		break;
+			break;
 
-	case 5: //APT 66
+		case 3: //Apt 60
 
-		gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
-		gObjects.push_back(new RGBRectangle(200, 100));
-		gObjects.push_back(triangle);
+			gObjects.push_back(TIE);
+			break;
 
-		break;
+		case 4: //Apt 64
+			gObjects.push_back(box);
+			break;
 
-	case 6: //APT 67
+		case 5: //APT 66
 
-		gObjects.push_back(tatooine); // Añadimos el planeta
+			gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
+			gObjects.push_back(new RGBRectangle(200, 100));
+			gObjects.push_back(triangle);
 
-		//Inicializamos los nodos ficticios
-		inventedNode = new CompoundEntity();		// Nodo para la translacion
-		inventedNodeRotate = new CompoundEntity();	// Nodo para la rotacion
+			break;
 
-		TIE->setModelMat(
-			scale(dmat4(1), dvec3(0.3, 0.3, 0.3))
-			* translate(dmat4(1), dvec3(-100.0, 620.0, -100.0))
-			* TIE->modelMat()
-		);
+		case 6: //APT 67
 
-		gObjects.push_back(TIE);
+			gObjects.push_back(tatooine); // Añadimos el planeta
 
-		inventedNode->addEntity(TIE);
-		inventedNodeRotate->addEntity(TIE);
+			//Inicializamos los nodos ficticios
+			inventedNode = new CompoundEntity();		// Nodo para la translacion
+			inventedNodeRotate = new CompoundEntity();	// Nodo para la rotacion
 
-		break;
+			TIE->setModelMat(
+				scale(dmat4(1), dvec3(0.3, 0.3, 0.3))
+				* translate(dmat4(1), dvec3(-100.0, 620.0, -100.0))
+				* TIE->modelMat()
+			);
 
-	case 7:
-		/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
-		gObjects.push_back(rbmSphere);*/
+			gObjects.push_back(TIE);
 
-		rbmToroid->setColor(dvec4(0, 1, 0, 1));
-		gObjects.push_back(rbmToroid);
-		break;
+			inventedNode->addEntity(TIE);
+			inventedNodeRotate->addEntity(TIE);
 
-	case 8:
-		tatooineColor->setColor(dvec4(1, 1, 0, 1));
-		tatooineColor->setModelMat(
-			translate(dmat4(1), dvec3(200, 0, 0))
-		);
-		gObjects.push_back(tatooineColor);
+			break;
 
-		goldMaterial->setGold();
-		tatooineMaterial->setMaterial(goldMaterial);
-		tatooineMaterial->setModelMat(
-			translate(dmat4(1), dvec3(0, 0, 200))
-		);
-		gObjects.push_back(tatooineMaterial);
-		break;
+		case 7:
+			/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
+			gObjects.push_back(rbmSphere);*/
 
-	case 9:
-		
-		break;
+			rbmToroid->setColor(dvec4(0, 1, 0, 1));
+			gObjects.push_back(rbmToroid);
+			break;
 
-	default:
-		break;
+		case 8:
+			tatooineColor->setColor(dvec4(1, 1, 0, 1));
+			tatooineColor->setModelMat(
+				translate(dmat4(1), dvec3(200, 0, 0))
+			);
+			gObjects.push_back(tatooineColor);
+
+			goldMaterial->setGold();
+			tatooineMaterial->setMaterial(goldMaterial);
+			tatooineMaterial->setModelMat(
+				translate(dmat4(1), dvec3(0, 0, 200))
+			);
+			gObjects.push_back(tatooineMaterial);
+			break;
+
+		case 9:
+
+			break;
+
+		default:
+			break;
+		}
+
+		if (i == 6) {
+			glClearColor(0, 0, 0, 1);
+		}
+		else {
+			glClearColor(0.6, 0.7, 0.8, 1);
+		}
 	}
 
-	if (i == 6) {
-		glClearColor(0, 0, 0, 1);
-	}
-	else {
-		glClearColor(0.6, 0.7, 0.8, 1);
-	}
+	mId = i;
+
 }
 
 void Scene::deleteObjects()
