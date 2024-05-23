@@ -14,6 +14,7 @@ Scene::init()
 
 	// allocate memory and load resources
 	// Lights
+	setLights();
 	// Textures
 			//Creamos y cargamos todas las texturas que se van a utilizar
 	Texture* baldosaC = new Texture();				//Suelo
@@ -44,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(9);
+	setScene(8);
 
 }
 
@@ -74,6 +75,7 @@ Scene::setGL()
 	glEnable(GL_BLEND);									// enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// enable Alpha channel
 	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHTING);			  // activar la iluminacion
 }
 
 void
@@ -85,6 +87,7 @@ Scene::resetGL()
 	glDisable(GLUT_MULTISAMPLE);
 	glDisable(GL_COLOR_MATERIAL);
 	glDisable(GL_BLEND);
+	glDisable(GL_LIGHTING);
 }
 
 //Apt 56
@@ -107,8 +110,11 @@ void Scene::sceneDirLight(Camera const& cam) const
 void
 Scene::render(Camera const& cam) const
 {
-	sceneDirLight(cam); //Apt 56
+	//sceneDirLight(cam); //Apt 56
 	cam.upload();
+	//luz
+	dirLight->upload(cam.viewMat());
+	
 
 	for (Abs_Entity* el : gObjects) {
 		el->render(cam.viewMat());
@@ -332,5 +338,14 @@ void Scene::rotate(float time)
 			glm::rotate(dmat4(1), radians(-0.5), eje)
 		);
 	}
+}
+
+void Scene::setLights()
+{
+	dirLight = new DirLight();
+	dirLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	dirLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
+	dirLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	dirLight->setPosDir(glm::fvec3(-100.0, -200.0, -100.0));
 }
 

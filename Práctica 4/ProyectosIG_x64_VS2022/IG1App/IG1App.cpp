@@ -234,17 +234,24 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'd':
 		mCamera->moveLR(-1);
 		break;
-	case 's':
+	/*case 's':
 		mCamera->moveUD(1);
 		break;
 	case 'w':
 		mCamera->moveUD(-1);
-		break;
+		break;*/
 	case 'f': //apt68
 		orbit = !orbit;
 		break;
 	case 'g': //apt68
 		rotate = !rotate;
+		break;
+		//luces
+	case 'q':
+		mScene->switchDirLight(true);
+		break;
+	case 'w':
+		mScene->switchDirLight(false);
 		break;
 	default:
 		need_redisplay = false;
