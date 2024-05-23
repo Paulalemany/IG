@@ -68,11 +68,29 @@ Scene::setGL()
 {
 	// OpenGL basic setting
 	glClearColor(0.6, 0.7, 0.8, 1.0);; // background color (alpha=1 -> opaque)
+
 	glEnable(GL_DEPTH_TEST);          // enable Depth test
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GLUT_MULTISAMPLE);
+
 	glEnable(GL_BLEND);									// enable Blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);	// enable Alpha channel
+	
+	/// [ Blending ] 
+	// Que es? -> proceso de combinar colores de la fuente (src) y el destino (dst) para lograr efectos visuales como transparencia.
+	// Ecuacion -> dstColor = srcBFactor * srcColor + dstBFactor * dstColor 
+					// donde:
+					//  · srcColor = (srcR, srcG, srcB, srcA) el color RGBA del fragmento en proceso,
+					//  · dstColor = (dstR, dstG, dstB, dstA) el color del Color Buffer correspondiente al mismo pixel
+					//  · srcBFactor y dstBFactor los correspondientes factores de blending.
+					// Usamos para esto glBlendFunc(srcBFactor, dstBFactor).
+					 
+	// glBlendFunc(GL_ONE, GL_ZERO) es el valor por defecto
+	// glBlendFunc(GL_CONSTANT_COLOR, GL_ONE_MINUS_CONSTANT_COLOR) modula cada canal conu n peso constante fijado con glBlendColor(r, g, b, a)
+	// glBlendFunc(GL_CONSTANT_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA) solo usa el valor a para todos los canales
+	/// ------------
+
+
 	glEnable(GL_COLOR_MATERIAL);
 }
 
@@ -84,7 +102,9 @@ Scene::resetGL()
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GLUT_MULTISAMPLE);
 	glDisable(GL_COLOR_MATERIAL);
+
 	glDisable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ZERO);
 }
 
 //Apt 56
@@ -229,18 +249,20 @@ void Scene::setScene(int i)
 
 	case 6: //APT 67
 
-		gObjects.push_back(tatooine);
+		gObjects.push_back(tatooine); // Añadimos el planeta
 
-		//Inicializamos el nodo ficticio
-		inventedNode = new CompoundEntity();
-		inventedNodeRotate = new CompoundEntity();
+		//Inicializamos los nodos ficticios
+		inventedNode = new CompoundEntity();		// Nodo para la translacion
+		inventedNodeRotate = new CompoundEntity();	// Nodo para la rotacion
 
 		TIE->setModelMat(
 			scale(dmat4(1), dvec3(0.3, 0.3, 0.3))
 			* translate(dmat4(1), dvec3(-100.0, 620.0, -100.0))
 			* TIE->modelMat()
 		);
+
 		gObjects.push_back(TIE);
+
 		inventedNode->addEntity(TIE);
 		inventedNodeRotate->addEntity(TIE);
 
