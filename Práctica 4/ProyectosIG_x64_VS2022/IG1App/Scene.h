@@ -8,6 +8,7 @@
 #include "Entity.h"
 #include "QuadricEntity.h"
 #include "CompoundEntity.h"
+#include "Rbm.h"
 
 #include <vector>
 

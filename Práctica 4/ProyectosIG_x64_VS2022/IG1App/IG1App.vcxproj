@@ -80,6 +80,7 @@
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="QuadricEntity.h" />
+    <ClInclude Include="Rbm.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
@@ -95,6 +96,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="QuadricEntity.cpp" />
+    <ClCompile Include="Rbm.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>

@@ -44,7 +44,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(8);
+	setScene(9);
 
 }
 
@@ -162,6 +162,12 @@ void Scene::setScene(int i)
 	RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20);
 
 	gObjects.push_back(new EjesRGB(400.0));
+
+	//apt74
+	RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
+	RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
+	Material* goldMaterial = new Material();
+
 #pragma endregion
 
 	switch (i)
@@ -248,6 +254,21 @@ void Scene::setScene(int i)
 	case 8:
 		rbmToroid->setColor(dvec4(0, 1, 0, 1));
 		gObjects.push_back(rbmToroid);
+		break;
+
+	case 9:
+		tatooineColor->setColor(dvec4(1, 1, 0, 1));
+		tatooineColor->setModelMat(
+			translate(dmat4(1), dvec3(200,0,0))
+		);
+		gObjects.push_back(tatooineColor);
+
+		goldMaterial->setGold();
+		tatooineMaterial->setMaterial(goldMaterial);
+		tatooineMaterial->setModelMat(
+			translate(dmat4(1), dvec3(0,0,200))
+		);
+		gObjects.push_back(tatooineMaterial);
 		break;
 
 	default:
