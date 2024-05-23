@@ -17,25 +17,29 @@ void Mesh::draw() const
 
 void Mesh::render() const
 {
-	if (vVertices.size() > 0) { // transfer data
+	if (vVertices.size() > 0) 
+	{ // transfer data
 		// transfer the coordinates of the vertices
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(
 			3, GL_DOUBLE, 0, vVertices.data()); // number of coordinates per vertex, type of
 		// each coordinate, stride, pointer
-		if (vColors.size() > 0) {             // transfer colors
+		if (vColors.size() > 0) 
+		{             // transfer colors
 			glEnableClientState(GL_COLOR_ARRAY);
 			glColorPointer(
 				4, GL_DOUBLE, 0, vColors.data()); // components number (rgba=4), type of
 			// each component, stride, pointer
 		}
-		if (vTexCoords.size() > 0) {
+		if (vTexCoords.size() > 0) // El metodo Mesh::render activa y desactiva el array de coordenadas de textura.
+		{
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glTexCoordPointer(
 				2, GL_DOUBLE, 0, vTexCoords.data());
 		}
 		//Apt61
-		if (vNormals.size() > 0) {
+		if (vNormals.size() > 0) 
+		{
 			glEnableClientState(GL_NORMAL_ARRAY);
 			glNormalPointer(GL_DOUBLE, 0, vNormals.data());
 		}
@@ -95,7 +99,9 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 {
 	Mesh* mesh = new Mesh();							//Creamos una nueva malla
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);					//Primitiva para colorear
-	mesh->mPrimitive = GL_TRIANGLE_STRIP;
+	mesh->mPrimitive = GL_TRIANGLE_STRIP; // Dibuja los triangulos en sentido antihorario, tomando el triangulo anterior.
+														// -> Ej. Si tenemos 6 vertices: v0, v1, v2...
+														//        Se colocaran 0,1,2 / luego 2,1,3 / 2,3,4 / 4,3,5 / 4,5,6
 
 
 	mesh->mNumVertices = 4.0;							// v0, v1, v2, v3
@@ -403,7 +409,7 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 {
 	Mesh* mesh = new Mesh();
 
-	mesh->mPrimitive = GL_TRIANGLE_FAN;			//Hacemos que las lineas empiencen y terminen en el mismo punto??
+	mesh->mPrimitive = GL_TRIANGLE_FAN;			// Todos los triangulos comparten un vertice comun.
 	mesh->mNumVertices = 2 * (np + 1);
 	mesh->vVertices.reserve(mesh->mNumVertices);				//Reserva espacio para el número de vértices
 
