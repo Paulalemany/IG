@@ -247,28 +247,30 @@ void Scene::setScene(int i)
 		break;
 
 	case 7:
-		rbmSphere->setColor(dvec4(0, 0, 1, 1));
-		gObjects.push_back(rbmSphere);
-		break;
+		/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
+		gObjects.push_back(rbmSphere);*/
 
-	case 8:
 		rbmToroid->setColor(dvec4(0, 1, 0, 1));
 		gObjects.push_back(rbmToroid);
 		break;
 
-	case 9:
+	case 8:
 		tatooineColor->setColor(dvec4(1, 1, 0, 1));
 		tatooineColor->setModelMat(
-			translate(dmat4(1), dvec3(200,0,0))
+			translate(dmat4(1), dvec3(200, 0, 0))
 		);
 		gObjects.push_back(tatooineColor);
 
 		goldMaterial->setGold();
 		tatooineMaterial->setMaterial(goldMaterial);
 		tatooineMaterial->setModelMat(
-			translate(dmat4(1), dvec3(0,0,200))
+			translate(dmat4(1), dvec3(0, 0, 200))
 		);
 		gObjects.push_back(tatooineMaterial);
+		break;
+
+	case 9:
+		
 		break;
 
 	default:
