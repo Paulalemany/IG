@@ -45,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(8);
+	setScene(6);
 
 }
 
@@ -315,11 +315,15 @@ void Scene::orbit(float time)
 			* TIE->modelMat()
 		);
 
+		//Colocamos la luz
+		//TIELight->setPosDir(inventedNode->modelMat());
+
 		//Hay que girarlo y moverlo
 		dvec3 direction = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 0.0, 1.0, 0.0)));
 		inventedNode->setModelMat(
 			glm::rotate(dmat4(1), radians(-0.3), direction)
 		);
+
 	}
 }
 
@@ -348,21 +352,29 @@ void Scene::setLights()
 	dirLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
 	dirLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
 	dirLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	dirLight->setPosDir(glm::fvec3(-100.0, -200.0, -100.0));
+	dirLight->setPosDir(glm::fvec3(1, 1, 1));
 	dirLight->setId(GL_LIGHT0);
 
 	posLight = new PosLight();
 	posLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
 	posLight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
 	posLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	posLight->setPosDir(glm::fvec3(100, 200, 0));
+	posLight->setPosDir(glm::fvec3(100.0, 1500.0, 0));
 	posLight->setId(GL_LIGHT1);
 
 	spotLight = new SpotLight();
 	spotLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
 	spotLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
 	spotLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	spotLight->setPosDir(glm::fvec3(0, 300.0, 300.0));
+	spotLight->setPosDir(glm::fvec3(0, 300.0, 3000.0));
 	spotLight->setId(GL_LIGHT2);
+
+	TIELight = new PosLight();
+	TIELight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	TIELight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
+	TIELight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	TIELight->setId(GL_LIGHT3);
+	//Ahora en el 0,0,0, en el update lo pondremos con el nodo ficticio
+	TIELight->setPosDir(glm::fvec3(0, 0, 0));
 }
 

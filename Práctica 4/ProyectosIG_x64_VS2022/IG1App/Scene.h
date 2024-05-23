@@ -91,6 +91,8 @@ protected:
 	PosLight* posLight;
 	SpotLight* spotLight;
 
+	PosLight* TIELight;
+
 };
 
 #endif //_H_Scene_H_
