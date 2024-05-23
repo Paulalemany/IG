@@ -14,6 +14,7 @@ Scene::init()
 
 	// allocate memory and load resources
 	// Lights
+	setLights();
 	// Textures
 			//Creamos y cargamos todas las texturas que se van a utilizar
 	Texture* baldosaC = new Texture();				//Suelo
@@ -44,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(9);
+	setScene(6);
 
 }
 
@@ -92,6 +93,7 @@ Scene::setGL()
 
 
 	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHTING);			  // activar la iluminacion
 }
 
 void
@@ -102,9 +104,9 @@ Scene::resetGL()
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GLUT_MULTISAMPLE);
 	glDisable(GL_COLOR_MATERIAL);
-
 	glDisable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ZERO);
+	glDisable(GL_LIGHTING);
 }
 
 //Apt 56
@@ -127,8 +129,13 @@ void Scene::sceneDirLight(Camera const& cam) const
 void
 Scene::render(Camera const& cam) const
 {
-	sceneDirLight(cam); //Apt 56
+	//sceneDirLight(cam); //Apt 56
 	cam.upload();
+	//luz
+	dirLight->upload(cam.viewMat());
+	posLight->upload(cam.viewMat());
+	spotLight->upload(cam.viewMat());
+	
 
 	for (Abs_Entity* el : gObjects) {
 		el->render(cam.viewMat());
@@ -269,28 +276,30 @@ void Scene::setScene(int i)
 		break;
 
 	case 7:
-		rbmSphere->setColor(dvec4(0, 0, 1, 1));
-		gObjects.push_back(rbmSphere);
-		break;
+		/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
+		gObjects.push_back(rbmSphere);*/
 
-	case 8:
 		rbmToroid->setColor(dvec4(0, 1, 0, 1));
 		gObjects.push_back(rbmToroid);
 		break;
 
-	case 9:
+	case 8:
 		tatooineColor->setColor(dvec4(1, 1, 0, 1));
 		tatooineColor->setModelMat(
-			translate(dmat4(1), dvec3(200,0,0))
+			translate(dmat4(1), dvec3(200, 0, 0))
 		);
 		gObjects.push_back(tatooineColor);
 
 		goldMaterial->setGold();
 		tatooineMaterial->setMaterial(goldMaterial);
 		tatooineMaterial->setModelMat(
-			translate(dmat4(1), dvec3(0,0,200))
+			translate(dmat4(1), dvec3(0, 0, 200))
 		);
 		gObjects.push_back(tatooineMaterial);
+		break;
+
+	case 9:
+		
 		break;
 
 	default:
@@ -327,11 +336,15 @@ void Scene::orbit(float time)
 			* TIE->modelMat()
 		);
 
+		//Colocamos la luz
+		//TIELight->setPosDir(inventedNode->modelMat());
+
 		//Hay que girarlo y moverlo
 		dvec3 direction = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 0.0, 1.0, 0.0)));
 		inventedNode->setModelMat(
 			glm::rotate(dmat4(1), radians(-0.3), direction)
 		);
+
 	}
 }
 
@@ -352,5 +365,37 @@ void Scene::rotate(float time)
 			glm::rotate(dmat4(1), radians(-0.5), eje)
 		);
 	}
+}
+
+void Scene::setLights()
+{
+	dirLight = new DirLight();
+	dirLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	dirLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
+	dirLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	dirLight->setPosDir(glm::fvec3(1, 1, 1));
+	dirLight->setId(GL_LIGHT0);
+
+	posLight = new PosLight();
+	posLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	posLight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
+	posLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	posLight->setPosDir(glm::fvec3(100.0, 1500.0, 0));
+	posLight->setId(GL_LIGHT1);
+
+	spotLight = new SpotLight();
+	spotLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	spotLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
+	spotLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	spotLight->setPosDir(glm::fvec3(0, 300.0, 3000.0));
+	spotLight->setId(GL_LIGHT2);
+
+	TIELight = new PosLight();
+	TIELight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
+	TIELight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
+	TIELight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
+	TIELight->setId(GL_LIGHT3);
+	//Ahora en el 0,0,0, en el update lo pondremos con el nodo ficticio
+	TIELight->setPosDir(glm::fvec3(0, 0, 0));
 }
 

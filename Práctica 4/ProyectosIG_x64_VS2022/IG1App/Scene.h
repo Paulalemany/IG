@@ -9,6 +9,7 @@
 #include "QuadricEntity.h"
 #include "CompoundEntity.h"
 #include "Rbm.h"
+#include "Light.h"
 
 #include <vector>
 
@@ -41,6 +42,27 @@ public:
 	void orbit(float time);
 	void rotate(float time);
 
+	//luces
+	void setLights();
+
+	//apt76
+	void switchDirLight(bool s) {
+		if (s) { dirLight->enable(); }
+		else { dirLight->disable(); }
+	}
+
+	//apt77
+	void switchPosLight(bool s) {
+		if (s) { posLight->enable(); }
+		else { posLight->disable(); }
+	}
+
+	//apt78
+	void switchSpotLight(bool s) {
+		if (s) { spotLight->enable(); }
+		else spotLight->disable();
+	}
+
 protected:
 	void free();
 	void setGL();
@@ -63,6 +85,13 @@ protected:
 	CompoundEntity* inventedNode;
 	CompoundEntity* inventedNodeRotate;
 	CompoundEntity* TIE;
+
+	//Luces
+	DirLight* dirLight;
+	PosLight* posLight;
+	SpotLight* spotLight;
+
+	PosLight* TIELight;
 
 };
 
