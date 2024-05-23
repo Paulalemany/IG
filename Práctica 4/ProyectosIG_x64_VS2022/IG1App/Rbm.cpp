@@ -51,6 +51,8 @@ void RbmSphere::render(glm::dmat4 const& modelViewMat) const
 		if (material != nullptr) {
 			material->reset();
 		}
+
+		glDisable(GL_COLOR_MATERIAL);
 	}
 	
 }

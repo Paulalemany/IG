@@ -17,31 +17,31 @@ Scene::init()
 	setLights();
 	// Textures
 			//Creamos y cargamos todas las texturas que se van a utilizar
-	Texture* baldosaC = new Texture();				//Suelo
+	Texture* baldosaC = new Texture();				//Suelo 0
 	baldosaC->load("../BmpsP1/baldosaC.bmp");
 	gTextures.push_back(baldosaC);
 
-	Texture* container = new Texture();				//Caja exterior
+	Texture* container = new Texture();				//Caja exterior 1
 	container->load("../BmpsP1/container.bmp");
 	gTextures.push_back(container);
 
-	Texture* papelE = new Texture();				//Caja interior
+	Texture* papelE = new Texture();				//Caja interior 2
 	papelE->load("../BmpsP1/papelE.bmp");
 	gTextures.push_back(papelE);
 
-	Texture* baldosaP = new Texture();				//Estrella
+	Texture* baldosaP = new Texture();				//Estrella 3
 	baldosaP->load("../BmpsP1/baldosaP.bmp");
 	gTextures.push_back(baldosaP);
 
-	Texture* windowV = new Texture();				//Parapet
+	Texture* windowV = new Texture();				//Parapet 4
 	windowV->load("../BmpsP1/windowV.bmp", 125);
 	gTextures.push_back(windowV);
 
-	Texture* noche = new Texture();					//Noche
+	Texture* noche = new Texture();					//Noche 5
 	noche->load("../BmpsP1/noche.bmp");
 	gTextures.push_back(noche);
 
-	Texture* foto = new Texture();					//Foto
+	Texture* foto = new Texture();					//Foto 6
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
@@ -189,18 +189,18 @@ void Scene::setScene(int i)
 		//apt 72
 		RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20);
 
-		gObjects.push_back(new EjesRGB(400.0));
-
 		//apt74
 		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
 		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
 		Material* goldMaterial = new Material();
+
 
 #pragma endregion
 
 		switch (i)
 		{
 		case 0:
+			gObjects.push_back(new EjesRGB(400.0));
 			//gObjects.push_back(new RegularCube(200.0));								//Cubo
 			gObjects.push_back(new RGBCube(200.0));									//Cubo RGB
 			break;
@@ -220,6 +220,7 @@ void Scene::setScene(int i)
 			break;
 
 		case 2:	//Apt 58
+			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(cabeza);																		//Esfera
 			gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
@@ -239,15 +240,19 @@ void Scene::setScene(int i)
 			break;
 
 		case 3: //Apt 60
+			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(TIE);
 			break;
 
 		case 4: //Apt 64
+			gObjects.push_back(new EjesRGB(400.0));
+
 			gObjects.push_back(box);
 			break;
 
 		case 5: //APT 66
+			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
 			gObjects.push_back(new RGBRectangle(200, 100));
@@ -256,6 +261,7 @@ void Scene::setScene(int i)
 			break;
 
 		case 6: //APT 67
+			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(tatooine); // Añadimos el planeta
 
@@ -277,6 +283,8 @@ void Scene::setScene(int i)
 			break;
 
 		case 7:
+			gObjects.push_back(new EjesRGB(400.0));
+
 			/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
 			gObjects.push_back(rbmSphere);*/
 
@@ -285,6 +293,8 @@ void Scene::setScene(int i)
 			break;
 
 		case 8:
+			gObjects.push_back(new EjesRGB(400.0));
+
 			tatooineColor->setColor(dvec4(1, 1, 0, 1));
 			tatooineColor->setModelMat(
 				translate(dmat4(1), dvec3(200, 0, 0))
@@ -300,7 +310,9 @@ void Scene::setScene(int i)
 			break;
 
 		case 9:
+			gObjects.push_back(new EjesRGB(400.0));
 
+			//add entities.
 			break;
 
 		default:

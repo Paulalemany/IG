@@ -27,7 +27,41 @@ using namespace glm;
 	{
 		//Se crean los objetos que lo componen aquí
 
-		/// Alas del TIE
+				///Eje del TIE
+		eje = new Cylinder(10, 10, 200);
+		eje->QuadricColor(0.1, 0.2, 0.5);
+		eje->setModelMat(
+			translate(dmat4(1), dvec3(100, 100, 0))
+		);
+		addEntity(eje);
+
+		///Cuerpo del TIE
+		body = new Sphere(60.0);
+		body->QuadricColor(0.1, 0.2, 0.5);
+		body->setModelMat(
+			translate(dmat4(1), dvec3(100, 100, 100))
+		);
+		addEntity(body);
+
+		///Morro
+		morro = new Cylinder(15, 15, 25);
+		morro->QuadricColor(0.1, 0.2, 0.5);
+		morro->setModelMat(
+			translate(dmat4(1), dvec3(155, 100, 100))
+			* rotate(dmat4(1), radians(90.0), dvec3(0.0, 1.0, 0.0))
+		);
+		addEntity(morro);
+
+		///Disco del Morro
+		tapaMorro = new Disk(5, 15);
+		tapaMorro->QuadricColor(0.1, 0.2, 0.5);
+		tapaMorro->setModelMat(
+			translate(dmat4(1), dvec3(180, 100, 100))
+			* rotate(dmat4(1), radians(90.0), dvec3(0.0, 1.0, 0.0))
+		);
+		addEntity(tapaMorro);
+
+		/// Alas del TIE (al final porque son transparentes)
 		wing1 = new WingAdvancedTIE(100.0, 50.0, 0);
 		wing1->setModelMat(
 			rotate(dmat4(1), glm::radians(-90.0), glm::dvec3(0.0, 0.0, 1.0))
@@ -43,39 +77,6 @@ using namespace glm;
 		);
 		addEntity(wing2);
 
-		///Eje del TIE
-		eje = new Cylinder(10, 10, 200);
-		eje->QuadricColor(0.1, 0.2, 0.5);
-		eje->setModelMat(
-			translate(dmat4(1), dvec3(100,100,0))
-		);
-		addEntity(eje);
-
-		///Cuerpo del TIE
-		body = new Sphere(60.0);
-		body->QuadricColor(0.1, 0.2, 0.5);
-		body->setModelMat(
-			translate(dmat4(1), dvec3(100, 100, 100))
-		);
-		addEntity(body);						
-
-		///Morro
-		morro = new Cylinder(15, 15, 25);
-		morro->QuadricColor(0.1, 0.2, 0.5);
-		morro->setModelMat(
-			translate(dmat4(1), dvec3(155, 100, 100))
-			* rotate(dmat4(1), radians(90.0), dvec3(0.0,1.0,0.0))
-		);
-		addEntity(morro);		
-
-		///Disco del Morro
-		tapaMorro = new Disk(5, 15);
-		tapaMorro->QuadricColor(0.1, 0.2, 0.5);
-		tapaMorro->setModelMat(
-			translate(dmat4(1), dvec3(180, 100, 100))
-			* rotate(dmat4(1), radians(90.0), dvec3(0.0, 1.0, 0.0))
-		);
-		addEntity(tapaMorro);
 	}
 
 	AdvancedTIE::~AdvancedTIE()

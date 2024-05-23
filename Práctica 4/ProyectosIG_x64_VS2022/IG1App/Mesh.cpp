@@ -467,8 +467,6 @@ Mesh* Mesh::generateWingAdvancedTIE(GLdouble w, GLdouble h)
 	mesh->vVertices.reserve(mesh->mNumVertices);
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
 
-
-
 	mesh->vVertices.emplace_back(w / 2, h, h); //v0
 	mesh->vVertices.emplace_back(w / 2, -h, h); //v1
 	mesh->vVertices.emplace_back(h / 2, h, 0); //v2
@@ -568,6 +566,8 @@ void IndexMesh::render() const
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisable(GL_COLOR_MATERIAL);
+		glColorMaterial(GL_FRONT_AND_BACK, GL_FILL);
 
 	}
 }

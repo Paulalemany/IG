@@ -85,7 +85,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			glLineWidth(2);
 			mMesh->render();
 			glLineWidth(1);
-			glColor4d(0, 0, 0, 0);		//Restablecemos el color Negro?
+			glColor4d(0, 0, 0, 1);		//Restablecemos el color Negro?
 		}
 	}
 
