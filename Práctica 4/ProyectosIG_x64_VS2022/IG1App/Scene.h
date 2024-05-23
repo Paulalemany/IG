@@ -57,6 +57,12 @@ public:
 		else { posLight->disable(); }
 	}
 
+	//apt78
+	void switchSpotLight(bool s) {
+		if (s) { spotLight->enable(); }
+		else spotLight->disable();
+	}
+
 protected:
 	void free();
 	void setGL();
@@ -83,6 +89,7 @@ protected:
 	//Luces
 	DirLight* dirLight;
 	PosLight* posLight;
+	SpotLight* spotLight;
 
 };
 

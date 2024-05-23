@@ -261,6 +261,13 @@ IG1App::key(unsigned char key, int x, int y)
 	case 's':
 		mScene->switchPosLight(false);
 		break;
+	case 'z':
+		mScene->switchSpotLight(true);
+		break;
+	case 'x':
+		mScene->switchSpotLight(false);
+		break;
+
 	default:
 		need_redisplay = false;
 		break;
