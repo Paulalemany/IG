@@ -94,6 +94,7 @@ IG1App::iniWinOpenGL()
 	glutInitWindowSize(mWinW, mWinH);		// window size
 	glutInitWindowPosition(140, 140);		//Cambia la posición en la que aparece la pantalla
 
+	/// [ Frame Buffer ] Se configura al crear la ventana
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE |
 		GLUT_DEPTH /*| GLUT_STENCIL*/); // RGBA colors, double buffer, depth
 	// buffer and stencil buffer
@@ -137,7 +138,7 @@ void
 IG1App::display() const
 { // double buffering
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT /*| GL_STENCIL_BUFFER_BIT*/); // clears the back buffer
 
 	if (m2Vistas)
 	{

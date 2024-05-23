@@ -85,7 +85,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			glLineWidth(2);
 			mMesh->render();
 			glLineWidth(1);
-			glColor4d(0, 0, 0, 0);		//Restablecemos el color �Negro?
+			glColor4d(0, 0, 0, 0);		//Restablecemos el color Negro?
 		}
 	}
 
@@ -330,6 +330,21 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		if (mMesh != nullptr) {
 			
 			glEnable(GL_CULL_FACE);
+			
+			/// [ Culling ]
+			// Que es? -> eliminar elementos, sacrificar selectivamente, entresacar o descartar
+						// Tipos:
+							// · Backface culling : eliminacion de caras traseras
+							// · (view) Frustum culling : eliminacion de caras de una malla que estan fuera del frustum
+							// · Occlusion culling : eliminacion de objetos que estan ocultos por otros objetos.
+			// Como usar -> glEnable(GL_CULL_FACE);
+			//				bind
+			//				glCullFace(GL_BACK); // face = GL_FRONT, GL_BACK o GL_FRONT_AND_BACK
+			//				render
+			//				unbind
+			//				*Se repite para GL_FRONT*
+			//				glDisable(GL_CULL_FACE);
+
 			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
 			upload(aMat);
 
@@ -344,9 +359,8 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			glCullFace(GL_FRONT);
 			mMesh->render();
 			mTexture->unbind();
-			glDisable(GL_CULL_FACE);
 
-			
+			glDisable(GL_CULL_FACE);
 			mMesh->render();
 		}
 	}
