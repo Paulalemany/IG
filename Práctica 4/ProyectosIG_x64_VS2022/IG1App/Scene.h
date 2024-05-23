@@ -42,12 +42,19 @@ public:
 	void orbit(float time);
 	void rotate(float time);
 
-	//apt76
+	//luces
 	void setLights();
 
+	//apt76
 	void switchDirLight(bool s) {
 		if (s) { dirLight->enable(); }
 		else { dirLight->disable(); }
+	}
+
+	//apt77
+	void switchPosLight(bool s) {
+		if (s) { posLight->enable(); }
+		else { posLight->disable(); }
 	}
 
 protected:
@@ -75,6 +82,7 @@ protected:
 
 	//Luces
 	DirLight* dirLight;
+	PosLight* posLight;
 
 };
 

@@ -228,13 +228,13 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'k': //apt 51
 		m2Vistas = !m2Vistas;
 		break;
-	case 'a':
+	/*case 'a':
 		mCamera->moveLR(1);
 		break;
 	case 'd':
 		mCamera->moveLR(-1);
 		break;
-	/*case 's':
+	case 's':
 		mCamera->moveUD(1);
 		break;
 	case 'w':
@@ -246,12 +246,20 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'g': //apt68
 		rotate = !rotate;
 		break;
+
 		//luces
 	case 'q':
 		mScene->switchDirLight(true);
 		break;
 	case 'w':
 		mScene->switchDirLight(false);
+		break;
+
+	case 'a':
+		mScene->switchPosLight(true);
+		break;
+	case 's':
+		mScene->switchPosLight(false);
 		break;
 	default:
 		need_redisplay = false;
