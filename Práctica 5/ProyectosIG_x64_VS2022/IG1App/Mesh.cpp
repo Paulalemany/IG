@@ -19,25 +19,29 @@ Mesh::draw() const
 void
 Mesh::render() const
 {
-	if (vVertices.size() > 0) { // transfer data
+	if (vVertices.size() > 0) // transfer data
+	{ 
 		// transfer the coordinates of the vertices
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glVertexPointer(
 			3, GL_DOUBLE, 0, vVertices.data()); // number of coordinates per vertex, type of
 		// each coordinate, stride, pointer
-		if (vColors.size() > 0) {             // transfer colors
+		if (vColors.size() > 0) 
+		{             // transfer colors
 			glEnableClientState(GL_COLOR_ARRAY);
 			glColorPointer(
 				4, GL_DOUBLE, 0, vColors.data()); // components number (rgba=4), type of
 			// each component, stride, pointer
 		}
-		if (vTexCoords.size() > 0) {
+		if (vTexCoords.size() > 0)							// El metodo Mesh::render activa y desactiva el array de coordenadas de textura.
+		{
 			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 			glTexCoordPointer(
 				2, GL_DOUBLE, 0, vTexCoords.data());
 		}
 		//Apt61
-		if (vNormals.size() > 0) {
+		if (vNormals.size() > 0) 
+		{
 			glEnableClientState(GL_NORMAL_ARRAY);
 			glNormalPointer(GL_DOUBLE, 0, vNormals.data());
 		}
@@ -331,7 +335,7 @@ Mesh* Mesh::generateBoxOutline(GLdouble length)
 	mesh->vVertices.push_back(mesh->vVertices[0]); //v8
 	mesh->vVertices.push_back(mesh->vVertices[1]); //v9
 
-	//TexCoords
+	//TexCoords	
 	mesh->vTexCoords.reserve(mesh->mNumVertices);
 
 	mesh->vTexCoords.emplace_back(0, 1);

@@ -42,7 +42,7 @@ protected:
 	GLuint mPrimitive = GL_TRIANGLES;          // graphic primitive: GL_POINTS, GL_LINES, GL_TRIANGLES, ...
 	GLuint mNumVertices = 0; // number of elements ( = vVertices.size())
 	std::vector<glm::dvec3> vVertices; // vertex array
-	std::vector<glm::dvec2> vTexCoords; //Texture Array
+	std::vector<glm::dvec2> vTexCoords; //Texture Array -> Para añadir texturas (s,t)
 	std::vector<glm::dvec4> vColors;   // color array
 	std::vector<glm::dvec3> vNormals; //apt61
 	virtual void draw() const;

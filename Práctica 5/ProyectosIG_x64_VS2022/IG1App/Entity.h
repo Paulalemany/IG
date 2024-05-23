@@ -17,7 +17,7 @@ public:
 	Abs_Entity(const Abs_Entity& e) = delete;            // no copy constructor
 	Abs_Entity& operator=(const Abs_Entity& e) = delete; // no copy assignment
 
-	/// * Transformaciones con mModelMat *
+	/// [ Transformaciones con mModelMat ]
 	/// ModelView MATRIX = VIEW MATRIX * MODEL MATRIX
 	// Sera donde se aplicaran las transformaciones (translate, rotate, scale)
 	// -> glm::translate(dmat4, dvec3)			// aqui dmat4 sera generalmente la matriz identidad (dmat4(1))
@@ -28,17 +28,18 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const = 0; // abstract method
 	virtual void update() {}	//Modifica el mModelMat de las entidades que la cambien
 
-	// modeling matrix
+	/// modeling matrix
 	glm::dmat4 const& modelMat() const { return mModelMat; };
 	void setModelMat(glm::dmat4 const& aMat) { mModelMat = aMat; };
 
-	//Color
+	/// Color
 	glm::dvec4 const& color() const { return mColor; };
 	void setColor(glm::dvec4 const& aColor) { mColor = aColor; };
 
-	//Texture
-	//Le pasamos como parámetro el nombre de la textura
+	/// Texture
+	// Establece la textura al crear la entidad.
 	void setTexture(std::string textura, Texture* t, GLuint a)const { t->load(textura, a); }
+	// En el render de entity, hay que activar y desactivar la textura (usando bind, unbind).
 
 	//apt68
 	void setRot(glm::dvec3 nrot, GLdouble nang);
@@ -49,7 +50,7 @@ public:
 
 protected:
 	Mesh* mMesh = nullptr; // the mesh
-	Texture* mTexture = nullptr;
+	Texture* mTexture = nullptr; // atributo para la textura 
 	Texture* mTexture2 = nullptr;
 	glm::dmat4 mModelMat;  // modeling matrix
 	glm::dvec4 mColor;	   // color de la entidad

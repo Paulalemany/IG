@@ -181,7 +181,7 @@ void RegularRectangle::update()
 Ground::Ground(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t)
 	: Abs_Entity()
 {
-	//Creamos un rect�ngulo
+	//Creamos un rectangulo
 	mMesh = Mesh::generateRectangleTexCor(w, h, rw, rh);
 	//Textura del ground
 	mTexture = t;
