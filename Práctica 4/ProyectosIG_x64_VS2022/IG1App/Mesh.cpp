@@ -822,7 +822,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 
 	MbR* mesh = new MbR(mm, nn, perfil);	//Creamos la malla
 
-	mesh->mPrimitive = GL_TRIANGLES;		//Primitiva
+	mesh->mPrimitive = GL_TRIANGLES;		//Primitiva [Exclusiva de Mallas Indexadas]
 	mesh->mNumVertices = nn * mm;			//Número de vértices
 
 	mesh->vVertices.reserve(mesh->mNumVertices);
@@ -909,6 +909,11 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 8. Construir los vectores normales y construir la malla.
 	mesh->vNormals.reserve(mesh->mNumVertices);
 	mesh->buildNormalVectors();
+
+	/// DEBUG -> Dibuja las normales
+	//for (int i = 0; i < mesh->mNumVertices; i++) {
+	//	mesh->vColors.emplace_back(mesh->vNormals[i].x, mesh->vNormals[i].y, mesh->vNormals[i].z, 1);
+	//}
 
 	return mesh;
 }

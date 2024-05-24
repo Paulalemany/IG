@@ -63,6 +63,14 @@ public:
 		else spotLight->disable();
 	}
 
+	//apt79 - llama a los metodos de AdvancedTIE
+	void switchTIESpotLight(bool s) {
+		if (TIE != nullptr) {
+			if (s) { TIE->activaFoco(); }
+			else TIE->desactivaFoco();
+		}
+	}
+
 protected:
 	void free();
 	void setGL();
@@ -84,14 +92,13 @@ protected:
 	//Método del Nodo ficticio
 	CompoundEntity* inventedNode;
 	CompoundEntity* inventedNodeRotate;
-	CompoundEntity* TIE;
+
+	AdvancedTIE* TIE; // referencia al TIE
 
 	//Luces
 	DirLight* dirLight;
 	PosLight* posLight;
 	SpotLight* spotLight;
-
-	PosLight* TIELight;
 
 };
 

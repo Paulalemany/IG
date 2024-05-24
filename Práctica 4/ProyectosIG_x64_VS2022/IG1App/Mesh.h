@@ -76,7 +76,7 @@ class MbR : public IndexMesh
 protected:
 
 	GLint m;				//Número de puntos del perfil
-	GLint n;				//Número de muestras al girar al rededor del eje
+	GLint n;				//Número de muestras al girar alrededor del eje
 	//(Damos por hecho que van de abajo a arriba)
 	glm::dvec3* perfil;	//Array de vértices que define el perfil que va a hacerse girar 
 

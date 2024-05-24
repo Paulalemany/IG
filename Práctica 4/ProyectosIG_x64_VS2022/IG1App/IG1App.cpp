@@ -99,8 +99,7 @@ IG1App::iniWinOpenGL()
 		GLUT_DEPTH /*| GLUT_STENCIL*/); // RGBA colors, double buffer, depth
 	// buffer and stencil buffer
 
-	mWinId = glutCreateWindow(
-		"Paula al cuadrado"); // with its associated OpenGL context, return window's identifier
+	mWinId = glutCreateWindow("Paula al cuadrado"); // with its associated OpenGL context, return window's identifier
 
 	// Callback registration
 	glutReshapeFunc(s_resize);
@@ -269,6 +268,13 @@ IG1App::key(unsigned char key, int x, int y)
 		mScene->switchSpotLight(false);
 		break;
 
+		// luces del tie
+	case 'v':
+		mScene->switchTIESpotLight(true);
+		break;
+	case 'b':
+		mScene->switchTIESpotLight(false);
+		break;
 	default:
 		need_redisplay = false;
 		break;

@@ -1,5 +1,7 @@
 #include "CompoundEntity.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "../IG1App/Light.h"
+
 
 using namespace glm;
 #pragma region CompoundEntity
@@ -27,7 +29,7 @@ using namespace glm;
 	{
 		//Se crean los objetos que lo componen aquí
 
-				///Eje del TIE
+		///Eje del TIE
 		eje = new Cylinder(10, 10, 200);
 		eje->QuadricColor(0.1, 0.2, 0.5);
 		eje->setModelMat(
@@ -77,20 +79,36 @@ using namespace glm;
 		);
 		addEntity(wing2);
 
+		/// Foco
+		//La posición inicial se fija en la constructora de la entidad que las contiene; generalmente esa
+		//posición suele ser el punto(0, 0, 0)
+		foco = new SpotLight();
+		
 	}
 
 	AdvancedTIE::~AdvancedTIE()
 	{
+		delete foco;
+		foco = nullptr;
 	}
 
 	void AdvancedTIE::render(glm::dmat4 const& modelViewMat) const
 	{
 		CompoundEntity::render(modelViewMat);
+		// Actualizamos posicion del foco
+		foco->upload(modelViewMat * mModelMat);
 	}
 
 	void AdvancedTIE::update()
 	{
-
+	}
+	void AdvancedTIE::activaFoco()
+	{
+		foco->enable();
+	}
+	void AdvancedTIE::desactivaFoco()
+	{
+		foco->disable();
 	}
 #pragma endregion
 

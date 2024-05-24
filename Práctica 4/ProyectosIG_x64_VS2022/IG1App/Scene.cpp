@@ -280,6 +280,7 @@ void Scene::setScene(int i)
 			inventedNode->addEntity(TIE);
 			inventedNodeRotate->addEntity(TIE);
 
+			
 			break;
 
 		case 7:
@@ -353,15 +354,11 @@ void Scene::orbit(float time)
 			* TIE->modelMat()
 		);
 
-		//Colocamos la luz
-		//TIELight->setPosDir(inventedNode->modelMat());
-
 		//Hay que girarlo y moverlo
 		dvec3 direction = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 0.0, 1.0, 0.0)));
 		inventedNode->setModelMat(
 			glm::rotate(dmat4(1), radians(-0.3), direction)
 		);
-
 	}
 }
 
@@ -406,13 +403,5 @@ void Scene::setLights()
 	spotLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
 	spotLight->setPosDir(glm::fvec3(0, 300.0, 3000.0));
 	spotLight->setId(GL_LIGHT2);
-
-	TIELight = new PosLight();
-	TIELight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
-	TIELight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
-	TIELight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	TIELight->setId(GL_LIGHT3);
-	//Ahora en el 0,0,0, en el update lo pondremos con el nodo ficticio
-	TIELight->setPosDir(glm::fvec3(0, 0, 0));
 }
 
