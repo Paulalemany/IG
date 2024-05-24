@@ -45,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(2);
+	setScene(6);
 
 }
 
@@ -389,21 +389,21 @@ void Scene::setLights()
 	dirLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
 	dirLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
 	dirLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	dirLight->setPosDir(glm::fvec3(1, 1, 1));
+	dirLight->setPosDir(glm::fvec3(1.0, 1.0, 1.0));
 	dirLight->setId(GL_LIGHT0);
 
 	posLight = new PosLight();
 	posLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
 	posLight->setDiff(glm::fvec4(1.0, 1.0, 0.0, 1.0));
 	posLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	posLight->setPosDir(glm::fvec3(100.0, 1500.0, 0));
+	posLight->setPosDir(glm::fvec3(200.0, 200.0, 0));
 	posLight->setId(GL_LIGHT1);
 
 	spotLight = new SpotLight();
 	spotLight->setAmb(glm::fvec4(0.0, 0.0, 0.0, 1.0));
 	spotLight->setDiff(glm::fvec4(1.0, 1.0, 1.0, 1.0));
 	spotLight->setSpec(glm::fvec4(0.5, 0.5, 0.5, 1.0));
-	spotLight->setPosDir(glm::fvec3(0, 300.0, 3000.0));
+	spotLight->setPosDir(glm::fvec3(0, 300.0, 2000.0));
 	spotLight->setId(GL_LIGHT2);
 }
 
