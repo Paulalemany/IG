@@ -191,7 +191,7 @@ void Scene::setScene(int i)
 
 		//apt74
 		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
-		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
+		RbmSphere* tatooineMaterial = new RbmSphere(200, 20, 30);
 		Material* goldMaterial = new Material();
 
 
@@ -263,7 +263,9 @@ void Scene::setScene(int i)
 		case 6: //APT 67
 			gObjects.push_back(new EjesRGB(400.0));
 
-			gObjects.push_back(tatooine); // Añadimos el planeta
+			goldMaterial->setGold();
+			tatooineMaterial->setMaterial(goldMaterial);
+			gObjects.push_back(tatooineMaterial); // Añadimos el planeta
 
 			//Inicializamos los nodos ficticios
 			inventedNode = new CompoundEntity();		// Nodo para la translacion
