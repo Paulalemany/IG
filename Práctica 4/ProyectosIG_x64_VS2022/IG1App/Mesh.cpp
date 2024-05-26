@@ -729,7 +729,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 
 	// 5. Construir los �ndices de las caras triangulares
 	int indiceMayor = 0;
-	mesh->nNumIndices = (nn-1) * (mm-1) * 6;
+	mesh->nNumIndices = mesh->mNumVertices * 6;
 	mesh->nIndexes = new GLuint[mesh->nNumIndices];
 
 	// Inicializamos nIndexes a 0
@@ -741,10 +741,10 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 6. Se rellena nIndexes
 	// i recorre las muestras alrededor del eje Y
 	//De alguna manera dejabamos alg�n indice suelto
-	for (int i = 0; i < nn-1; i++)
+	for (int i = 0; i < nn; i++)
 	{
 		// j recorre los vertices del perfil
-		for (int j = 0; j < mm-1; j++)
+		for (int j = 0; j < mm; j++)
 		{
 			// 7.
 			//indice cuenta los indices generados hasta ahora

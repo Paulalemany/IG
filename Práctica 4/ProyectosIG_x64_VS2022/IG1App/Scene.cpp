@@ -196,6 +196,8 @@ void Scene::setScene(int i)
 		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20, 360);
 		Material* goldMaterial = new Material();
 
+		RbmSphere* rombo = new RbmSphere(100, 4, 3, 360);
+
 
 #pragma endregion
 
@@ -323,8 +325,10 @@ void Scene::setScene(int i)
 
 		case 9:
 
-			
+			//gObjects.push_back(new RbmSphere(100, 4, 3, 360));	//Para crear una pirámide regular
 			//add entities.
+			rombo->setColor(dvec4(1, 0, 0, 1));
+			gObjects.push_back(rombo);
 			break;
 
 		default:

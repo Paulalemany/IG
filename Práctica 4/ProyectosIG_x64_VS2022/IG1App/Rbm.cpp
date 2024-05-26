@@ -4,15 +4,15 @@ RbmSphere::RbmSphere(GLdouble r, GLint m, GLint p, int g)
 {
 	//r: radio de la esfera
 	//p: puntos que tiene el perfil
-	//m: numero de puntos que hay en el perfil
+	//m: revoluciones
 
-	perfil = new glm::dvec3[m];
+	perfil = new glm::dvec3[p];
 
 	//Variables para colocar los puntos
-	const double alpha = 3.14 / (m - 1);	//ángulo entre los puntos del perfil
+	const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
 
 	//Colocamos los puntos en el perfil
-	for (int i = 0; i < m; i++)
+	for (int i = 0; i < p; i++)
 	{
 		perfil[i] = glm::dvec3(
 			r * sin(alpha * i),
@@ -103,4 +103,44 @@ void RbmToroid::render(glm::dmat4 const& modelViewMat) const
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 
+}
+
+RbmPiramid::RbmPiramid(GLuint r, GLuint m, GLuint p)
+{
+	//r: radio de la esfera
+	//p: puntos que tiene el perfil
+	//m: numero de rotaciones que se va a dar
+
+	perfil = new glm::dvec3[p];
+
+	//Variables para colocar los puntos
+	const double alpha = 3.14 / (p - 1);	//ángulo entre los puntos del perfil
+
+	//Colocamos los puntos en el perfil
+	for (int i = 0; i < p; i++)
+	{
+		perfil[i] = glm::dvec3(
+			r * sin(alpha * i),
+			r * cos(alpha * i),
+			0 //Queremos que gire sobre este eje por lo que no debe cambiar
+		);
+	}
+}
+
+void RbmPiramid::render(glm::dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+		glm::dmat4 aMat = modelViewMat * mModelMat;	// glm matrix multiplication
+		upload(aMat);
+
+		glColor4f(mColor.r, mColor.g, mColor.b, mColor.a);
+
+		mMesh->render();
+
+		glColor4f(0, 0, 0, 0);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	}
 }

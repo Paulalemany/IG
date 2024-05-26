@@ -28,3 +28,14 @@ protected:
 
 };
 
+class RbmPiramid : public Abs_Entity {
+public:
+
+	RbmPiramid(GLuint r, GLuint m, GLuint p);
+	~RbmPiramid() { delete mMesh; delete[] perfil; }
+	virtual void render(glm::dmat4 const& modelViewMat) const override;
+	virtual void update() override {};
+
+protected:
+	glm::dvec3* perfil;
+};
