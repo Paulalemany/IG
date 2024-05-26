@@ -833,8 +833,8 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	{
 		//Genera la muestra i-ésima de vértices
 
-		GLdouble theta = i * 360 / nn;
-		theta /= 4; // Para que salga un cuarto de toroide (las tapas se rayan por el ultimo indice)
+		GLdouble theta = i * 360 / (nn-1); // nn-1 para que las tapas no se rayen!!!
+		theta /= 4; // Para que salga un cuarto de toroide (hacer parametro para esto)
 
 		GLdouble c = cos(radians(theta));
 		GLdouble s = sin(radians(theta));
@@ -858,7 +858,7 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 
 	// 5. Construir los índices de las caras triangulares
 	int indiceMayor = 0;
-	mesh->nNumIndices = mesh->mNumVertices * 6;
+	mesh->nNumIndices = (nn-1) * (mm-1) * 6;
 	mesh->nIndexes = new GLuint[mesh->nNumIndices];
 
 	// Inicializamos nIndexes a 0
@@ -870,10 +870,10 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	// 6. Se rellena nIndexes
 	// i recorre las muestras alrededor del eje Y
 	//De alguna manera dejabamos algún indice suelto
-	for (int i = 0; i < nn; i++)
+	for (int i = 0; i < nn-1; i++)
 	{
 		// j recorre los vertices del perfil
-		for (int j = 0; j < mm; j++)
+		for (int j = 0; j < mm-1; j++)
 		{
 			// 7.
 			//indice cuenta los indices generados hasta ahora
