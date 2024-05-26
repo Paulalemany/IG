@@ -832,7 +832,10 @@ MbR* MbR::generateIndexMbR(int mm, int nn, glm::dvec3* perfil)
 	for (int i = 0; i < nn; i++)
 	{
 		//Genera la muestra i-ésima de vértices
+
 		GLdouble theta = i * 360 / nn;
+		theta /= 4; // Para que salga un cuarto de toroide (las tapas se rayan por el ultimo indice)
+
 		GLdouble c = cos(radians(theta));
 		GLdouble s = sin(radians(theta));
 

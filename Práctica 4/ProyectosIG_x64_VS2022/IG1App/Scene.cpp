@@ -45,7 +45,7 @@ Scene::init()
 	foto->loadColorBuffer(800.0, 600.0);
 	gTextures.push_back(foto);
 	
-	setScene(6);
+	setScene(7);
 
 }
 
@@ -188,7 +188,8 @@ void Scene::setScene(int i)
 		RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
 
 		//apt 72
-		RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20);
+		RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20); //grosor rosquilla, radio rosquilla, muestras, perfil
+		CompoundEntity* node7 = new CompoundEntity(); // node7 porque es en la escena 7
 
 		//apt74
 		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
@@ -198,16 +199,23 @@ void Scene::setScene(int i)
 
 #pragma endregion
 
+		// Para que no haya errores con los colores -> empezar la escena en la que trabajamos primero (linea 48 de scene.cpp)
+
+		gObjects.push_back(new EjesRGB(400.0)); // gObjects[0]
+
+		if (i == 7)
+		{
+
+		}
 		switch (i)
 		{
 		case 0:
-			gObjects.push_back(new EjesRGB(400.0));
+
 			//gObjects.push_back(new RegularCube(200.0));								//Cubo
 			gObjects.push_back(new RGBCube(200.0));									//Cubo RGB
 			break;
 		case 1:
 			// Graphics objects (entities) of the scene
-			gObjects.push_back(new EjesRGB(400.0));
 			//gObjects.push_back(new RegularPolygon(glm::dvec4 (0,1,1,1), 3.0, 100.0));						//Tri�ngulo
 			//gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));							//Circunferencia
 			//gObjects.push_back(new RGBTriangle(30.0));													//Triangulo RGB
@@ -221,7 +229,6 @@ void Scene::setScene(int i)
 			break;
 
 		case 2:	//Apt 58
-			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(cabeza);																		//Esfera
 			gObjects.push_back(new Disk(50.0, 150.0));														//Sombrero
@@ -241,19 +248,16 @@ void Scene::setScene(int i)
 			break;
 
 		case 3: //Apt 60
-			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(TIE);
 			break;
 
 		case 4: //Apt 64
-			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(box);
 			break;
 
 		case 5: //APT 66
-			gObjects.push_back(new EjesRGB(400.0));
 
 			gObjects.push_back(new RegularPolygon(glm::dvec4(1), 100.0, 200.0));
 			gObjects.push_back(new RGBRectangle(200, 100));
@@ -262,7 +266,6 @@ void Scene::setScene(int i)
 			break;
 
 		case 6: //APT 67 - tatooine y la nave
-			gObjects.push_back(new EjesRGB(400.0));
 
 			goldMaterial->setGold();
 			tatooine->setMaterial(goldMaterial);
@@ -283,21 +286,30 @@ void Scene::setScene(int i)
 			inventedNode->addEntity(TIE);
 			inventedNodeRotate->addEntity(TIE);
 
-			
 			break;
 
-		case 7: // toroide
-			gObjects.push_back(new EjesRGB(400.0));
-
+		case 7: // toroide (version 1/4 con tie que gira)
+			
 			/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
 			gObjects.push_back(rbmSphere);*/
 
 			rbmToroid->setColor(dvec4(0, 1, 0, 1));
-			gObjects.push_back(rbmToroid);
+
+			// Recolocamos y escalamos tie
+			TIE->setModelMat(translate(TIE->modelMat(), dvec3(75.0, -25.0, 0.0)) * 
+							 scale(dmat4(1), dvec3(0.3, 0.3, 0.3))
+			);
+
+			// Añadimos el TIE al node
+			node7->addEntity(TIE);
+
+			// Pusheamos objetos
+			gObjects.push_back(rbmToroid); // gObjects[1]
+			gObjects.push_back(node7); // gObjects[2]
+
 			break;
 
 		case 8: // dos planetas
-			gObjects.push_back(new EjesRGB(400.0));
 
 			tatooineColor->setColor(dvec4(1, 1, 0, 1)); 
 			tatooineColor->setModelMat(
@@ -314,7 +326,7 @@ void Scene::setScene(int i)
 			break;
 
 		case 9:
-			gObjects.push_back(new EjesRGB(400.0));
+
 
 			//add entities.
 			break;
@@ -326,7 +338,8 @@ void Scene::setScene(int i)
 		if (i == 6) {
 			glClearColor(0, 0, 0, 1);
 		}
-		else {
+		else
+		{
 			glClearColor(0.6, 0.7, 0.8, 1);
 		}
 	}
@@ -363,11 +376,34 @@ void Scene::orbit(float time)
 			glm::rotate(dmat4(1), radians(-0.3), direction)
 		);
 	}
+
+	if (mId == 7) // cuarto de toroide
+	{ 
+		// Podemos acceder a node (creado en el switch, con gObjects[2])
+		auto invnode = gObjects[2];
+
+		// Movemos el nodo
+		TIE->setModelMat(
+			translate(invnode->modelMat(), dvec3(0, 0, 0))
+			* TIE->modelMat()
+		);
+		
+		// Giramos y movemos el nodo
+		// Le damos direccion al TIE
+		dvec3 direction = glm::normalize(glm::dvec3(TIE->modelMat() * 
+										glm::dvec4(0.0, -1.0, 0.0, 0.0)) // Queremos que gire alrededor del eje Y
+		);
+
+		invnode->setModelMat(
+			glm::rotate(dmat4(1), 
+						radians(0.3), // Velocidad a la que gira
+						direction)
+		);
+	}
 }
 
 void Scene::rotate(float time)
 {
-	//habria que ver cual es el tie para darle el setRot
 	if (mId == 6) {
 
 		//Necesito que siempre rote sobre si mismo
@@ -379,7 +415,8 @@ void Scene::rotate(float time)
 
 		dvec3 eje = glm::normalize(glm::dvec3(TIE->modelMat() * glm::dvec4(0.0, 1.0, 0.0, 0.0)));
 		inventedNodeRotate->setModelMat(
-			glm::rotate(dmat4(1), radians(-0.5), eje)
+			glm::rotate(dmat4(1), 
+				radians(-0.5), eje)
 		);
 	}
 }

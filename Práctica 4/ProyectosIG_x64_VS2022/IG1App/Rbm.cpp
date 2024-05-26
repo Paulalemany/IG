@@ -69,7 +69,7 @@ RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p)
 
 	perfil = new glm::dvec3[p];
 
-	//Colocamos los puntos en el perfil
+	/// PUNTOS DEL PERFIL
 	for (int i = 0; i < p; i++)
 	{
 		//Variables para colocar los puntos

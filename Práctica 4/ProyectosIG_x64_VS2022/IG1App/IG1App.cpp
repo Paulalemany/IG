@@ -218,9 +218,11 @@ IG1App::key(unsigned char key, int x, int y)
 		setScene(9);
 	case 'u':
 		update();
+		std::cout << "update" << std::endl;
 		break;
 	case 'U':
 		glutIdleFunc(s_update);
+		std::cout << "s_update" << std::endl;
 		break;
 	case 'p': //apt 44
 		mCamera->changePrj();
@@ -240,11 +242,14 @@ IG1App::key(unsigned char key, int x, int y)
 	case 'w':
 		mCamera->moveUD(-1);
 		break;*/
+
 	case 'f': //apt68
 		orbit = !orbit;
+		std::cout << "f - orbit" << std::endl;
 		break;
 	case 'g': //apt68
 		rotate = !rotate;
+		std::cout << "g - rotate" << std::endl;
 		break;
 
 		//luces
