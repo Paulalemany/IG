@@ -203,10 +203,6 @@ void Scene::setScene(int i)
 
 		gObjects.push_back(new EjesRGB(400.0)); // gObjects[0]
 
-		if (i == 7)
-		{
-
-		}
 		switch (i)
 		{
 		case 0:
@@ -335,6 +331,7 @@ void Scene::setScene(int i)
 			break;
 		}
 
+		// color de fondo
 		if (i == 6) {
 			glClearColor(0, 0, 0, 1);
 		}
@@ -379,7 +376,7 @@ void Scene::orbit(float time)
 
 	if (mId == 7) // cuarto de toroide
 	{ 
-		// Podemos acceder a node (creado en el switch, con gObjects[2])
+		// Podemos acceder a node (creado en el switch) con gObjects[2]
 		auto invnode = gObjects[2];
 
 		// Movemos el nodo
