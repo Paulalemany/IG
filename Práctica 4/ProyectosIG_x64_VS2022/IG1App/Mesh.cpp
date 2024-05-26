@@ -650,34 +650,93 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	return mesh;
 }
 
+IndexMesh* IndexMesh::generateIndexPyramid(GLdouble l)
+{
+	IndexMesh* mesh = new IndexMesh();
+
+	mesh->mPrimitive = GL_TRIANGLES;
+	mesh->mNumVertices = 5;	//Solo hacemos una mitad
+	mesh->vVertices.reserve(mesh->mNumVertices);
+
+	//Colocamos los vértices en su sitio
+	GLdouble m = l / 2;
+	mesh->vVertices.emplace_back(0, l, 0);	//v0
+	mesh->vVertices.emplace_back(m, 0, m);	//v1
+	mesh->vVertices.emplace_back(m, 0, -m);	//v2
+	mesh->vVertices.emplace_back(-m, 0, -m);//v3
+	mesh->vVertices.emplace_back(-m, 0, m);	//v4
+
+	//hay 6 triangulos en total
+	//(1 por cara 2 en la base)
+	//Cada cara formada por 3 vértices
+	//6*3 = 18
+	mesh->nNumIndices = 18;
+	mesh->nIndexes = new GLuint[mesh->nNumIndices];
+
+	//Union de los vértices para hacer cada cara
+	const GLuint arr[18]{
+		0,4,1,
+		1,4,2,
+		2,3,0,
+		0,3,4,
+		4,3,2,
+		2,0,1
+	};
+
+	//Asignamos los indices
+	for (int i = 0; i < mesh->nNumIndices; i++) {
+		mesh->nIndexes[i] = arr[i];
+	}
+
+	//Añadimos los vértices de color
+	mesh->vColors.reserve(mesh->mNumVertices);
+	for (int i = 0; i < mesh->mNumVertices; i++) {
+		mesh->vColors.emplace_back(1, 0.75, 0.9, 1);
+	}
+
+	//Numero de vértices que hay por cada cara
+	int vertices = 3;
+	float numCaras = mesh->nNumIndices / vertices;
+	mesh->vCaras.resize(numCaras);
+	for (int i = 0; i < numCaras; i++) {
+
+		mesh->vCaras[i] = Cara(
+			mesh->nIndexes[i * vertices],
+			mesh->nIndexes[i * vertices + 1],
+			mesh->nIndexes[i * vertices + 2]);
+	}
+
+	mesh->buildNormalVectors();
+
+	return mesh;
+}
+
 //hacemos la versi�n de la profe a ver si as� el cubo de ilumina bien
 void IndexMesh::buildNormalVectors()
 {
-	vNormals.resize(mNumVertices);
-
-	std::vector<dvec3> vAuxNormals = vNormals;	//Vector auxiliar para las normales
-
-	//Hacemos el c�lculo antes para que lo haga solo una vez
-	GLuint limit = nNumIndices / 3;
-	for (int i = 0; i < limit; i++) {
-
-		int realI = i * 3;
-		dvec3 v0 = vVertices[nIndexes[realI]];
-		dvec3 v1 = vVertices[nIndexes[realI + 1]];
-		dvec3 v2 = vVertices[nIndexes[realI + 2]];
-
-		dvec3 v = v1 - v0;
-		dvec3 w = v2 - v0;
-
-		const dvec3 n = normalize(cross(v, w));
-
-		vAuxNormals[nIndexes[realI]] += n;
-		vAuxNormals[nIndexes[realI + 1]] += n;
-		vAuxNormals[nIndexes[realI + 2]] += n;
-	}
-
 	for (int i = 0; i < mNumVertices; i++) {
-		vNormals[i] = normalize(vAuxNormals[i]);
+		vNormals.emplace_back(0, 0, 0);
+	}
+	for (int i = 0; i < nNumIndices; i += 3) {
+		glm::dvec3 n(0.0, 0.0, 0.0); //vector normal donde nos dara el resultado de las operaciones entre los vertices
+		//obtener los 3 indices que corresponden al triangulo actual
+		GLuint ind_a = nIndexes[i];
+		GLuint ind_b = nIndexes[i + 1];
+		GLuint ind_c = nIndexes[i + 2];
+		//vectores entre vertices
+		glm::dvec3 v1 = vVertices[ind_b] - vVertices[ind_a];
+		glm::dvec3 v2 = vVertices[ind_c] - vVertices[ind_b];
+		//producto cruz entre los vectores para obtener la norma
+		n = glm::cross(v1, v2);
+
+		//sumar la normal obtenida a los vertices de la cara actual
+		vNormals[ind_a] += n;
+		vNormals[ind_b] += n;
+		vNormals[ind_c] += n;
+	}
+	//normalizar todas las normales resultantes
+	for (auto& normal : vNormals) {
+		normal = glm::normalize(normal);
 	}
 }
 #pragma endregion

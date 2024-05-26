@@ -404,14 +404,15 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 			upload(aMat);
 			glLineWidth(2);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
 			mMesh->render();
+
+
 			dmat4 rMat = mModelMat;
 			rMat *= rotate(dmat4(1), radians(180.0), dvec3(0.0, 1.0, 0.0));
 			aMat = modelViewMat * rMat; // glm matrix multiplication
 			upload(aMat);
-
 			mMesh->render();
+
 			mTexture->unbind();
 			glLineWidth(1);
 		}
@@ -506,29 +507,7 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 	{
 		mTexture->loadColorBuffer(800.0, 600.0);
 	}
-#pragma endregion
 
-#pragma region WingAdvancedTIE
-
-	EWingAdvancedTIE::EWingAdvancedTIE(GLdouble w, GLdouble h, GLuint rw, GLuint rh, Texture* t)
-	{
-
-	}
-
-	EWingAdvancedTIE::~EWingAdvancedTIE()
-	{
-
-	}
-
-	void EWingAdvancedTIE::render(glm::dmat4 const& modelViewMat) const
-	{
-
-	}
-
-	void EWingAdvancedTIE::update()
-	{
-
-	}
 #pragma endregion
 
 #pragma region IndexedBox
@@ -562,8 +541,42 @@ Abs_Entity::upload(dmat4 const& modelViewMat) const
 		Abs_Entity::update();
 	}
 
+
+	IndexedPyramid::IndexedPyramid(GLdouble l)
+	{
+		mMesh = IndexMesh::generateIndexPyramid(l);
+	}
+
+	IndexedPyramid::~IndexedPyramid()
+	{
+		delete mMesh;
+		mMesh = nullptr;
+	}
+
+	void IndexedPyramid::render(glm::dmat4 const& modelViewMat) const
+	{
+		if (mMesh != nullptr)
+		{
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+			dmat4 aMat = modelViewMat * mModelMat; // glm matrix multiplication
+			upload(aMat);
+			mMesh->render();
+
+			//Renderizamos la parte de abajo del rombo
+			dmat4 rMat = mModelMat;
+			rMat *= rotate(dmat4(1), radians(180.0), dvec3(1.0, 0.0, 0.0));
+			aMat = modelViewMat * rMat; // glm matrix multiplication
+			upload(aMat);
+			mMesh->render();
+
+		}
+	}
+
+	void IndexedPyramid::update()
+	{
+	}
+
 #pragma endregion
-
-
 
 	

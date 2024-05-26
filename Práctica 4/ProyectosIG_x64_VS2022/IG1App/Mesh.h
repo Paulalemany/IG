@@ -66,6 +66,8 @@ public:
 	//apt63
 	static IndexMesh* generateIndexedBox(GLdouble l);
 
+	static IndexMesh* generateIndexPyramid(GLdouble l);
+
 	//metodo de newell (diap 38) - he creado la clase Cara
 	void buildNormalVectors();
 };

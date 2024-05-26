@@ -327,8 +327,11 @@ void Scene::setScene(int i)
 
 			//gObjects.push_back(new RbmSphere(100, 4, 3, 360));	//Para crear una pirámide regular
 			//add entities.
-			rombo->setColor(dvec4(1, 0, 0, 1));
-			gObjects.push_back(rombo);
+			/*rombo->setColor(dvec4(1, 0, 0, 1));
+			gObjects.push_back(rombo);*/
+
+			gObjects.push_back(new IndexedPyramid(100));
+
 			break;
 
 		default:

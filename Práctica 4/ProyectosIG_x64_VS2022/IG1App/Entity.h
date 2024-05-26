@@ -190,4 +190,12 @@ public:
 	//void buildNormalVectors(); //apt 65
 };
 
+class IndexedPyramid : public Abs_Entity {
+public:
+	explicit IndexedPyramid(GLdouble l);
+	~IndexedPyramid();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+	virtual void update();
+};
+
 #endif //_H_Entities_H_
