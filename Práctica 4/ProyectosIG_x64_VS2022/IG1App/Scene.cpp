@@ -180,8 +180,9 @@ void Scene::setScene(int i)
 
 
 		//Apt 67
-		QuadricEntity* tatooine = new Sphere(200.0);
-		tatooine->QuadricColor(1, 255 / 233, 0);
+		//QuadricEntity* tatooine = new Sphere(200.0);
+		//tatooine->QuadricColor(1, 255 / 233, 0);
+		RbmSphere* tatooine = new RbmSphere(200, 20, 30);
 
 		//apt 71
 		RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
@@ -191,7 +192,7 @@ void Scene::setScene(int i)
 
 		//apt74
 		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
-		RbmSphere* tatooineMaterial = new RbmSphere(200, 20, 30);
+		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
 		Material* goldMaterial = new Material();
 
 
@@ -260,12 +261,12 @@ void Scene::setScene(int i)
 
 			break;
 
-		case 6: //APT 67
+		case 6: //APT 67 - tatooine y la nave
 			gObjects.push_back(new EjesRGB(400.0));
 
 			goldMaterial->setGold();
-			tatooineMaterial->setMaterial(goldMaterial);
-			gObjects.push_back(tatooineMaterial); // Añadimos el planeta
+			tatooine->setMaterial(goldMaterial);
+			gObjects.push_back(tatooine); // Añadimos el planeta
 
 			//Inicializamos los nodos ficticios
 			inventedNode = new CompoundEntity();		// Nodo para la translacion
@@ -285,7 +286,7 @@ void Scene::setScene(int i)
 			
 			break;
 
-		case 7:
+		case 7: // toroide
 			gObjects.push_back(new EjesRGB(400.0));
 
 			/*rbmSphere->setColor(dvec4(0, 0, 1, 1));
@@ -295,10 +296,10 @@ void Scene::setScene(int i)
 			gObjects.push_back(rbmToroid);
 			break;
 
-		case 8:
+		case 8: // dos planetas
 			gObjects.push_back(new EjesRGB(400.0));
 
-			tatooineColor->setColor(dvec4(1, 1, 0, 1));
+			tatooineColor->setColor(dvec4(1, 1, 0, 1)); 
 			tatooineColor->setModelMat(
 				translate(dmat4(1), dvec3(200, 0, 0))
 			);
