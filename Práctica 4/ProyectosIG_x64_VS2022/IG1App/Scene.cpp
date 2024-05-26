@@ -182,18 +182,18 @@ void Scene::setScene(int i)
 		//Apt 67
 		//QuadricEntity* tatooine = new Sphere(200.0);
 		//tatooine->QuadricColor(1, 255 / 233, 0);
-		RbmSphere* tatooine = new RbmSphere(200, 20, 30);
+		RbmSphere* tatooine = new RbmSphere(200, 20, 30, 360);
 
 		//apt 71
-		RbmSphere* rbmSphere = new RbmSphere(100, 10, 20);
+		RbmSphere* rbmSphere = new RbmSphere(100, 10, 20, 360);
 
 		//apt 72
-		RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20); //grosor rosquilla, radio rosquilla, muestras, perfil
+		RbmToroid* rbmToroid = new RbmToroid(50, 100, 30, 20, 90); //grosor rosquilla, radio rosquilla, muestras, perfil
 		CompoundEntity* node7 = new CompoundEntity(); // node7 porque es en la escena 7
 
 		//apt74
-		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20);
-		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20);
+		RbmSphere* tatooineColor = new RbmSphere(100, 10, 20, 360);
+		RbmSphere* tatooineMaterial = new RbmSphere(100, 10, 20, 360);
 		Material* goldMaterial = new Material();
 
 

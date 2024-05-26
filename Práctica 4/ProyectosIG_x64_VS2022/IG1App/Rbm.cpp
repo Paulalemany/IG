@@ -1,6 +1,6 @@
 #include "Rbm.h"
 
-RbmSphere::RbmSphere(GLdouble r, GLint m, GLint p)
+RbmSphere::RbmSphere(GLdouble r, GLint m, GLint p, int g)
 {
 	//r: radio de la esfera
 	//p: puntos que tiene el perfil
@@ -22,7 +22,9 @@ RbmSphere::RbmSphere(GLdouble r, GLint m, GLint p)
 	}
 
 	//Una vez colocados creamos la malla
-	mMesh = MbR::generateIndexMbR(m, p, perfil);
+	//Depende de si es entera o no
+	if (g == 360) mMesh = MbR::generateIndexMbR(p, m, perfil);
+	else mMesh = MbR::generatePartialIndexMbR(p, m, g, perfil);
 }
 
 void RbmSphere::render(glm::dmat4 const& modelViewMat) const
@@ -57,7 +59,7 @@ void RbmSphere::render(glm::dmat4 const& modelViewMat) const
 	
 }
 
-RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p)
+RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p, int g)
 {
 	// r: grosor de la rosquilla
 	// R: radio de la rosquilla
@@ -78,7 +80,10 @@ RbmToroid::RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p)
 		perfil[i] = { R + (r * sin(alpha)),	-(r * cos(alpha)), 0 };
 	}
 
-	mMesh = MbR::generateIndexMbR(p, m, perfil);
+	//Depende de si es entera o no
+	if (g == 360) mMesh = MbR::generateIndexMbR(p, m, perfil);
+	else mMesh = MbR::generatePartialIndexMbR(p, m, g, perfil);
+	
 }
 
 void RbmToroid::render(glm::dmat4 const& modelViewMat) const

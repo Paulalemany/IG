@@ -5,7 +5,7 @@
 class RbmSphere : public EntityWithMaterial {
 public:
 
-	RbmSphere(GLdouble r, GLint p, GLint m);
+	RbmSphere(GLdouble r, GLint p, GLint m, int g);
 	~RbmSphere() { delete Abs_Entity::mMesh; }
 	virtual void render(glm::dmat4 const& modelViewMat) const override;
 	virtual void update() override {};
@@ -18,7 +18,7 @@ protected:
 class RbmToroid : public Abs_Entity {
 public:
 
-	RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p);
+	RbmToroid(GLuint r, GLuint R, GLuint m, GLuint p, int g);
 	~RbmToroid() { delete mMesh; delete[] perfil; }
 	virtual void render(glm::dmat4 const& modelViewMat) const override;
 	virtual void update() override {};

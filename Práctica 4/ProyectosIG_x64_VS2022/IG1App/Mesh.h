@@ -85,6 +85,7 @@ public:
 	MbR(GLint mm, GLint nn, glm::dvec3* p) { m = mm, n = nn, perfil = p; }
 	~MbR() override = default;
 	static MbR* generateIndexMbR(int mm, int nn, glm::dvec3* perfil);
+	static MbR* generatePartialIndexMbR(int mm, int nn, int grados, glm::dvec3* perfil);
 };
 
 #endif //_H_Scene_H_
